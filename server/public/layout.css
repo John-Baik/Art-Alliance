@@ -1,0 +1,119 @@
+/* //CREATE MODAL// */
+
+.modal-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-style: solid;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.container {
+  border: white solid;
+  background-color: white;
+  border-radius: 1rem;
+  width: 22rem;
+  height: 38rem;
+}
+
+.create-row1 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.price-date-time-container {
+  display: block;
+}
+
+.price-date-container {
+  justify-content: space-evenly;
+  margin: 0.5rem 0;
+}
+
+.time-container {
+  justify-content: space-evenly;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.create-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.2rem;
+  gap: 1rem;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.start-end-label {
+  margin-bottom: 0.3rem;
+}
+
+.align-items {
+  align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    margin: 1rem 0;
+  }
+
+  .price-date-time {
+    display: flex;
+  }
+
+  .container {
+    width: 47rem;
+    height: 33rem;
+  }
+
+  .price-date-container {
+    margin-top: 0;
+  }
+
+  .price-date-time-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .price-date-gap {
+    gap: 5rem;
+  }
+
+  .label-gap {
+    gap: 2rem;
+  }
+
+  form {
+    margin: 0 2rem;
+  }
+
+  .start-end-label {
+    margin-right: 0.7rem;
+    margin-bottom: 0;
+  }
+}
