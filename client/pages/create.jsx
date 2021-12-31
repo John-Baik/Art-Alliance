@@ -155,7 +155,7 @@ export default class Create extends React.Component {
                 </div>
                 <div className="create-buttons">
                   <button type="reset" onClick={this.handleStatus} className="cancel">Cancel</button>
-                  <button onSubmit={this.handleSubmit} className={this.state.button ? 'post post-button-active' : 'post'}>Post</button>
+                  <button onSubmit={this.handleSubmit} className={this.state.button ? 'post post-button-active' : 'no-post'}>Post</button>
                 </div>
               </form>
             </div>

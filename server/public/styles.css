@@ -126,6 +126,15 @@ h1 {
   background-color: #2559dc;
 }
 
+.no-post {
+  color: white;
+  background-color: rgb(177, 175, 175);
+  border-style: none;
+  font-size: 1.5rem;
+  padding: 0.4rem 1.2rem;
+  border-radius: 0.3rem;
+}
+
 @media screen and (min-width: 768px) {
   form {
     margin: 0 3rem;
