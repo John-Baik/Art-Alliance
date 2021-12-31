@@ -4,12 +4,12 @@ export default class Create extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      post: '',
-      price: '',
-      startDate: '',
-      startTime: '',
-      endTime: '',
-      location: '',
+      post: null,
+      price: null,
+      startDate: null,
+      startTime: null,
+      endTime: null,
+      location: null,
       status: true,
       button: false
     };
@@ -25,7 +25,7 @@ export default class Create extends React.Component {
   }
 
   handleClick() {
-    if (this.state.post !== '' && this.state.price !== '' && this.state.startDate !== '' && this.state.startTime !== '' && this.state.endTime !== '' && this.state.location !== '') {
+    if (this.state.post !== null && this.state.price !== null && this.state.startDate !== null && this.state.startTime !== null && this.state.endTime !== null && this.state.location !== null) {
       this.setState({ button: true });
     } else {
       this.setState({ button: false });
@@ -36,7 +36,7 @@ export default class Create extends React.Component {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({ [name]: value });
-    if (this.state.post !== '' && this.state.price !== '' && this.state.startDate !== '' && this.state.startTime !== '' && this.state.endTime !== '' && this.state.location !== '') {
+    if (this.state.post !== null && this.state.price !== null && this.state.startDate !== null && this.state.startTime !== null && this.state.endTime !== null && this.state.location !== null) {
       this.setState({ button: true });
     } else {
       this.setState({ button: false });
@@ -45,12 +45,12 @@ export default class Create extends React.Component {
 
   handleReset(event) {
     this.setState({
-      post: '',
-      price: '',
-      startDate: '',
-      startTime: '',
-      endTime: '',
-      location: ''
+      post: null,
+      price: null,
+      startDate: null,
+      startTime: null,
+      endTime: null,
+      location: null
     });
   }
 
@@ -66,15 +66,14 @@ export default class Create extends React.Component {
       .then(response => response.json())
       .then(() => { location.hash = '#'; });
     this.setState({
-      post: '',
-      price: '',
-      startDate: '',
-      startTime: '',
-      endTime: '',
-      location: '',
+      post: null,
+      price: null,
+      startDate: null,
+      startTime: null,
+      endTime: null,
+      location: null,
       status: false
     });
-
   }
 
   render() {
