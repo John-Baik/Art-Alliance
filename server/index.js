@@ -42,8 +42,9 @@ app.post('/api/posts', (req, res) => {
 
 app.get('/api/posts', (req, res, next) => {
   const sql = `
-  select *
+  select "postId", "userId", "post", "price", "startTime", "endTime", "location", "createdAt", "startDate", "username"
   from "posts"
+   join "users" using ("userId")
   `;
   db.query(sql)
     .then(result => res.json(result.rows))

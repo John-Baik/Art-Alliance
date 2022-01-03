@@ -114,6 +114,8 @@ h1 {
 
 .no-margin {
   margin: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 .start-end-label {
@@ -133,6 +135,141 @@ h1 {
   font-size: 1.5rem;
   padding: 0.4rem 1.2rem;
   border-radius: 0.3rem;
+}
+
+/* //HOME// */
+
+.navigation-container {
+  color: white;
+  background-color: #000572;
+}
+
+.navigation-symbol {
+  font-size: 2rem;
+}
+
+.navigation-title {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.profile {
+  font-size: 1.8rem;
+  border: solid;
+  padding: 0.6rem;
+  border-radius: 2rem;
+  background-color: white;
+  color: gray;
+  width: 3.5rem;
+  text-align: center;
+}
+
+.add-post-button {
+  border: solid;
+  border-radius: 2rem;
+  padding: 0.4rem;
+  font-size: 2rem;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: #979797;
+}
+
+.add-post-container {
+  display: flex;
+}
+
+.page-header {
+  font-family: Roboto, sans-serif;
+  font-size: 3rem;
+}
+
+.post-container {
+  border: 1.6px solid rgb(0, 0, 0, 0.3);
+  border-radius: 1.5rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 3px 3px 0;
+}
+
+.logo-desktop:hover,
+.navigation-symbol:hover,
+.navigation-title:hover {
+  cursor: pointer;
+}
+
+.navigation-title:hover {
+  text-decoration: underline;
+}
+
+.profile:hover {
+  cursor: pointer;
+}
+
+.add-post-button:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+  color: black;
+  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+}
+
+.post-header {
+  border-bottom: rgb(192, 192, 192) solid 2px;
+}
+
+.user {
+  transform: scale(1);
+}
+
+.roboto-font {
+  font-family: Roboto, sans-serif;
+}
+
+.post-creator-creation {
+  font-size: 1.2rem;
+}
+
+.date {
+  font-size: 0.9rem;
+  opacity: 50%;
+}
+
+.low-opacity {
+  opacity: 20%;
+}
+
+.table-row1 {
+  font-size: 1rem;
+}
+
+ul {
+  list-style-type: none;
+}
+
+#no-font-weight {
+  font-weight: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+i.star {
+  display: none;
+}
+
+.options-button {
+  transform: scale(1.8) rotate(90deg);
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.comment-button:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 @media screen and (min-width: 768px) {
@@ -190,5 +327,34 @@ h1 {
 
   .start-end-label {
     margin-top: 0;
+  }
+
+  /* //HOME// */
+
+  .profile {
+    transform: scale(1.2);
+  }
+
+  .add-post-button {
+    font-size: 3rem;
+    width: 4rem;
+    height: 4rem;
+    transition: 0.3s;
+  }
+
+  .home-button {
+    font-size: 2rem;
+  }
+
+  .user {
+    transform: scale(1);
+  }
+
+  .username {
+    font-weight: 600;
+  }
+
+  th {
+    font-size: 1;
   }
 }

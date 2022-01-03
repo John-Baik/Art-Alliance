@@ -1,6 +1,5 @@
 import React from 'react';
-// import Home from './pages/home';
-import Create from './pages/create';
+import Home from './pages/home';
 import parseRoute from './lib/parse-route';
 
 export default class App extends React.Component {
@@ -26,7 +25,7 @@ export default class App extends React.Component {
   renderPage() {
     const { route } = this.state;
     if (route.path === '') {
-      return <Create />;
+      return <Home />;
     }
     return <h1>Unknown Page</h1>;
   }
@@ -34,7 +33,7 @@ export default class App extends React.Component {
   render() {
     return (
       <>
-    { this.renderPage() };
+    { this.renderPage() }
       </>
     );
   }
