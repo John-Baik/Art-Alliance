@@ -208,7 +208,7 @@ ul {
 }
 
 .post-entry {
-  margin: 2.3rem 0;
+  margin: 2rem 0 3rem;
 }
 
 .flex-start {
@@ -361,5 +361,9 @@ ul {
 
   th {
     padding: 0.4rem 1rem;
+  }
+
+  .post-entry {
+    margin: 2.3rem 0;
   }
 }

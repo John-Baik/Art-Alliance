@@ -81,17 +81,18 @@ export default class Create extends React.Component {
       body: JSON.stringify(this.state)
     })
       .then(response => response.json())
-      .then(() => { location.hash = '#'; });
-    this.setState({
-      post: '',
-      price: '',
-      startDate: '',
-      startTime: '',
-      endTime: '',
-      location: '',
-      isOpen: false
-    });
-    this.props.getPosts();
+      .then(() => {
+        this.props.getPosts();
+        this.setState({
+          post: '',
+          price: '',
+          startDate: '',
+          startTime: '',
+          endTime: '',
+          location: '',
+          isOpen: false
+        });
+      });
   }
 
   render() {
