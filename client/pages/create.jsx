@@ -19,6 +19,7 @@ export default class Create extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.open = this.open.bind(this);
     this.close = this.close.bind(this);
+    this.isButtonActive = this.isButtonActive.bind(this);
   }
 
   open() {
@@ -37,6 +38,14 @@ export default class Create extends React.Component {
     });
   }
 
+  isButtonActive() {
+    if (this.state.post !== '' && this.state.price !== '' && this.state.startDate !== '' && this.state.startTime !== '' && this.state.endTime !== '' && this.state.location !== '') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   handleClick() {
     if (this.state.post !== '' && this.state.price !== '' && this.state.startDate !== '' && this.state.startTime !== '' && this.state.endTime !== '' && this.state.location !== '') {
       this.setState({ postButtonActive: true });
@@ -49,11 +58,6 @@ export default class Create extends React.Component {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({ [name]: value });
-    if (this.state.post !== '' && this.state.price !== '' && this.state.startDate !== '' && this.state.startTime !== '' && this.state.endTime !== '' && this.state.location !== '') {
-      this.setState({ postButtonActive: true });
-    } else {
-      this.setState({ postButtonActive: false });
-    }
   }
 
   handleReset(event) {
@@ -92,6 +96,7 @@ export default class Create extends React.Component {
 
   render() {
     const button = <button onClick={this.open} className="add-post-button">+</button>;
+    const isActive = this.isButtonActive();
 
     if (this.state.isOpen) {
       return (
@@ -173,7 +178,7 @@ export default class Create extends React.Component {
                       </div>
                       <div className="create-buttons">
                         <button type="button" onClick={this.close} className="cancel">Cancel</button>
-                        <button onSubmit={this.handleSubmit} className={this.state.postButtonActive ? 'post post-button-active' : 'no-post'}>Post</button>
+                        <button onSubmit={this.handleSubmit} className={isActive ? 'post post-button-active' : 'no-post'}>Post</button>
                       </div>
                     </form>
                   </div>
