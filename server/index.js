@@ -40,6 +40,17 @@ app.post('/api/posts', (req, res) => {
     });
 });
 
+app.get('/api/posts', (req, res, next) => {
+  const sql = `
+  select "postId", "userId", "post", "price", "startTime", "endTime", "location", "createdAt", "startDate", "username"
+  from "posts"
+   join "users" using ("userId")
+  `;
+  db.query(sql)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);
