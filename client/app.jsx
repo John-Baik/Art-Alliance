@@ -25,7 +25,7 @@ export default class App extends React.Component {
   renderPage() {
     const { route } = this.state;
     if (route.path === '') {
-      return <Home />;
+      return <Home onClick={this.isDropdownActive} />;
     }
     return <h1>Unknown Page</h1>;
   }

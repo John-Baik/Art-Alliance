@@ -4,10 +4,8 @@ export default class Post extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: [],
       dropdownButton: false
     };
-    this.getPosts = this.getPosts.bind(this);
     this.isDropdownActive = this.isDropdownActive.bind(this);
   }
 
@@ -15,25 +13,13 @@ export default class Post extends React.Component {
     this.setState({ dropdownButton: !this.state.dropdownButton });
   }
 
-  getPosts() {
-    fetch('/api/posts')
-      .then(res => res.json())
-      .then(posts => {
-        this.setState({ posts });
-      });
-  }
-
-  componentDidMount() {
-    fetch('/api/posts')
-      .then(res => res.json())
-      .then(posts => {
-        this.setState({ posts });
-      });
-  }
-
   render() {
-    const listItems = this.state.posts.reverse().map(post => (
-      <li key={post.postId} className="post-entry">
+    const post = this.props.post;
+    return (
+    <>
+      <div onClick={this.isDropdownActive} className={this.state.dropdownButton ? 'drop-down-view' : 'hidden'}>
+      </div>
+      <li className="post-entry">
         <div className="post-container">
           <div className="post-second-container">
             <div className="post-header">
@@ -79,7 +65,7 @@ export default class Post extends React.Component {
                             <td className="table-mobile-inactive">${post.price}</td>
                             <td className="table-mobile-inactive">{post.startDate}</td>
                             <td className="table-mobile-inactive">{post.startTime} - {post.endTime}</td>
-                            <td className="table-mobile-inactive">{post.location}</td>
+                              <td className="relative location-button table-mobile-inactive">{post.location}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -99,26 +85,24 @@ export default class Post extends React.Component {
                           </tr>
                           <tr className="table-row1">
                             <th scope="column" className="table-mobile-active">LOCATION</th>
-                            <td scope="column" className="table-mobile-active">{post.location}</td>
+                            <td scope="column" className="relative location-button table-mobile-active">{post.location}</td>
                           </tr>
                         </thead>
                       </table>
                     </div>
                   </div>
                 </div>
-                <div className="post-comments">
-                  <a className="comment-button roboto-font">Comments(1)</a>
+                <div className="post-comments priority">
+                  <div>
+                    <a href="" className="relative comment-button roboto-font">Comments(1)</a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </li>
-    ));
-    return (
-      <>
-      {listItems}
-      </>
+    </>
     );
   }
 }

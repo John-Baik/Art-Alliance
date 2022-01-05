@@ -19,7 +19,7 @@
   border-style: solid;
   position: fixed;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
+  z-index: 4;
   top: 0;
   left: 0;
 }
@@ -252,6 +252,26 @@ ul {
   border-radius: 0 0 0.6rem 0.6rem;
 }
 
+.drop-down-view {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+button,
+i,
+a,
+.location-button {
+  z-index: 3;
+}
+
+.relative {
+  position: relative;
+}
+
 @media screen and (min-width: 768px) {
   .header {
     margin: 1rem 0;
@@ -310,10 +330,6 @@ ul {
 
   .navigation {
     gap: 4rem;
-  }
-
-  .profile-icon-container {
-    padding-right: 3rem;
   }
 
   .home-page {
