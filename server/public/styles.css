@@ -272,6 +272,27 @@ i.star {
   text-decoration: underline;
 }
 
+.navigation-color {
+  background-color: #000572;
+}
+
+.dropdown-content {
+  background-color: #f1f1f1;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  border: rgba(0, 0, 0) solid 2px;
+  border-radius: 0.6rem;
+}
+
+.dropdown-option {
+  background-color: white;
+  border: none;
+  font-size: 1rem;
+}
+
+.border-bottom {
+  border-bottom: rgba(0, 0, 0) solid 2px;
+}
+
 @media screen and (min-width: 768px) {
   form {
     margin: 0 3rem;
@@ -356,5 +377,9 @@ i.star {
 
   th {
     font-size: 1;
+  }
+
+  .dropdown-option {
+    font-size: 1.2rem;
   }
 }

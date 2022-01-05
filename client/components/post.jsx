@@ -1,7 +1,6 @@
 import React from 'react';
-import Create from './create';
 
-export default class Home extends React.Component {
+export default class Post extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -116,65 +115,9 @@ export default class Home extends React.Component {
         </div>
       </li>
     ));
-
     return (
       <>
-      <div className="home-container flex column">
-        <div className="navigation-color">
-          <div className="navigation-container flex align-item">
-            <div className="flex align-items">
-              <h1 className="logo-mobile">A</h1>
-              <h1 className="logo-desktop">ArtAlliance</h1>
-            </div>
-            <div className="navigation-desktop flex roboto-font">
-              <div className="symbol-container">
-                <i className="fas fa-home navigation-symbol"></i>
-                <p className="navigation-title">Home</p>
-              </div>
-              <div className="symbol-container">
-                <i className="far fa-star navigation-symbol"></i>
-                <p className="navigation-title">Favorites</p>
-              </div>
-              <div className="symbol-container">
-                <i className="far fa-comment-alt navigation-symbol"></i>
-                <p className="navigation-title">Messages</p>
-              </div>
-              <div className="profile-icon-container">
-                <i className="fas fa-user profile"></i>
-              </div>
-            </div>
-            <div className="symbol-container navigation-mobile">
-              <i className="fas fa-home navigation-symbol"></i>
-              <p className="navigation-title">Home</p>
-            </div>
-            <div className="symbol-container navigation-mobile">
-              <i className="far fa-star navigation-symbol"></i>
-              <p className="navigation-title">Favorites</p>
-            </div>
-            <div className="symbol-container navigation-mobile">
-              <i className="far fa-comment-alt navigation-symbol"></i>
-              <p className="navigation-title">Messages</p>
-            </div>
-            <div className="profile-icon-container navigation-mobile">
-              <i className="fas fa-user profile"></i>
-            </div>
-          </div>
-        </div>
-        <div className="home-page-container">
-          <div className="home-page">
-            <div className="home-margin">
-              <div className="page-title">
-                <button className="add-post-button invisible">+</button>
-                <h1 className="page-header">Home</h1>
-                <div className="add-post-container">
-                  <Create getPosts={this.getPosts} />
-                </div>
-              </div>
-              <ul className="home-posts">{listItems}</ul>
-            </div>
-          </div>
-        </div>
-      </div>
+      {listItems}
       </>
     );
   }

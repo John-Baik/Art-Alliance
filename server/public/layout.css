@@ -110,6 +110,7 @@
 
 .navigation-container {
   display: flex;
+  margin: auto;
   align-items: center;
   justify-content: space-between;
 }
@@ -209,6 +210,7 @@ ul {
 
 .post-entry {
   margin: 2rem 0 3rem;
+  position: relative;
 }
 
 .flex-start {
@@ -222,6 +224,32 @@ ul {
 .post-comments {
   margin-bottom: 1.5rem;
   font-size: 1.2rem;
+}
+
+.home-page-container {
+  display: flex;
+  justify-content: center;
+}
+
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  right: -3px;
+}
+
+.dropdown-option {
+  padding: 0.5rem 1.4em;
+  width: 100%;
+}
+
+.dropdown-top {
+  border-radius: 0.6rem 0.6rem 0 0;
+}
+
+.dropdown-bottom {
+  border-radius: 0 0 0.6rem 0.6rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -289,12 +317,11 @@ ul {
   }
 
   .home-page {
-    width: 84%;
+    width: 84rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: white;
-    margin: auto;
   }
 
   .home-container {
@@ -306,7 +333,7 @@ ul {
   }
 
   .navigation-container {
-    justify-content: space-between;
+    max-width: 87rem;
   }
 
   .full-symbol-container {
@@ -365,5 +392,14 @@ ul {
 
   .post-entry {
     margin: 2.3rem 0;
+  }
+
+  .post-header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .dropdown-option {
+    padding: 0.6rem 1.8rem;
   }
 }
