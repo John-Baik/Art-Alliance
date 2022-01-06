@@ -329,6 +329,34 @@ i.star {
   cursor: pointer;
 }
 
+/* DELETE MODAL */
+.delete-modal {
+  width: 24rem;
+  height: 16rem;
+}
+
+.delete-modal-buttons {
+  gap: 6rem;
+}
+
+.delete-button-active {
+  background-color: red;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.cancel-button {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.delete-modal-body {
+  width: 21rem;
+  font-size: 0.9rem;
+}
+
 @media screen and (min-width: 768px) {
   form {
     margin: 0 3rem;
@@ -421,5 +449,11 @@ i.star {
 
   .dropdown-option {
     font-size: 1.2rem;
+  }
+
+  /* DELETE MODAL */
+  .delete-modal {
+    width: 29rem;
+    height: 15rem;
   }
 }

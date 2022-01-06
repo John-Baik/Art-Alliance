@@ -259,6 +259,15 @@ ul {
   width: 90vw;
 }
 
+.delete-modal-gap {
+  gap: 2.8rem;
+}
+
+.delete-modal-body > h1 {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
 @media screen and (min-width: 768px) {
   .header {
     margin: 1rem 0;
@@ -405,5 +414,9 @@ ul {
   .post-width {
     width: 46rem;
     margin: auto;
+  }
+
+  .delete-modal-gap {
+    gap: 2.3rem;
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
-import Create from './create';
+import Create from '../components/create';
 import Post from '../components/post';
+import Delete from '../components/delete';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -34,6 +35,7 @@ export default class Home extends React.Component {
 
     return (
       <>
+      <Delete />
       <div className="home-container flex column">
         <div className="navigation-color">
           <div className="navigation-container flex align-item">

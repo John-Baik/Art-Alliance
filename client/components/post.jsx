@@ -1,8 +1,7 @@
 import React from 'react';
-// import Dropdown from '../pages/dropdown';
 import OutsideClickHandler from 'react-outside-click-handler';
 
-import Edit from '../pages/edit';
+import Edit from './edit';
 import { format, parseISO, parse } from 'date-fns';
 
 export default class Post extends React.Component {
