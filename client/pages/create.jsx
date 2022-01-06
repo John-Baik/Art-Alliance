@@ -60,7 +60,7 @@ export default class Create extends React.Component {
     this.setState({ [name]: value });
   }
 
-  handleReset(event) {
+  handleReset() {
     this.setState({
       post: '',
       price: '',
@@ -71,7 +71,7 @@ export default class Create extends React.Component {
     });
   }
 
-  handleSubmit(props) {
+  handleSubmit(event) {
     event.preventDefault();
     fetch('/api/posts', {
       method: 'POST',
