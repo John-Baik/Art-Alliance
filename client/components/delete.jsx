@@ -18,7 +18,7 @@ export default class Delete extends React.Component {
                 <h1 className="roboto-font text-align-center">Are you sure you want to delete your post?</h1>
               </div>
               <div className="flex delete-modal-buttons">
-                <button className="post cancel-button">Cancel</button>
+                <button onClick={this.props.deleteModalClose} className="post cancel-button">Cancel</button>
                 <button className="post delete-button-active">Delete</button>
               </div>
             </div>

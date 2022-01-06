@@ -17,6 +17,7 @@ export default class Post extends React.Component {
     this.editModal = this.editModal.bind(this);
     this.dropdownClose = this.dropdownClose.bind(this);
     this.deleteModalOpen = this.deleteModalOpen.bind(this);
+    this.deleteModalClose = this.deleteModalClose.bind(this);
   }
 
   dropdownClose() {
@@ -43,6 +44,12 @@ export default class Post extends React.Component {
     });
   }
 
+  deleteModalClose() {
+    this.setState({
+      deleteModalOpen: false
+    });
+  }
+
   dropdownOpen() {
     this.setState({ dropdownButton: !this.state.dropdownButton });
   }
@@ -56,7 +63,7 @@ export default class Post extends React.Component {
     return (
     <>
       <div className={this.state.deleteModalOpen ? '' : 'hidden'}>
-        <Delete />
+        <Delete deleteModalClose={this.deleteModalClose} />
       </div>
       <div>
         <li className="post-entry">
