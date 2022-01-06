@@ -23,6 +23,7 @@ form {
   border: thin solid #000;
   border-radius: 0.2rem;
   padding-left: 0.7rem;
+  background-color: white;
 }
 
 .post-padding-top {
@@ -135,6 +136,7 @@ h1 {
   font-size: 1.5rem;
   padding: 0.4rem 1.2rem;
   border-radius: 0.3rem;
+  pointer-events: none;
 }
 
 /* //HOME// */
@@ -146,6 +148,7 @@ h1 {
 
 .navigation-symbol {
   font-size: 2rem;
+  transition: 2s;
 }
 
 .navigation-title {
@@ -153,6 +156,7 @@ h1 {
   margin-block-end: 0;
   margin-top: 0.3rem;
   font-size: 0.9rem;
+  transition: 0.2s;
 }
 
 .profile {
@@ -263,9 +267,17 @@ i.star {
 }
 
 .options-button {
-  transform: scale(1.8) rotate(90deg);
+  border-radius: 0.5rem;
+  transform: scale(2.9) rotate(90deg);
   margin-right: 1rem;
   cursor: pointer;
+  padding: 0.2rem;
+  transition: 0.3s ease;
+}
+
+.options-button:hover {
+  background-color: #f0f0f0;
+  transition: 0s;
 }
 
 .comment-button:hover {
@@ -287,7 +299,7 @@ i.star {
 .dropdown-option {
   background-color: white;
   border: none;
-  font-size: 1rem;
+  font-size: 1.1rem;
   transition: 0.2s;
 }
 

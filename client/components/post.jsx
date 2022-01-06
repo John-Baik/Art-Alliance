@@ -1,4 +1,7 @@
 import React from 'react';
+// import Dropdown from '../pages/dropdown';
+import OutsideClickHandler from 'react-outside-click-handler';
+
 import Edit from '../pages/edit';
 import { format, parseISO, parse } from 'date-fns';
 
@@ -6,12 +9,32 @@ export default class Post extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dropdownButton: false
+      dropdownButton: false,
+      editModalOpen: false
     };
-    this.isDropdownActive = this.isDropdownActive.bind(this);
+    this.dropdownOpen = this.dropdownOpen.bind(this);
+    this.editModal = this.editModal.bind(this);
+    this.dropdownClose = this.dropdownClose.bind(this);
   }
 
-  isDropdownActive() {
+  dropdownClose() {
+    this.setState({ dropdownButton: false });
+  }
+
+  editModal() {
+    this.setState({
+      dropdownButton: false,
+      editModalOpen: !this.state.editModalOpen
+    });
+  }
+
+  closeEditModal() {
+    this.setState({
+      editModalOpen: false
+    });
+  }
+
+  dropdownOpen() {
     this.setState({ dropdownButton: !this.state.dropdownButton });
   }
 
@@ -23,8 +46,6 @@ export default class Post extends React.Component {
     const endTimeFormatted = format(parse(post.endTime, 'H:mm:ss', new Date()), 'h:mm a');
     return (
     <>
-      <div onClick={this.isDropdownActive} className={this.state.dropdownButton ? 'drop-down-view' : 'hidden'}>
-      </div>
       <div>
         <li className="post-entry">
           <div className="post-container">
@@ -42,13 +63,19 @@ export default class Post extends React.Component {
                 <div>
                   <i className="far fa-star navigation-symbol low-opacity star"></i>
                   <div>
-                    <svg onClick={this.isDropdownActive} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-three-dots-vertical options-button relative" viewBox="0 0 16 16">
+                    <OutsideClickHandler onOutsideClick={this.dropdownClose}>
+                    <svg onClick={this.dropdownOpen} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-three-dots-vertical options-button relative" viewBox="0 0 16 16">
                       <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
                     </svg>
-                    <div className={this.state.dropdownButton ? 'active' : 'hidden'}>
-                      <div className='dropdown-content'>
-                          <Edit post={post} getPosts={this.props.getPosts} isDropdownActive={this.isDropdownActive} />
+                    <div className={this.state.dropdownButton ? 'dropdown-content' : 'hidden'}>
+
+                        <button onClick={this.editModal} className="dropdown-option border-bottom dropdown-top">Edit</button>
+                        <button onClick={this.dropdownOpen} className="delete-color dropdown-option dropdown-bottom">Delete</button>
+
                       </div>
+                      </OutsideClickHandler>
+                    <div className={this.state.editModalOpen ? '' : 'hidden'}>
+                      <Edit closeEditModal={this.closeEditModal} editModal={this.editModal} post={post} getPosts={this.props.getPosts} />
                     </div>
                   </div>
                 </div>
