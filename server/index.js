@@ -54,6 +54,10 @@ app.get('/api/posts', (req, res, next) => {
 
 app.get('/api/posts/:postId', (req, res, next) => {
   const id = Number(req.params.postId);
+  if (!id || id <= 0) {
+    res.status(400).json({ error: 'invalid id' });
+    return;
+  }
   const sql = `
   select "postId", "userId", "post", "price", "startTime", "endTime", "location", "createdAt", "startDate", "username"
   from "posts"
@@ -62,7 +66,14 @@ app.get('/api/posts/:postId', (req, res, next) => {
   `;
   const values = [id];
   db.query(sql, values)
-    .then(result => res.json(result.rows))
+    .then(result => {
+      const post = result.rows[0];
+      if (!post) {
+        res.status(404).json({ error: 'postId does not exist' });
+        return;
+      }
+      res.status(200).json(result.rows);
+    })
     .catch(err => next(err));
 });
 
@@ -75,7 +86,7 @@ app.patch('/api/posts/:postId', (req, res) => {
   const endTime = body.endTime;
   const location = body.location;
   const startDate = body.startDate;
-  if (!id || id < 0) {
+  if (!id || id <= 0) {
     res.status(400).json({ error: 'invalid id' });
     return;
   } else if (!post || !price || !startTime || !endTime || !location || !startDate) {
@@ -102,6 +113,32 @@ app.patch('/api/posts/:postId', (req, res) => {
         return;
       }
       res.status(200).json(updatedPost);
+    })
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      res.status(500).json({ error: 'An unexpected error has occurred' });
+    });
+});
+
+app.delete('/api/posts/:postId', (req, res, next) => {
+  const id = Number(req.params.postId);
+  if (!id || id <= 0) {
+    res.status(400).json({ error: 'invalid id' });
+    return;
+  }
+  const sql = `delete from "posts"
+    where "postId" = $1
+    returning  "postId", "userId", "post", "price", "startTime", "endTime", "location", "createdAt", "startDate"
+  `;
+  const values = [id];
+  db.query(sql, values)
+    .then(result => {
+      const deletedPost = result.rows[0];
+      if (!deletedPost) {
+        res.status(404).json({ error: 'postId does not exist' });
+      }
+      res.status(200).json(deletedPost);
     })
     .catch(error => {
       // eslint-disable-next-line no-console
