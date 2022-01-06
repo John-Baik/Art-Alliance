@@ -12,7 +12,7 @@ export default class Dropdown extends React.Component {
     return (
       <>
         <button onClick={this.props.editModal} className="dropdown-option border-bottom dropdown-top">Edit</button>
-        <button onClick={this.props.dropdownOpen} className="delete-color dropdown-option dropdown-bottom">Delete</button>
+        <button onClick={this.props.deleteModalOpen} className="delete-color dropdown-option dropdown-bottom">Delete</button>
       </>
     );
   }

@@ -1,7 +1,8 @@
 import React from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
-
+import Delete from '../components/delete';
 import Edit from './edit';
+import Dropdown from './dropdown';
 import { format, parseISO, parse } from 'date-fns';
 
 export default class Post extends React.Component {
@@ -9,11 +10,13 @@ export default class Post extends React.Component {
     super(props);
     this.state = {
       dropdownButton: false,
-      editModalOpen: false
+      editModalOpen: false,
+      deleteModalOpen: false
     };
     this.dropdownOpen = this.dropdownOpen.bind(this);
     this.editModal = this.editModal.bind(this);
     this.dropdownClose = this.dropdownClose.bind(this);
+    this.deleteModalOpen = this.deleteModalOpen.bind(this);
   }
 
   dropdownClose() {
@@ -33,6 +36,13 @@ export default class Post extends React.Component {
     });
   }
 
+  deleteModalOpen() {
+    this.setState({
+      dropdownButton: false,
+      deleteModalOpen: true
+    });
+  }
+
   dropdownOpen() {
     this.setState({ dropdownButton: !this.state.dropdownButton });
   }
@@ -45,6 +55,9 @@ export default class Post extends React.Component {
     const endTimeFormatted = format(parse(post.endTime, 'H:mm:ss', new Date()), 'h:mm a');
     return (
     <>
+      <div className={this.state.deleteModalOpen ? '' : 'hidden'}>
+        <Delete />
+      </div>
       <div>
         <li className="post-entry">
           <div className="post-container">
@@ -67,12 +80,11 @@ export default class Post extends React.Component {
                       <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
                     </svg>
                     <div className={this.state.dropdownButton ? 'dropdown-content' : 'hidden'}>
-
-                        <button onClick={this.editModal} className="dropdown-option border-bottom dropdown-top">Edit</button>
-                        <button onClick={this.dropdownOpen} className="delete-color dropdown-option dropdown-bottom">Delete</button>
-
-                      </div>
-                      </OutsideClickHandler>
+                      <Dropdown editModal={this.editModal} deleteModalOpen={this.deleteModalOpen} />
+                      {/* <button onClick={this.editModal} className="dropdown-option border-bottom dropdown-top">Edit</button>
+                      <button onClick={this.deleteModalOpen} className="delete-color dropdown-option dropdown-bottom">Delete</button> */}
+                    </div>
+                    </OutsideClickHandler>
                     <div className={this.state.editModalOpen ? '' : 'hidden'}>
                       <Edit closeEditModal={this.closeEditModal} editModal={this.editModal} post={post} getPosts={this.props.getPosts} />
                     </div>
