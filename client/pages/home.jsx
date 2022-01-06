@@ -29,12 +29,12 @@ export default class Home extends React.Component {
 
   render() {
     const listItems = this.state.posts.reverse().map(post => (
-      <Post key={post.postId} post={post} />
+      <Post key={post.postId} post={post} getPosts={this.getPosts} />
     ));
 
     return (
       <>
-        <div className="home-container flex column">
+      <div className="home-container flex column">
         <div className="navigation-color">
           <div className="navigation-container flex align-item">
             <div className="flex align-items">

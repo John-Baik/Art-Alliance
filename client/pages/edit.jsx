@@ -15,7 +15,7 @@ export default class Edit extends React.Component {
       postButtonActive: false
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.closeDropdown = this.closeDropdown.bind(this);
     this.isButtonActive = this.isButtonActive.bind(this);
@@ -64,9 +64,10 @@ export default class Edit extends React.Component {
     });
   }
 
-  handleSubmit(event) {
+  handleUpdate(event) {
+    const post = this.props.post;
     event.preventDefault();
-    fetch('/api/posts/:postId', {
+    fetch(`/api/posts/${post.postId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -74,12 +75,13 @@ export default class Edit extends React.Component {
       body: JSON.stringify(this.state)
     })
       .then(response => response.json())
-      .then(() => {
+      .then(data => {
         this.props.getPosts();
         this.setState({
           isOpen: false
         });
       });
+    this.props.isDropdownActive();
   }
 
   render() {
@@ -97,7 +99,7 @@ export default class Edit extends React.Component {
               </div>
               <div>
                 <div className="">
-                  <form onSubmit={this.handleSubmit}>
+                  <form onSubmit={this.handleUpdate}>
                     <div className="create-row1">
                       <div className="">
                         <div className="label-margin">
@@ -166,7 +168,7 @@ export default class Edit extends React.Component {
                     </div>
                     <div className="create-buttons">
                       <button type="button" onClick={this.closeDropdown} className="cancel">Cancel</button>
-                      <button onSubmit={this.handleSubmit} className={isActive ? 'post post-button-active' : 'no-post'}>Post</button>
+                      <button onSubmit={this.handleUpdate} className={isActive ? 'post post-button-active' : 'no-post'}>Post</button>
                     </div>
                   </form>
                 </div>

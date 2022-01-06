@@ -19,8 +19,8 @@ export default class Post extends React.Component {
     const post = this.props.post;
     const dateFormatted = format(parseISO(post.startDate), 'LLL dd, yyyy');
     const createdAtFormatted = format(parseISO(post.createdAt), 'LLL dd, yyyy');
-    const startTimeFormatted = format(parse(post.startTime, 'HH:mm:ss', new Date()), 'hh:mm a');
-    const endTimeFormatted = format(parse(post.endTime, 'HH:mm:ss', new Date()), 'hh:mm a');
+    const startTimeFormatted = format(parse(post.startTime, 'H:mm:ss', new Date()), 'h:mm a');
+    const endTimeFormatted = format(parse(post.endTime, 'H:mm:ss', new Date()), 'h:mm a');
     return (
     <>
       <div onClick={this.isDropdownActive} className={this.state.dropdownButton ? 'drop-down-view' : 'hidden'}>
@@ -47,7 +47,7 @@ export default class Post extends React.Component {
                     </svg>
                     <div className={this.state.dropdownButton ? 'active' : 'hidden'}>
                       <div className='dropdown-content'>
-                        <Edit post={post} isDropdownActive={this.isDropdownActive} />
+                          <Edit post={post} getPosts={this.props.getPosts} isDropdownActive={this.isDropdownActive} />
                       </div>
                     </div>
                   </div>
