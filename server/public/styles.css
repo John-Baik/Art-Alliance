@@ -280,7 +280,7 @@ i.star {
 .dropdown-content {
   background-color: #f1f1f1;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-  border: rgba(0, 0, 0) solid 2px;
+  border: rgba(0, 0, 0) solid 1.7px;
   border-radius: 0.6rem;
 }
 
@@ -288,10 +288,24 @@ i.star {
   background-color: white;
   border: none;
   font-size: 1rem;
+  transition: 0.2s;
+}
+
+.point-cursor {
+  cursor: pointer;
+}
+
+.delete-color {
+  color: red;
+}
+
+.dropdown-option:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
 }
 
 .border-bottom {
-  border-bottom: rgba(0, 0, 0) solid 2px;
+  border-bottom: rgba(0, 0, 0) solid 1.7px;
 }
 
 .location-button {
@@ -300,6 +314,7 @@ i.star {
 
 .location-button:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {

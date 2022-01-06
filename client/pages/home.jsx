@@ -89,7 +89,9 @@ export default class Home extends React.Component {
                   <Create getPosts={this.getPosts} />
                 </div>
               </div>
-              <ul className="home-posts">{listItems}</ul>
+              <div className="post-width">
+                <ul className="home-posts">{listItems}</ul>
+              </div>
             </div>
           </div>
         </div>

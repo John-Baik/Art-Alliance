@@ -189,7 +189,6 @@ td {
 
 ul {
   padding-inline-start: 0;
-  margin: 0 1.2rem;
 }
 
 .table-mobile-inactive {
@@ -264,12 +263,17 @@ ul {
 button,
 i,
 a,
-.location-button {
+.location-button,
+.options-button {
   z-index: 3;
 }
 
 .relative {
   position: relative;
+}
+
+.post-width {
+  width: 90vw;
 }
 
 @media screen and (min-width: 768px) {
@@ -370,10 +374,6 @@ a,
     margin: 3rem 0;
   }
 
-  .home-margin {
-    margin: 0 13%;
-  }
-
   .table-width {
     display: revert;
   }
@@ -417,5 +417,10 @@ a,
 
   .dropdown-option {
     padding: 0.6rem 1.8rem;
+  }
+
+  .post-width {
+    width: 46rem;
+    margin: auto;
   }
 }

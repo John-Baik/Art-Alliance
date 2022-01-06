@@ -51,7 +51,21 @@ app.get('/api/posts', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.put('/api/posts/:postId', (req, res) => {
+app.get('/api/posts/:postId', (req, res, next) => {
+  const id = Number(req.params.postId);
+  const sql = `
+  select "postId", "userId", "post", "price", "startTime", "endTime", "location", "createdAt", "startDate", "username"
+  from "posts"
+   join "users" using ("userId")
+  where "postId" = $1
+  `;
+  const values = [id];
+  db.query(sql, values)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+app.patch('/api/posts/:postId', (req, res) => {
   const body = req.body;
   const id = Number(req.params.postId);
   const post = body.post;
