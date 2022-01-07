@@ -53,6 +53,10 @@ h1 {
   font-size: 1.2rem;
 }
 
+.bookmark-active {
+  color: #2026ae;
+}
+
 .post {
   color: white;
   background-color: rgb(177, 175, 175);
@@ -148,7 +152,6 @@ h1 {
 
 .navigation-symbol {
   font-size: 2rem;
-  transition: 2s;
 }
 
 .navigation-title {
@@ -259,10 +262,6 @@ ul {
 }
 
 .hidden {
-  display: none;
-}
-
-i.star {
   display: none;
 }
 

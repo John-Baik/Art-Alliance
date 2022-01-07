@@ -6,6 +6,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userId: 1,
       route: parseRoute(window.location.hash)
     };
   }

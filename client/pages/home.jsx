@@ -6,9 +6,11 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: []
+      posts: [],
+      dummyUserId: ''
     };
     this.getPosts = this.getPosts.bind(this);
+    this.getUser = this.getUser.bind(this);
   }
 
   getPosts() {
@@ -19,22 +21,30 @@ export default class Home extends React.Component {
       });
   }
 
+  getUser() {
+    fetch('/api/users/1')
+      .then(res => res.json())
+      .then(user => {
+        this.setState({ dummyUserId: user[0].userId });
+      });
+  }
+
   componentDidMount() {
     fetch('/api/posts')
       .then(res => res.json())
       .then(posts => {
         this.setState({ posts });
-      });
+      })
+      .then(this.getUser());
   }
 
   render() {
-    const listItems = this.state.posts.reverse().map(post => (
-      <Post key={post.postId} post={post} getPosts={this.getPosts} />
+    const listItems = this.state.posts.map(post => (
+      <Post dummyUserId={this.state.dummyUserId} key={post.postId} post={post} getPosts={this.getPosts} />
     ));
-
     return (
       <>
-      <div className="home-container flex column">
+        <div className="home-container flex column">
         <div className="navigation-color">
           <div className="navigation-container flex align-item">
             <div className="flex align-items">
@@ -51,7 +61,7 @@ export default class Home extends React.Component {
                 <a className="relative navigation-title">Home</a>
               </div>
               <div className="symbol-container">
-                <i className="far fa-star navigation-symbol"></i>
+                  <i className="far fa-bookmark navigation-symbol"></i>
                 <a className="relative navigation-title">Favorites</a>
               </div>
               <div className="symbol-container">

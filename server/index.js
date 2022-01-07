@@ -21,7 +21,7 @@ app.use(errorMiddleware);
 
 app.post('/api/posts', (req, res) => {
   const body = req.body;
-  const userId = 1;
+  const userId = 2;
   const sql = `
   insert into "posts" ("post", "price", "startDate", "startTime", "endTime", "location", "userId")
   values ($1, $2, $3, $4, $5, $6, $7)
@@ -45,10 +45,34 @@ app.get('/api/posts', (req, res, next) => {
   select "postId", "userId", "post", "price", "startTime", "endTime", "location", "createdAt", "startDate", "username"
   from "posts"
    join "users" using ("userId")
-  ORDER BY "createdAt"
+  order BY "createdAt" desc
   `;
   db.query(sql)
     .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+app.get('/api/users/:userId', (req, res, next) => {
+  const id = Number(req.params.userId);
+  if (!id || id <= 0) {
+    res.status(400).json({ error: 'invalid id' });
+    return;
+  }
+  const sql = `select "userId", "username", "password"
+  from "users"
+  where "userId" = $1
+  `;
+  const values = [id];
+  // ^^ change this to id later
+  db.query(sql, values)
+    .then(result => {
+      const user = result.rows[0];
+      if (!user) {
+        res.status(404).json({ error: 'userId does not exist' });
+        return;
+      }
+      res.status(200).json(result.rows);
+    })
     .catch(err => next(err));
 });
 
