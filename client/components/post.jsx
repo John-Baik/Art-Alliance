@@ -63,7 +63,7 @@ export default class Post extends React.Component {
     return (
     <>
       <div className={this.state.deleteModalOpen ? '' : 'hidden'}>
-        <Delete deleteModalClose={this.deleteModalClose} />
+          <Delete getPosts={this.props.getPosts} post={post} deleteModalClose={this.deleteModalClose} />
       </div>
       <div>
         <li className="post-entry">

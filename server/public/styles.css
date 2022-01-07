@@ -452,8 +452,13 @@ i.star {
   }
 
   /* DELETE MODAL */
+  .delete-modal-body {
+    width: 36rem;
+    font-size: 0.9rem;
+  }
+
   .delete-modal {
-    width: 29rem;
+    width: 41rem;
     height: 15rem;
   }
 }
