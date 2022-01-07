@@ -1,5 +1,5 @@
 import React from 'react';
-import Create from './create';
+import Create from '../components/create';
 import Post from '../components/post';
 
 export default class Home extends React.Component {
