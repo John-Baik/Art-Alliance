@@ -7,7 +7,8 @@ export default class Home extends React.Component {
     super(props);
     this.state = {
       posts: [],
-      dummyUserId: ''
+      dummyUserId: '',
+      userIdReady: false
     };
     this.getPosts = this.getPosts.bind(this);
     this.getUser = this.getUser.bind(this);
@@ -26,18 +27,29 @@ export default class Home extends React.Component {
       .then(res => res.json())
       .then(user => {
         this.setState({ dummyUserId: user[0].userId });
+        if (this.state.dummyUserId !== '') {
+          this.setState({ userIdReady: true });
+        } else {
+          this.setState({ userIdReady: false });
+        }
       });
   }
 
   componentDidMount() {
     this.getPosts();
     this.getUser();
+    if (this.state.dummyUserId === 1) {
+      this.setState({ userIdReady: true });
+    } else {
+      this.setState({ userIdReady: false });
+    }
   }
 
   render() {
     const listItems = this.state.posts.map(post => (
       <Post dummyUserId={this.state.dummyUserId} key={post.postId} post={post} getUser={this.getUser} getPosts={this.getPosts} />
     ));
+
     return (
       <>
         <div className="home-container flex column">
@@ -96,7 +108,7 @@ export default class Home extends React.Component {
                 </div>
               </div>
               <div className="post-width">
-                <ul className="home-posts">{listItems}</ul>
+                <ul className={this.state.userIdReady ? 'home-posts' : 'hidden'}>{listItems}</ul>
               </div>
             </div>
           </div>
