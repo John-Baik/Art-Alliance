@@ -53,6 +53,16 @@ h1 {
   font-size: 1.2rem;
 }
 
+.bookmark-active {
+  color: #2026ae;
+  transition: 0.15s;
+}
+
+.bookmark-inactive {
+  opacity: 30%;
+  transition: 0.15s;
+}
+
 .post {
   color: white;
   background-color: rgb(177, 175, 175);
@@ -148,7 +158,6 @@ h1 {
 
 .navigation-symbol {
   font-size: 2rem;
-  transition: 2s;
 }
 
 .navigation-title {
@@ -237,6 +246,11 @@ h1 {
   font-size: 1.2rem;
 }
 
+.username {
+  font-weight: 600;
+  padding-top: 0.2rem;
+}
+
 .date {
   font-size: 0.9rem;
   opacity: 50%;
@@ -259,10 +273,6 @@ ul {
 }
 
 .hidden {
-  display: none;
-}
-
-i.star {
   display: none;
 }
 
@@ -437,10 +447,6 @@ i.star {
 
   .user {
     transform: scale(1);
-  }
-
-  .username {
-    font-weight: 600;
   }
 
   th {

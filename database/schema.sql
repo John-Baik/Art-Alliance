@@ -35,6 +35,15 @@ CREATE TABLE "comments" (
 ) WITH (
   OIDS=FALSE
 );
+CREATE TABLE "favorites" (
+  "userId" integer NOT NULL,
+  "postId" integer NOT NULL,
+  CONSTRAINT "favorites_pk" PRIMARY KEY ("userId", "postId")
+) WITH (
+  OIDS=FALSE
+);
 ALTER TABLE "posts" ADD CONSTRAINT "posts_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
 ALTER TABLE "comments" ADD CONSTRAINT "comments_fk0" FOREIGN KEY ("postId") REFERENCES "posts"("postId");
 ALTER TABLE "comments" ADD CONSTRAINT "comments_fk1" FOREIGN KEY ("userId") REFERENCES "users"("userId");
+ALTER TABLE "favorites" ADD CONSTRAINT "favorites_fk0" FOREIGN KEY ("postId") REFERENCES "posts"("postId") ON DELETE CASCADE;
+ALTER TABLE "favorites" ADD CONSTRAINT "favorites_fk1" FOREIGN KEY ("userId") REFERENCES "users"("userId") ON DELETE CASCADE;

@@ -6,9 +6,12 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: []
+      posts: [],
+      dummyUserId: '',
+      userIdReady: false
     };
     this.getPosts = this.getPosts.bind(this);
+    this.getUser = this.getUser.bind(this);
   }
 
   getPosts() {
@@ -19,22 +22,31 @@ export default class Home extends React.Component {
       });
   }
 
-  componentDidMount() {
-    fetch('/api/posts')
+  getUser() {
+    fetch('/api/users/2')
       .then(res => res.json())
-      .then(posts => {
-        this.setState({ posts });
+      .then(user => {
+        this.setState({ dummyUserId: user[0].userId });
+        if (this.state.dummyUserId !== '') {
+          this.setState({ userIdReady: true });
+        } else {
+          this.setState({ userIdReady: false });
+        }
       });
   }
 
-  render() {
-    const listItems = this.state.posts.reverse().map(post => (
-      <Post key={post.postId} post={post} getPosts={this.getPosts} />
-    ));
+  componentDidMount() {
+    this.getPosts();
+    this.getUser();
+  }
 
+  render() {
+    const listItems = this.state.posts.map(post => (
+      <Post dummyUserId={this.state.dummyUserId} key={post.postId} post={post} getUser={this.getUser} getPosts={this.getPosts} />
+    ));
     return (
       <>
-      <div className="home-container flex column">
+        <div className="home-container flex column">
         <div className="navigation-color">
           <div className="navigation-container flex align-item">
             <div className="flex align-items">
@@ -51,7 +63,7 @@ export default class Home extends React.Component {
                 <a className="relative navigation-title">Home</a>
               </div>
               <div className="symbol-container">
-                <i className="far fa-star navigation-symbol"></i>
+                <i className="far fa-bookmark navigation-symbol"></i>
                 <a className="relative navigation-title">Favorites</a>
               </div>
               <div className="symbol-container">
@@ -79,9 +91,9 @@ export default class Home extends React.Component {
             </div>
           </div>
         </div>
-        <div className="home-page-container">
+        <div className='home-page-container'>
           <div className="home-page">
-            <div className="home-margin">
+              <div className={this.state.userIdReady ? 'home-margin' : 'invisible'}>
               <div className="page-title">
                 <button className="add-post-button invisible">+</button>
                 <h1 className="page-header">Home</h1>
@@ -90,7 +102,7 @@ export default class Home extends React.Component {
                 </div>
               </div>
               <div className="post-width">
-                <ul className="home-posts">{listItems}</ul>
+                <ul className='home-posts'>{listItems}</ul>
               </div>
             </div>
           </div>
@@ -98,5 +110,6 @@ export default class Home extends React.Component {
       </div>
       </>
     );
+
   }
 }

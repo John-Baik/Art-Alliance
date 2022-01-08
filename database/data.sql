@@ -1,3 +1,3 @@
 insert into "users"
   ("username", "password")
-  values ('testUser', 'temp');
+  values ('testUser', 'temp'), ('testUser2', 'temp2');
