@@ -55,6 +55,12 @@ h1 {
 
 .bookmark-active {
   color: #2026ae;
+  transition: 0.15s;
+}
+
+.bookmark-inactive {
+  opacity: 30%;
+  transition: 0.15s;
 }
 
 .post {

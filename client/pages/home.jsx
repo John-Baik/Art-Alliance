@@ -30,17 +30,13 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/posts')
-      .then(res => res.json())
-      .then(posts => {
-        this.setState({ posts });
-      })
-      .then(this.getUser());
+    this.getPosts();
+    this.getUser();
   }
 
   render() {
     const listItems = this.state.posts.map(post => (
-      <Post dummyUserId={this.state.dummyUserId} key={post.postId} post={post} getPosts={this.getPosts} />
+      <Post dummyUserId={this.state.dummyUserId} key={post.postId} post={post} getUser={this.getUser} getPosts={this.getPosts} />
     ));
     return (
       <>
@@ -61,7 +57,7 @@ export default class Home extends React.Component {
                 <a className="relative navigation-title">Home</a>
               </div>
               <div className="symbol-container">
-                  <i className="far fa-bookmark navigation-symbol"></i>
+                <i className="far fa-bookmark navigation-symbol"></i>
                 <a className="relative navigation-title">Favorites</a>
               </div>
               <div className="symbol-container">

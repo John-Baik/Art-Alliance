@@ -19,27 +19,6 @@ app.use(jsonMiddleWare);
 
 app.use(errorMiddleware);
 
-app.post('/api/posts', (req, res) => {
-  const body = req.body;
-  const userId = 2;
-  const sql = `
-  insert into "posts" ("post", "price", "startDate", "startTime", "endTime", "location", "userId")
-  values ($1, $2, $3, $4, $5, $6, $7)
-  returning *
-  `;
-  const values = [body.post, body.price, body.startDate, body.startTime, body.endTime, body.location, userId];
-  db.query(sql, values)
-    .then(result => {
-      const post = result.rows[0];
-      res.status(201).json(post);
-    })
-    .catch(error => {
-      // eslint-disable-next-line no-console
-      console.log(error);
-      res.status(500).json({ error: 'An unexpected error has occurred' });
-    });
-});
-
 app.get('/api/posts', (req, res, next) => {
   const sql = `
   select "postId", "userId", "post", "price", "startTime", "endTime", "location", "createdAt", "startDate", "username"
@@ -63,7 +42,6 @@ app.get('/api/users/:userId', (req, res, next) => {
   where "userId" = $1
   `;
   const values = [id];
-  // ^^ change this to id later
   db.query(sql, values)
     .then(result => {
       const user = result.rows[0];
@@ -99,6 +77,71 @@ app.get('/api/posts/:postId', (req, res, next) => {
       res.status(200).json(result.rows);
     })
     .catch(err => next(err));
+});
+
+app.get('/api/favorites', (req, res, next) => {
+  const sql = `
+  select "postId", "userId"
+  from "favorites"
+  `;
+  db.query(sql)
+    .then(result => {
+      const post = result.rows;
+      res.status(200).json(post);
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/posts/:userId', (req, res, next) => {
+  const body = req.body;
+  const userId = Number(req.params.userId);
+  const sql = `
+  insert into "posts" ("post", "price", "startDate", "startTime", "endTime", "location", "userId")
+  values ($1, $2, $3, $4, $5, $6, $7)
+  returning "post", "price", "startDate", "startTime", "endTime", "location", "userId"
+  `;
+  const values = [body.post, body.price, body.startDate, body.startTime, body.endTime, body.location, userId];
+  db.query(sql, values)
+    .then(result => {
+      const post = result.rows[0];
+      res.status(201).json(post);
+    })
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      res.status(500).json({ error: 'An unexpected error has occurred' });
+    });
+});
+
+app.post('/api/favorites/:postId', (req, res, next) => {
+  const id = Number(req.params.postId);
+  if (!id || id <= 0) {
+    res.status(400).json({ error: 'invalid id' });
+    return;
+  }
+  const sql = `
+  insert into "favorites" ("postId", "userId")
+  select "postId", "userId"
+  from "posts"
+   join "users" using ("userId")
+  where "postId" = $1
+  returning "postId", "userId"
+  `;
+  const values = [id];
+  db.query(sql, values)
+    .then(result => {
+      const post = result.rows[0];
+      if (!post) {
+        res.status(404).json({ error: 'postId does not exist' });
+        return;
+      }
+      res.status(200).json(result.rows);
+    })
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      res.status(500).json({ error: 'An unexpected error has occurred' });
+    });
 });
 
 app.patch('/api/posts/:postId', (req, res) => {
@@ -151,9 +194,10 @@ app.delete('/api/posts/:postId', (req, res, next) => {
     res.status(400).json({ error: 'invalid id' });
     return;
   }
-  const sql = `delete from "posts"
+  const sql = `
+  delete from "posts"
     where "postId" = $1
-    returning  "postId", "userId", "post", "price", "startTime", "endTime", "location", "createdAt", "startDate"
+    returning "postId", "userId", "post", "price", "startTime", "endTime", "location", "createdAt", "startDate"
   `;
   const values = [id];
   db.query(sql, values)
@@ -161,8 +205,36 @@ app.delete('/api/posts/:postId', (req, res, next) => {
       const deletedPost = result.rows[0];
       if (!deletedPost) {
         res.status(404).json({ error: 'postId does not exist' });
+        return;
       }
       res.status(200).json(deletedPost);
+    })
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      res.status(500).json({ error: 'An unexpected error has occurred' });
+    });
+});
+
+app.delete('/api/favorites/:postId', (req, res, next) => {
+  const id = Number(req.params.postId);
+  if (!id || id <= 0) {
+    res.status(400).json({ error: 'invalid id' });
+    return;
+  }
+  const sql = `delete from "favorites"
+  where "postId" = $1
+  returning "postId", "userId"
+  `;
+  const values = [id];
+  db.query(sql, values)
+    .then(result => {
+      const post = result.rows[0];
+      if (!post) {
+        res.status(404).json({ error: 'postId does not exist' });
+        return;
+      }
+      res.status(200).json(result.rows);
     })
     .catch(error => {
       // eslint-disable-next-line no-console

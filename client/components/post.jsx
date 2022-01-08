@@ -12,22 +12,20 @@ export default class Post extends React.Component {
       dropdownButton: false,
       editModalOpen: false,
       deleteModalOpen: false,
-      starActive: false
+      bookmarkActive: false
     };
     this.dropdownOpen = this.dropdownOpen.bind(this);
     this.editModal = this.editModal.bind(this);
     this.dropdownClose = this.dropdownClose.bind(this);
     this.deleteModalOpen = this.deleteModalOpen.bind(this);
     this.deleteModalClose = this.deleteModalClose.bind(this);
-    this.starActive = this.starActive.bind(this);
+    this.addFavorite = this.addFavorite.bind(this);
+    this.removeFavorite = this.removeFavorite.bind(this);
+    this.handleBookmarks = this.handleBookmarks.bind(this);
   }
 
   dropdownClose() {
     this.setState({ dropdownButton: false });
-  }
-
-  starActive() {
-    this.setState({ starActive: !this.state.starActive });
   }
 
   editModal() {
@@ -60,7 +58,60 @@ export default class Post extends React.Component {
     this.setState({ dropdownButton: !this.state.dropdownButton });
   }
 
-  componentDidMount() {
+  removeFavorite(event) {
+    const post = this.props.post;
+    event.preventDefault();
+    fetch(`/api/favorites/${post.postId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ bookmarkActive: false });
+      });
+  }
+
+  addFavorite(event) {
+    const post = this.props.post;
+    event.preventDefault();
+    fetch(`/api/favorites/${post.postId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ bookmarkActive: !this.state.bookmarkActive });
+      });
+  }
+
+  handleBookmarks() {
+    const post = this.props.post;
+    const userId = this.props.dummyUserId;
+    if (post.userId !== userId) {
+      fetch('/api/favorites')
+        .then(res => res.json())
+        .then(favoritesList => {
+          for (let i = 0; i < favoritesList.length; i++) {
+            if (favoritesList[i].postId === post.postId && userId !== favoritesList[i].userId) {
+              this.setState({ bookmarkActive: true });
+            }
+          }
+        })
+        .catch(error => {
+          // eslint-disable-next-line no-console
+          console.log(error.message);
+        });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.dummyUserId !== prevProps.dummyUserId) {
+      this.handleBookmarks();
+    }
   }
 
   render() {
@@ -186,7 +237,7 @@ export default class Post extends React.Component {
                     </div>
                     <div>
                       <OutsideClickHandler onOutsideClick={this.dropdownClose}>
-                        <i onClick={this.starActive} className={this.state.starActive ? 'fas fa-bookmark navigation-symbol bookmark-active' : 'far fa-bookmark navigation-symbol star-button'}></i>
+                        <i onClick={this.state.bookmarkActive ? this.removeFavorite : this.addFavorite } className={this.state.bookmarkActive ? 'fas fa-bookmark navigation-symbol bookmark-active' : 'far fa-bookmark navigation-symbol bookmark-inactive'}></i>
                       </OutsideClickHandler>
                       <div className={this.state.editModalOpen ? '' : 'hidden'}>
                         <Edit closeEditModal={this.closeEditModal} editModal={this.editModal} post={post} getPosts={this.props.getPosts} />
