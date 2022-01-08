@@ -38,7 +38,6 @@ export default class Home extends React.Component {
   componentDidMount() {
     this.getPosts();
     this.getUser();
-
   }
 
   render() {
@@ -94,7 +93,7 @@ export default class Home extends React.Component {
         </div>
         <div className='home-page-container'>
           <div className="home-page">
-              <div className={this.state.userIdReady ? 'home-margin' : 'hidden'}>
+              <div className={this.state.userIdReady ? 'home-margin' : 'invisible'}>
               <div className="page-title">
                 <button className="add-post-button invisible">+</button>
                 <h1 className="page-header">Home</h1>
