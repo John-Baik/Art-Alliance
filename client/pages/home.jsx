@@ -23,7 +23,7 @@ export default class Home extends React.Component {
   }
 
   getUser() {
-    fetch('/api/users/1')
+    fetch('/api/users/2')
       .then(res => res.json())
       .then(user => {
         this.setState({ dummyUserId: user[0].userId });
@@ -38,18 +38,13 @@ export default class Home extends React.Component {
   componentDidMount() {
     this.getPosts();
     this.getUser();
-    if (this.state.dummyUserId === 1) {
-      this.setState({ userIdReady: true });
-    } else {
-      this.setState({ userIdReady: false });
-    }
+
   }
 
   render() {
     const listItems = this.state.posts.map(post => (
       <Post dummyUserId={this.state.dummyUserId} key={post.postId} post={post} getUser={this.getUser} getPosts={this.getPosts} />
     ));
-
     return (
       <>
         <div className="home-container flex column">
@@ -97,9 +92,9 @@ export default class Home extends React.Component {
             </div>
           </div>
         </div>
-        <div className="home-page-container">
+        <div className='home-page-container'>
           <div className="home-page">
-            <div className="home-margin">
+              <div className={this.state.userIdReady ? 'home-margin' : 'hidden'}>
               <div className="page-title">
                 <button className="add-post-button invisible">+</button>
                 <h1 className="page-header">Home</h1>
@@ -108,7 +103,7 @@ export default class Home extends React.Component {
                 </div>
               </div>
               <div className="post-width">
-                <ul className={this.state.userIdReady ? 'home-posts' : 'hidden'}>{listItems}</ul>
+                <ul className='home-posts'>{listItems}</ul>
               </div>
             </div>
           </div>
@@ -116,5 +111,6 @@ export default class Home extends React.Component {
       </div>
       </>
     );
+
   }
 }
