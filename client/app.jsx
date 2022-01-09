@@ -1,12 +1,14 @@
 import React from 'react';
-import Home from './pages/home';
+// import Home from './pages/home';
+import Saved from './pages/saved';
 import parseRoute from './lib/parse-route';
+import Navigation from './components/navigation';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: 1,
+      loggedInUserId: 2,
       route: parseRoute(window.location.hash)
     };
   }
@@ -26,7 +28,10 @@ export default class App extends React.Component {
   renderPage() {
     const { route } = this.state;
     if (route.path === '') {
-      return <Home onClick={this.isDropdownActive} />;
+      return <>
+        <Saved loggedInUserId={this.state.loggedInUserId} onClick={this.isDropdownActive} />
+      </>
+      ;
     }
     return <h1>Unknown Page</h1>;
   }
@@ -34,6 +39,7 @@ export default class App extends React.Component {
   render() {
     return (
       <>
+        <Navigation onClick={this.isDropdownActive} />
     { this.renderPage() }
       </>
     );

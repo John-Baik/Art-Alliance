@@ -73,7 +73,7 @@ export default class Create extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    fetch('/api/posts/2', {
+    fetch(`/api/posts/${this.props.loggedInUserId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -61,10 +61,6 @@
   gap: 1rem;
 }
 
-.justify-content-center {
-  justify-content: center;
-}
-
 .flex {
   display: flex;
 }

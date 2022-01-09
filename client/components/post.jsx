@@ -90,13 +90,13 @@ export default class Post extends React.Component {
 
   handleBookmarks() {
     const post = this.props.post;
-    const userId = this.props.dummyUserId;
-    if (post.userId !== userId) {
+    const loggedInUserId = this.props.loggedInUserId;
+    if (post.userId !== loggedInUserId) {
       fetch('/api/saved')
         .then(res => res.json())
         .then(savedList => {
           for (let i = 0; i < savedList.length; i++) {
-            if (savedList[i].postId === post.postId && userId !== savedList[i].userId) {
+            if (savedList[i].postId === post.postId && loggedInUserId !== savedList[i].userId) {
               this.setState({ bookmarkActive: true });
             }
           }
@@ -108,21 +108,19 @@ export default class Post extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.dummyUserId !== prevProps.dummyUserId) {
-      this.handleBookmarks();
-    }
+  componentDidMount() {
+    this.handleBookmarks();
   }
 
   render() {
     const post = this.props.post;
-    const userId = this.props.dummyUserId;
+    const loggedInUserId = this.props.loggedInUserId;
     const dateFormatted = format(parseISO(post.startDate), 'LLL dd, yyyy');
     const createdAtFormatted = format(parseISO(post.createdAt), 'LLL dd, yyyy');
     const startTimeFormatted = format(parse(post.startTime, 'H:mm:ss', new Date()), 'h:mm a');
     const endTimeFormatted = format(parse(post.endTime, 'H:mm:ss', new Date()), 'h:mm a');
 
-    if (post.userId === userId) {
+    if (post.userId === loggedInUserId) {
       return (
     <>
       <div className={this.state.deleteModalOpen ? '' : 'hidden'}>
