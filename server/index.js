@@ -99,19 +99,24 @@ app.get('/api/saved/:userId', (req, res, next) => {
     return;
   }
   const sql = `
-  select "p"."postId",
-   "p"."userId",
+ select "p"."postId",
+   "p"."userId" as "creatorUserId",
    "p"."post",
    "p"."price",
    "p"."startTime",
    "p"."endTime",
    "p"."location",
    "p"."createdAt",
-   "p"."startDate"
+   "p"."startDate",
+   "u"."username",
+   "A"."username" as "authorUsername"
   from "saved" as "s"
+   join "users" as "u" using ("userId")
   join "posts" as "p" using ("postId")
+  join "users" as "A" on ("p"."userId" = "A"."userId")
   where "s"."userId" = $1
   `;
+
   const values = [id];
   db.query(sql, values)
     .then(result => {
@@ -150,21 +155,18 @@ app.post('/api/posts/:userId', (req, res, next) => {
     });
 });
 
-app.post('/api/saved/:postId', (req, res, next) => {
-  const id = Number(req.params.postId);
+app.post('/api/saved/:userId', (req, res, next) => {
+  const id = Number(req.params.userId);
   if (!id || id <= 0) {
     res.status(400).json({ error: 'invalid id' });
     return;
   }
   const sql = `
-  insert into "saved" ("postId", "userId")
-  select "postId", "userId"
-  from "posts"
-   join "users" using ("userId")
-  where "postId" = $1
-  returning "postId", "userId"
+  insert into "saved" ("userId", "postId")
+  values ($1, $2)
+  returning "userId", "postId"
   `;
-  const values = [id];
+  const values = [id, req.body.postId];
   db.query(sql, values)
     .then(result => {
       const post = result.rows[0];

@@ -1,6 +1,7 @@
 import React from 'react';
-// import Home from './pages/home';
+import Home from './pages/home';
 import Saved from './pages/saved';
+import Messages from './pages/messages';
 import parseRoute from './lib/parse-route';
 import Navigation from './components/navigation';
 
@@ -8,7 +9,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedInUserId: 2,
+      loggedInUserId: 1,
       route: parseRoute(window.location.hash)
     };
   }
@@ -29,9 +30,16 @@ export default class App extends React.Component {
     const { route } = this.state;
     if (route.path === '') {
       return <>
-        <Saved loggedInUserId={this.state.loggedInUserId} onClick={this.isDropdownActive} />
-      </>
-      ;
+        <Home loggedInUserId={this.state.loggedInUserId} />
+      </>;
+    } else if (route.path === 'saved') {
+      return <>
+        <Saved loggedInUserId={this.state.loggedInUserId} />
+        </>;
+    } else if (route.path === 'messages') {
+      return <>
+        <Messages loggedInUserId={this.state.loggedInUserId} />
+      </>;
     }
     return <h1>Unknown Page</h1>;
   }
@@ -39,7 +47,7 @@ export default class App extends React.Component {
   render() {
     return (
       <>
-        <Navigation onClick={this.isDropdownActive} />
+        <Navigation routePath={this.state.route} onClick={this.isDropdownActive} />
     { this.renderPage() }
       </>
     );

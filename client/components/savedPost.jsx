@@ -1,31 +1,31 @@
 import React from 'react';
-import OutsideClickHandler from 'react-outside-click-handler';
 import { format, parseISO, parse } from 'date-fns';
 
 export default class savedPost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      deleteModalOpen: false,
-      bookmarkActive: false
+      savedPost: this.props.savedPost,
+      bookmarkActive: true
     };
-    this.deleteModalOpen = this.deleteModalOpen.bind(this);
-    this.deleteModalClose = this.deleteModalClose.bind(this);
     this.removeSaved = this.removeSaved.bind(this);
-    this.handleBookmarks = this.handleBookmarks.bind(this);
+    this.addSaved = this.addSaved.bind(this);
   }
 
-  deleteModalOpen() {
-    this.setState({
-      dropdownButton: false,
-      deleteModalOpen: true
-    });
-  }
-
-  deleteModalClose() {
-    this.setState({
-      deleteModalOpen: false
-    });
+  addSaved(event) {
+    const savedPost = this.props.savedPost;
+    event.preventDefault();
+    fetch(`/api/saved/${this.props.loggedInUserId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ postId: savedPost.postId })
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ bookmarkActive: true });
+      });
   }
 
   removeSaved(event) {
@@ -43,40 +43,15 @@ export default class savedPost extends React.Component {
       });
   }
 
-  handleBookmarks() {
-    const savedPost = this.props.savedPost;
-    const loggedInUserId = this.props.loggedInUserId;
-    if (savedPost.userId !== loggedInUserId) {
-      fetch('/api/saved')
-        .then(res => res.json())
-        .then(savedList => {
-          for (let i = 0; i < savedList.length; i++) {
-            if (savedList[i].postId === savedPost.postId && loggedInUserId !== savedList[i].userId) {
-              this.setState({ bookmarkActive: true });
-            }
-          }
-        })
-        .catch(error => {
-          // eslint-disable-next-line no-console
-          console.log(error.message);
-        });
-    }
-  }
-
   render() {
     const savedPost = this.props.savedPost;
-    const loggedInUserId = this.props.loggedInUserId;
     const dateFormatted = format(parseISO(savedPost.startDate), 'LLL dd, yyyy');
     const createdAtFormatted = format(parseISO(savedPost.createdAt), 'LLL dd, yyyy');
     const startTimeFormatted = format(parse(savedPost.startTime, 'H:mm:ss', new Date()), 'h:mm a');
     const endTimeFormatted = format(parse(savedPost.endTime, 'H:mm:ss', new Date()), 'h:mm a');
 
-    if (savedPost.userId === loggedInUserId) {
-      return (
+    return (
         <>
-          {/* <div className={this.state.deleteModalOpen ? '' : 'hidden'}>
-            <Delete getPosts={this.props.getPosts} post={post} deleteModalClose={this.deleteModalClose} />
-          </div> */}
           <div>
             <li className="post-entry">
               <div className="post-container">
@@ -87,17 +62,12 @@ export default class savedPost extends React.Component {
                         <i className="fas fa-user profile user"></i>
                       </div>
                       <div className="username-date flex column flex-start">
-                        <p className="post-creator-creation username roboto-font">{savedPost.username}</p>
+                        <p className="post-creator-creation username roboto-font">{savedPost.authorUsername}</p>
                         <p className="date post-creator-creation roboto-font">{createdAtFormatted}</p>
                       </div>
                     </div>
                     <div>
-                      <OutsideClickHandler onOutsideClick={this.dropdownClose}>
-                        <i onClick={this.state.bookmarkActive ? this.removeSaved : this.addSaved} className='fas fa-bookmark navigation-symbol bookmark-active'></i>
-                      </OutsideClickHandler>
-                      <div className={this.state.editModalOpen ? '' : 'hidden'}>
-                        {/* <Edit closeEditModal={this.closeEditModal} editModal={this.editModal} post={post} getPosts={this.props.getPosts} /> */}
-                      </div>
+                      <i onClick={this.state.bookmarkActive ? this.removeSaved : this.addSaved} className={this.state.bookmarkActive ? 'fas fa-bookmark navigation-symbol bookmark-active' : 'far fa-bookmark navigation-symbol bookmark-inactive'}></i>
                     </div>
                   </div>
                   <div>
@@ -159,7 +129,6 @@ export default class savedPost extends React.Component {
             </li>
           </div>
         </>
-      );
-    }
+    );
   }
 }

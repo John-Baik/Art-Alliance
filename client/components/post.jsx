@@ -76,11 +76,12 @@ export default class Post extends React.Component {
   addSaved(event) {
     const post = this.props.post;
     event.preventDefault();
-    fetch(`/api/saved/${post.postId}`, {
+    fetch(`/api/saved/${this.props.loggedInUserId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      body: JSON.stringify({ postId: post.postId })
     })
       .then(response => response.json())
       .then(data => {
@@ -91,21 +92,19 @@ export default class Post extends React.Component {
   handleBookmarks() {
     const post = this.props.post;
     const loggedInUserId = this.props.loggedInUserId;
-    if (post.userId !== loggedInUserId) {
-      fetch('/api/saved')
-        .then(res => res.json())
-        .then(savedList => {
-          for (let i = 0; i < savedList.length; i++) {
-            if (savedList[i].postId === post.postId && loggedInUserId !== savedList[i].userId) {
-              this.setState({ bookmarkActive: true });
-            }
+    fetch(`/api/saved/${loggedInUserId}`)
+      .then(res => res.json())
+      .then(savedList => {
+        for (let i = 0; i < savedList.length; i++) {
+          if (savedList[i].postId === post.postId) {
+            this.setState({ bookmarkActive: true });
           }
-        })
-        .catch(error => {
-          // eslint-disable-next-line no-console
-          console.log(error.message);
-        });
-    }
+        }
+      })
+      .catch(error => {
+        // eslint-disable-next-line no-console
+        console.log(error.message);
+      });
   }
 
   componentDidMount() {

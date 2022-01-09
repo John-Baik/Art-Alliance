@@ -92,7 +92,6 @@
 }
 
 .home-container {
-  width: 100vw;
   height: max-content;
 }
 
@@ -101,6 +100,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.4rem;
 }
 
 .navigation-container {
@@ -203,7 +203,7 @@ ul {
 }
 
 .post-entry {
-  margin: 2rem 0 3rem;
+  margin: 2rem 0 4rem;
   position: relative;
 }
 
@@ -316,7 +316,6 @@ ul {
 
   .logo-desktop {
     display: inline;
-    padding-left: 2rem;
   }
 
   .navigation {
@@ -324,11 +323,11 @@ ul {
   }
 
   .home-page {
-    width: 84rem;
+    width: 60rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: white;
+    background-color: #fafafa;
   }
 
   .home-container {
@@ -340,7 +339,8 @@ ul {
   }
 
   .navigation-container {
-    max-width: 87rem;
+    padding-left: 1rem;
+    max-width: 93rem;
   }
 
   .full-symbol-container {
@@ -394,7 +394,7 @@ ul {
   }
 
   .post-entry {
-    margin: 2.3rem 0;
+    margin: 2.3rem 0 4rem;
   }
 
   .post-header {

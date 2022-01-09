@@ -1,3 +1,10 @@
+.website-title {
+  font-family: Raleway, sans-serif;
+  font-weight: 800;
+  font-size: 1.3;
+  text-transform: uppercase;
+}
+
 /* //CREATE MODAL// */
 
 .start-label-box {
@@ -84,6 +91,7 @@ h1 {
 .post-textbox {
   height: 8rem;
   resize: none;
+  font-size: 1rem;
 }
 
 .price-box {
@@ -139,6 +147,10 @@ h1 {
   background-color: #2559dc;
 }
 
+.post-button-active:active {
+  background-color: rgb(6, 40, 124);
+}
+
 .no-post {
   color: white;
   background-color: rgb(177, 175, 175);
@@ -157,15 +169,11 @@ h1 {
 }
 
 .navigation-symbol {
-  font-size: 2rem;
+  font-size: 1.7rem;
 }
 
-.navigation-title {
-  margin-block-start: 0;
-  margin-block-end: 0;
-  margin-top: 0.3rem;
+.navigation-symbol p {
   font-size: 0.9rem;
-  transition: 0.2s;
 }
 
 .profile {
@@ -189,7 +197,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: #fafafa;
   color: #979797;
 }
 
@@ -204,19 +212,40 @@ h1 {
 
 .post-container {
   border: 1.6px solid rgb(0, 0, 0, 0.3);
-  border-radius: 1.5rem;
-  box-shadow: rgba(0, 0, 0, 0.15) 0 3px 3px 0;
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.05) 0 0 0 1px;
   background-color: white;
+}
+
+.logo-desktop {
+  font-size: 1.7rem;
 }
 
 .logo-desktop:hover,
 .navigation-symbol:hover,
-.navigation-title:hover {
+.symbol-container:hover {
   cursor: pointer;
 }
 
-.navigation-title:hover {
+.symbol-container .navigation-symbol:active {
+  color: #bbbaba;
+}
+
+.home-button-click:active {
+  color: #bbbaba;
+}
+
+.symbol-container p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.symbol-container p:hover {
   text-decoration: underline;
+}
+
+.symbol-container p:active {
+  color: #bbbaba;
 }
 
 .profile:hover {
@@ -225,9 +254,14 @@ h1 {
 
 .add-post-button:hover {
   cursor: pointer;
-  transform: scale(1.2);
+  transform: scale(1.2) rotate(180deg);
   color: black;
   box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0 inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+.add-post-button:active {
+  background-color: #f0f0f0;
 }
 
 .post-header {
@@ -285,9 +319,14 @@ ul {
   transition: 0.3s ease;
 }
 
+.options-button:active {
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0 inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  background-color: white;
+}
+
 .options-button:hover {
   background-color: #f0f0f0;
-  transition: 0s;
+  transition: 0.1s;
 }
 
 .comment-button:hover {
@@ -297,6 +336,11 @@ ul {
 
 .navigation-color {
   background-color: #000572;
+}
+
+.dropdown-content button:active {
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0 inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  background-color: white;
 }
 
 .dropdown-content {
@@ -310,7 +354,7 @@ ul {
   background-color: white;
   border: none;
   font-size: 1.1rem;
-  transition: 0.2s;
+  transition: 0.1s;
 }
 
 .point-cursor {
@@ -369,6 +413,49 @@ ul {
 
 .justify-content-center {
   justify-content: center;
+}
+
+.navigation-container a {
+  color: white;
+}
+
+.empty-page {
+  color: red;
+  font-size: 1.3rem;
+}
+
+textarea,
+.start-end-label,
+.input-box-border {
+  font-family: Raleway, sans-serif;
+}
+
+.home-button {
+  gap: 0;
+  padding-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.home-button svg {
+  transform: scale(0.8);
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 8rem;
+  height: 8rem;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.full-width-height {
+  height: 100vh;
 }
 
 @media screen and (min-width: 768px) {
@@ -431,22 +518,18 @@ ul {
   /* //HOME// */
 
   .home-page-container {
-    background-color: #c0d1e2;
+    background-image: linear-gradient(to bottom, #e1effe, #d6e9fd, #cae2fc, #bfdcfa, #b3d6f9);
   }
 
   .profile {
-    transform: scale(1.2);
+    transform: scale(1);
   }
 
   .add-post-button {
     font-size: 3rem;
     width: 4rem;
     height: 4rem;
-    transition: 0.3s;
-  }
-
-  .home-button {
-    font-size: 2rem;
+    transition: 0.2s;
   }
 
   .user {
@@ -471,4 +554,10 @@ ul {
     width: 41rem;
     height: 15rem;
   }
+
+  .empty-page {
+    font-size: 1.6rem;
+  }
+}
+}
 }

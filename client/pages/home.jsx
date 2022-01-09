@@ -6,7 +6,7 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: [],
+      posts: null,
       loggedInUserId: this.props.loggedInUserId,
       userIdReady: false
     };
@@ -26,8 +26,25 @@ export default class Home extends React.Component {
   }
 
   render() {
+    if (!this.state.posts) {
+      return (
+       <>
+          <div className='home-page-container'>
+            <div className="home-page">
+              <div className='home-margin'>
+                <div className="full-width-height page-title flex justify-content-center align-items">
+                  <div className="loading-circle loader"></div>
+                </div>
+                <div className="post-width">
+                </div>
+              </div>
+            </div>
+          </div>
+       </>
+      );
+    }
     const listItems = this.state.posts.map(post => (
-      <Post loggedInUserId={this.props.loggedInUserId} key={post.postId} post={post} getPosts={this.getPosts} />
+        <Post loggedInUserId={this.props.loggedInUserId} key={post.postId} post={post} getPosts={this.getPosts} />
     ));
     return (
       <>
@@ -42,6 +59,7 @@ export default class Home extends React.Component {
                 </div>
               </div>
               <div className="post-width">
+                <p className={this.state.posts.length === 0 ? 'empty-page roboto-font text-align-center' : 'hidden'}>There are no saved posts</p>
                 <ul className='home-posts'>{listItems}</ul>
               </div>
             </div>
