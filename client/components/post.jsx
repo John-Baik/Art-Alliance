@@ -19,8 +19,8 @@ export default class Post extends React.Component {
     this.dropdownClose = this.dropdownClose.bind(this);
     this.deleteModalOpen = this.deleteModalOpen.bind(this);
     this.deleteModalClose = this.deleteModalClose.bind(this);
-    this.addFavorite = this.addFavorite.bind(this);
-    this.removeFavorite = this.removeFavorite.bind(this);
+    this.addSaved = this.addSaved.bind(this);
+    this.removeSaved = this.removeSaved.bind(this);
     this.handleBookmarks = this.handleBookmarks.bind(this);
   }
 
@@ -58,10 +58,10 @@ export default class Post extends React.Component {
     this.setState({ dropdownButton: !this.state.dropdownButton });
   }
 
-  removeFavorite(event) {
+  removeSaved(event) {
     const post = this.props.post;
     event.preventDefault();
-    fetch(`/api/favorites/${post.postId}`, {
+    fetch(`/api/saved/${post.postId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -73,10 +73,10 @@ export default class Post extends React.Component {
       });
   }
 
-  addFavorite(event) {
+  addSaved(event) {
     const post = this.props.post;
     event.preventDefault();
-    fetch(`/api/favorites/${post.postId}`, {
+    fetch(`/api/saved/${post.postId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -92,11 +92,11 @@ export default class Post extends React.Component {
     const post = this.props.post;
     const userId = this.props.dummyUserId;
     if (post.userId !== userId) {
-      fetch('/api/favorites')
+      fetch('/api/saved')
         .then(res => res.json())
-        .then(favoritesList => {
-          for (let i = 0; i < favoritesList.length; i++) {
-            if (favoritesList[i].postId === post.postId && userId !== favoritesList[i].userId) {
+        .then(savedList => {
+          for (let i = 0; i < savedList.length; i++) {
+            if (savedList[i].postId === post.postId && userId !== savedList[i].userId) {
               this.setState({ bookmarkActive: true });
             }
           }
@@ -238,7 +238,7 @@ export default class Post extends React.Component {
                     </div>
                     <div>
                       <OutsideClickHandler onOutsideClick={this.dropdownClose}>
-                        <i onClick={this.state.bookmarkActive ? this.removeFavorite : this.addFavorite } className={this.state.bookmarkActive ? 'fas fa-bookmark navigation-symbol bookmark-active' : 'far fa-bookmark navigation-symbol bookmark-inactive'}></i>
+                        <i onClick={this.state.bookmarkActive ? this.removeSaved : this.addSaved } className={this.state.bookmarkActive ? 'fas fa-bookmark navigation-symbol bookmark-active' : 'far fa-bookmark navigation-symbol bookmark-inactive'}></i>
                       </OutsideClickHandler>
                       <div className={this.state.editModalOpen ? '' : 'hidden'}>
                         <Edit closeEditModal={this.closeEditModal} editModal={this.editModal} post={post} getPosts={this.props.getPosts} />

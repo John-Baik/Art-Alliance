@@ -64,7 +64,7 @@ export default class Home extends React.Component {
               </div>
               <div className="symbol-container">
                 <i className="far fa-bookmark navigation-symbol"></i>
-                <a className="relative navigation-title">Favorites</a>
+                <a className="relative navigation-title">Saved</a>
               </div>
               <div className="symbol-container">
                 <i className="far fa-comment-alt navigation-symbol"></i>
@@ -80,7 +80,7 @@ export default class Home extends React.Component {
             </div>
             <div className="symbol-container navigation-mobile">
               <i className="far fa-star navigation-symbol"></i>
-              <a className="relative navigation-title">Favorites</a>
+              <a className="relative navigation-title">Saved</a>
             </div>
             <div className="symbol-container navigation-mobile">
               <i className="far fa-comment-alt navigation-symbol"></i>

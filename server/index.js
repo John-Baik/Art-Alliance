@@ -79,10 +79,10 @@ app.get('/api/posts/:postId', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/favorites', (req, res, next) => {
+app.get('/api/saved', (req, res, next) => {
   const sql = `
   select "postId", "userId"
-  from "favorites"
+  from "saved"
   `;
   db.query(sql)
     .then(result => {
@@ -92,9 +92,46 @@ app.get('/api/favorites', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/saved/:userId', (req, res, next) => {
+  const id = Number(req.params.userId);
+  if (!id || id <= 0) {
+    res.status(400).json({ error: 'invalid id' });
+    return;
+  }
+  const sql = `
+  select "p"."postId",
+   "p"."userId",
+   "p"."post",
+   "p"."price",
+   "p"."startTime",
+   "p"."endTime",
+   "p"."location",
+   "p"."createdAt",
+   "p"."startDate"
+  from "saved" as "s"
+  join "posts" as "p" using ("postId")
+  where "s"."userId" = $1
+  `;
+  const values = [id];
+  db.query(sql, values)
+    .then(result => {
+      const post = result.rows;
+      res.status(201).json(post);
+    })
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      res.status(500).json({ error: 'An unexpected error has occurred' });
+    });
+});
+
 app.post('/api/posts/:userId', (req, res, next) => {
   const body = req.body;
   const userId = Number(req.params.userId);
+  if (!userId || userId <= 0) {
+    res.status(400).json({ error: 'invalid userId' });
+    return;
+  }
   const sql = `
   insert into "posts" ("post", "price", "startDate", "startTime", "endTime", "location", "userId")
   values ($1, $2, $3, $4, $5, $6, $7)
@@ -113,14 +150,14 @@ app.post('/api/posts/:userId', (req, res, next) => {
     });
 });
 
-app.post('/api/favorites/:postId', (req, res, next) => {
+app.post('/api/saved/:postId', (req, res, next) => {
   const id = Number(req.params.postId);
   if (!id || id <= 0) {
     res.status(400).json({ error: 'invalid id' });
     return;
   }
   const sql = `
-  insert into "favorites" ("postId", "userId")
+  insert into "saved" ("postId", "userId")
   select "postId", "userId"
   from "posts"
    join "users" using ("userId")
@@ -216,13 +253,13 @@ app.delete('/api/posts/:postId', (req, res, next) => {
     });
 });
 
-app.delete('/api/favorites/:postId', (req, res, next) => {
+app.delete('/api/saved/:postId', (req, res, next) => {
   const id = Number(req.params.postId);
   if (!id || id <= 0) {
     res.status(400).json({ error: 'invalid id' });
     return;
   }
-  const sql = `delete from "favorites"
+  const sql = `delete from "saved"
   where "postId" = $1
   returning "postId", "userId"
   `;
