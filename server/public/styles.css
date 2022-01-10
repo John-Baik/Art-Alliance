@@ -67,11 +67,13 @@ h1 {
 .bookmark-active {
   color: #2026ae;
   transition: 0.15s;
+  margin-right: 0.4rem;
 }
 
 .bookmark-inactive {
   opacity: 30%;
   transition: 0.15s;
+  margin-right: 0.4rem;
 }
 
 .post {
@@ -204,6 +206,7 @@ h1 {
   align-items: center;
   background-color: #fafafa;
   color: #979797;
+  transition: 0.2s;
 }
 
 .add-post-container {
@@ -570,7 +573,6 @@ textarea,
     font-size: 3rem;
     width: 4rem;
     height: 4rem;
-    transition: 0.2s;
   }
 
   .user {
