@@ -1,5 +1,6 @@
 import React from 'react';
 import SavedPost from '../components/savedPost';
+import AOS from 'aos';
 
 export default class Saved extends React.Component {
   constructor(props) {
@@ -23,13 +24,14 @@ export default class Saved extends React.Component {
   }
 
   render() {
+    AOS.init();
     if (!this.state.savedPosts) {
       return (
         <>
           <div className='home-page-container'>
             <div className="home-page">
               <div className='home-margin'>
-                <div className="full-width-height page-title flex justify-content-center align-items">
+                <div className="loading-container ">
                   <div className="loading-circle loader"></div>
                 </div>
                 <div className="post-width">
@@ -46,13 +48,10 @@ export default class Saved extends React.Component {
     return (
       <>
         <div className='home-page-container'>
-          <div className="home-page">
-            <div className='home-margin'>
-              <div className="page-title justify-content-center">
-                <h1 className="page-header">Saved</h1>
-              </div>
+          <div className="home-page home-page-padding-top">
+            <div className="flex justify-content-center">
               <div className="post-width">
-                <p className={savedListItems.length === 0 ? 'empty-page roboto-font text-align-center' : 'hidden'}>There are no saved posts</p>
+                <p data-aos="fade-right" className={savedListItems.length === 0 ? 'empty-page roboto-font text-align-center' : 'hidden'}>You have no saved posts</p>
                 <ul className='home-posts'>{savedListItems}</ul>
               </div>
             </div>

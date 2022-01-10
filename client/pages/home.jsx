@@ -1,6 +1,7 @@
 import React from 'react';
 import Create from '../components/create';
 import Post from '../components/post';
+import AOS from 'aos';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -26,13 +27,14 @@ export default class Home extends React.Component {
   }
 
   render() {
+    AOS.init();
     if (!this.state.posts) {
       return (
        <>
           <div className='home-page-container'>
             <div className="home-page">
               <div className='home-margin'>
-                <div className="full-width-height page-title flex justify-content-center align-items">
+                <div className="loading-container ">
                   <div className="loading-circle loader"></div>
                 </div>
                 <div className="post-width">
@@ -50,16 +52,12 @@ export default class Home extends React.Component {
       <>
         <div className='home-page-container'>
           <div className="home-page">
-            <div className='home-margin'>
-              <div className="page-title">
-                <button className="add-post-button invisible">+</button>
-                <h1 className="page-header">Home</h1>
-                <div className="add-post-container">
-                  <Create loggedInUserId={this.state.loggedInUserId} getPosts={this.getPosts} />
-                </div>
-              </div>
+            <div className="add-post-container">
+              <Create loggedInUserId={this.state.loggedInUserId} getPosts={this.getPosts} />
+            </div>
+            <div className="flex justify-content-center">
               <div className="post-width">
-                <p className={this.state.posts.length === 0 ? 'empty-page roboto-font text-align-center' : 'hidden'}>There are no saved posts</p>
+                <p data-aos="fade-right" className={this.state.posts.length === 0 ? 'empty-page roboto-font text-align-center' : 'hidden'}>There are no posts...</p>
                 <ul className='home-posts'>{listItems}</ul>
               </div>
             </div>

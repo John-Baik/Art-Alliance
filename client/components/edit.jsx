@@ -7,7 +7,7 @@ export default class Edit extends React.Component {
     this.state = {
       post: this.props.post.post,
       price: this.props.post.price,
-      startDate: this.props.post.startDate,
+      startDate: format(parseISO(this.props.post.startDate), 'yyyy-MM-dd'),
       startTime: this.props.post.startTime,
       endTime: this.props.post.endTime,
       location: this.props.post.location
@@ -78,98 +78,96 @@ export default class Edit extends React.Component {
 
   render() {
     const isActive = this.isButtonActive();
-    const post = this.props.post;
-    const dateFormatted = format(parseISO(post.startDate), 'yyyy-MM-dd');
     return (
-     <>
-        <div className='modal-container'>
-          <div className="container">
-            <div className="create-header">
-              <h1 className="header">Edit Post</h1>
-            </div>
-            <div>
-              <div className="">
-                <form onSubmit={this.handleUpdate}>
-                  <div className="create-row1">
-                    <div className="">
-                      <div className="label-margin">
-                        <label className="label-title no-margin" htmlFor="post-title">Post</label>
-                      </div>
+    <>
+      <div className='modal-container'>
+        <div className="container">
+          <div className="create-header">
+            <h1 className="header">Edit Post</h1>
+          </div>
+          <div>
+            <div className="">
+              <form onSubmit={this.handleUpdate}>
+                <div className="create-row1">
+                  <div className="">
+                    <div className="label-margin">
+                      <label className="label-title no-margin" htmlFor="post-title">Post</label>
                     </div>
-                    <textarea className="post-textbox input-box-border post-padding-top" value={this.state.post} onChange={this.handleChange} name="post" placeholder="Description" id="post-title" required></textarea>
                   </div>
+                  <textarea className="post-textbox input-box-border post-padding-top" value={this.state.post} onChange={this.handleChange} name="post" placeholder="Description" id="post-title" required></textarea>
+                </div>
+                <div className="">
                   <div className="">
                     <div className="">
-                      <div className="">
-                        <div className="price-date-time-container label-gap">
-                          <div className="price-date-container flex price-date-gap">
-                            <div className="">
-                              <div className="label-margin flex align-items">
-                                <label className="label-title" htmlFor="price-box">Price</label>
-                              </div>
-                              <div>
-                                <input value={this.state.price} onChange={this.handleChange} className="price-box input-box-border" placeholder="0.00" type="number" id="price-box" name="price" step="0.01" required></input>
-                              </div>
+                      <div className="price-date-time-container label-gap">
+                        <div className="price-date-container flex price-date-gap">
+                          <div className="">
+                            <div className="label-margin flex align-items">
+                              <label className="label-title" htmlFor="price-box">Price</label>
                             </div>
-                            <div className="">
-                              <div className="label-margin flex align-items">
-                                <label className="label-title" htmlFor="date-box">Date</label>
-                              </div>
+                            <div>
+                              <input value={this.state.price} onChange={this.handleChange} className="price-box input-box-border" placeholder="0.00" type="number" id="price-box" name="price" step="0.01" required></input>
+                            </div>
+                          </div>
+                          <div className="">
+                            <div className="label-margin flex align-items">
+                              <label className="label-title" htmlFor="date-box">Date</label>
+                            </div>
+                            <div>
+                              <input value={this.state.startDate} onChange={this.handleChange} className="date-box input-box-border" type="date" id="date-box" name="startDate" required></input>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="time-container flex">
+                          <div className="">
+                            <div className="label-margin time-margin flex align-items">
+                              <label className="label-title" htmlFor="start-box">Time</label>
+                            </div>
+                            <div className="start-label-box">
+                              <label className="start-end-label" htmlFor="start-box">Start</label>
+                              <input value={this.state.startTime} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime"
+                                required></input>
                               <div>
-                                <input value={dateFormatted} onChange={this.handleChange} className="date-box input-box-border" type="date" id="date-box" name="startDate" required></input>
                               </div>
                             </div>
                           </div>
-                          <div className="time-container flex">
-                            <div className="">
-                              <div className="label-margin time-margin flex align-items">
-                                <label className="label-title" htmlFor="start-box">Time</label>
-                              </div>
-                              <div className="start-label-box">
-                                <label className="start-end-label" htmlFor="start-box">Start</label>
-                                <input value={this.state.startTime} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime"
-                                  required></input>
-                                <div>
-                                </div>
-                              </div>
+                          <div className="placeholder">
+                            <div className="label-margin time-margin">
+                              <label className="label-title invisible">placeholder</label>
                             </div>
-                            <div className="placeholder">
-                              <div className="label-margin time-margin">
-                                <label className="label-title invisible">placeholder</label>
-                              </div>
-                              <div className="start-label-box flex">
-                                <label className="start-end-label" htmlFor="end-box">End</label>
-                                <input value={this.state.endTime} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="end-box" name="endTime"
-                                  required></input>
-                              </div>
+                            <div className="start-label-box flex">
+                              <label className="start-end-label" htmlFor="end-box">End</label>
+                              <input value={this.state.endTime} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="end-box" name="endTime"
+                                required></input>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div className="location-container">
-                      <div className="label-margin flex align-items">
-                        <label className="label-title" htmlFor="location-box">Location</label>
-                      </div>
-                      <div className="">
-                        <input value={this.state.location} onChange={this.handleChange} className="location-box input-box-border" type="textbox" placeholder="Address" name="location" id="location-box" required></input>
-                      </div>
+                  </div>
+                  <div className="location-container">
+                    <div className="label-margin flex align-items">
+                      <label className="label-title" htmlFor="location-box">Location</label>
+                    </div>
+                    <div className="">
+                      <input value={this.state.location} onChange={this.handleChange} className="location-box input-box-border" type="textbox" placeholder="Address" name="location" id="location-box" required></input>
                     </div>
                   </div>
-                  <div className="create-buttons">
-                    <button onClick={() => {
-                      this.props.editModal();
-                      this.handleReset();
-                    }}
-                    type="button" className="cancel">Cancel</button>
-                    <button onClick={this.props.editModal} onSubmit={this.handleUpdate} className={isActive ? 'post post-button-active' : 'no-post'}>Post</button>
-                  </div>
-                </form>
-              </div>
+                </div>
+                <div className="create-buttons">
+                  <button onClick={() => {
+                    this.props.editModal();
+                    this.handleReset();
+                  }}
+                  type="button" className="cancel">Cancel</button>
+                  <button onClick={this.props.editModal} onSubmit={this.handleUpdate} className={isActive ? 'post post-button-active' : 'no-post'}>Post</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
-      </>
+      </div>
+    </>
     );
   }
 }

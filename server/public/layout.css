@@ -88,7 +88,12 @@
 /* //HOME// */
 
 .home-page {
+  min-width: 100%;
   min-height: 100vh;
+}
+
+.home-page-padding-top {
+  padding-top: 2rem;
 }
 
 .home-container {
@@ -115,11 +120,11 @@
 }
 
 .logo-mobile {
-  padding-left: 1rem;
+  padding-left: 3vw;
 }
 
 .profile-icon-container {
-  padding-right: 1rem;
+  padding-right: 3vw;
 }
 
 .page-title {
@@ -175,7 +180,13 @@ td {
 }
 
 .post-table {
-  margin: 2rem 0;
+  margin-bottom: 2rem;
+}
+
+.post-body p {
+  margin-top: 1.3rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.4rem;
 }
 
 .table-width {
@@ -203,7 +214,7 @@ ul {
 }
 
 .post-entry {
-  margin: 2rem 0 4rem;
+  margin: 2rem 0 3rem;
   position: relative;
 }
 
@@ -261,6 +272,13 @@ ul {
 .delete-modal-body > h1 {
   margin-block-start: 0;
   margin-block-end: 0;
+}
+
+.loading-container {
+  justify-content: center;
+  display: flex;
+  height: 30rem;
+  align-items: center;
 }
 
 @media screen and (min-width: 768px) {
@@ -323,11 +341,10 @@ ul {
   }
 
   .home-page {
-    width: 60rem;
+    min-width: 60rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #fafafa;
   }
 
   .home-container {
@@ -355,10 +372,6 @@ ul {
 
   .navigation-mobile {
     display: none;
-  }
-
-  .post-container {
-    margin: 3rem 0;
   }
 
   .table-width {

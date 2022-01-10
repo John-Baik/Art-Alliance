@@ -11,6 +11,7 @@ CREATE TABLE "users" (
 ) WITH (
   OIDS=FALSE
 );
+
 CREATE TABLE "posts" (
     "postId" serial NOT NULL,
     "userId" integer NOT NULL,
@@ -25,6 +26,7 @@ CREATE TABLE "posts" (
 ) WITH (
   OIDS=FALSE
 );
+
 CREATE TABLE "comments" (
     "commentId" serial NOT NULL,
     "postId" integer NOT NULL,

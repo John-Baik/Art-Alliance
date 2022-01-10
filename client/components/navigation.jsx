@@ -18,10 +18,10 @@ export default class Home extends React.Component {
             <div className="navigation-container flex align-item">
               <div className="flex align-items">
                 <h1 className="logo-mobile priority">
-                  <a href="#" className="website-title relative">AA</a>
+                  <a href="" className="website-title relative">AA</a>
                 </h1>
                 <h1 className="logo-desktop priority">
-                  <a href="#" className="website-title relative">Art Alliance</a>
+                  <a href="" className="website-title relative">Art Alliance</a>
                 </h1>
               </div>
               <div className="navigation-desktop flex roboto-font">
@@ -43,7 +43,7 @@ export default class Home extends React.Component {
                   </a>
                 </div>
                 <div className="symbol-container">
-                  <a href='messages' className="symbol-container relative roboto-font">
+                  <a href='#messages' className="symbol-container relative roboto-font">
                     <i className={routePath === 'messages' ? 'fas fa-comment-alt navigation-symbol' : 'far fa-comment-alt navigation-symbol'}></i>
                     <p>Messages</p>
                   </a>
@@ -70,7 +70,7 @@ export default class Home extends React.Component {
                 </a>
               </div>
               <div className="symbol-container navigation-mobile roboto-font">
-                <a href='messages' className="symbol-container relative">
+                <a href='#messages' className="symbol-container relative">
                   <i className={routePath === 'messages' ? 'fas fa-comment-alt navigation-symbol' : 'far fa-comment-alt navigation-symbol'}></i>
                   <p>Messages</p>
                 </a>

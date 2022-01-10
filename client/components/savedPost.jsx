@@ -1,5 +1,6 @@
 import React from 'react';
 import { format, parseISO, parse } from 'date-fns';
+import AOS from 'aos';
 
 export default class savedPost extends React.Component {
   constructor(props) {
@@ -44,6 +45,7 @@ export default class savedPost extends React.Component {
   }
 
   render() {
+    AOS.init();
     const savedPost = this.props.savedPost;
     const dateFormatted = format(parseISO(savedPost.startDate), 'LLL dd, yyyy');
     const createdAtFormatted = format(parseISO(savedPost.createdAt), 'LLL dd, yyyy');
@@ -52,7 +54,7 @@ export default class savedPost extends React.Component {
 
     return (
         <>
-          <div>
+          <div data-aos="fade-up" data-aos-offset="0">
             <li className="post-entry">
               <div className="post-container">
                 <div className="post-second-container">

@@ -25,7 +25,6 @@ export default class Delete extends React.Component {
   }
 
   render() {
-
     return (
       <>
         <div className='modal-container'>

@@ -5,6 +5,10 @@
   text-transform: uppercase;
 }
 
+.website-title:active {
+  color: #bbbaba;
+}
+
 /* //CREATE MODAL// */
 
 .start-label-box {
@@ -178,7 +182,7 @@ h1 {
 
 .profile {
   font-size: 1.8rem;
-  border: solid;
+  border: solid 2.5px;
   padding: 0.6rem;
   border-radius: 2rem;
   background-color: white;
@@ -188,7 +192,7 @@ h1 {
 }
 
 .add-post-button {
-  border: solid;
+  border: solid 2.5px;
   border-radius: 2rem;
   padding: 0.4rem;
   font-size: 2rem;
@@ -203,22 +207,27 @@ h1 {
 
 .add-post-container {
   display: flex;
+  margin-top: 2rem;
+  justify-content: center;
 }
 
-.page-header {
-  font-family: Roboto, sans-serif;
-  font-size: 3rem;
+.page-title {
+  width: 46rem;
+}
+
+.background-white {
+  background-color: white;
 }
 
 .post-container {
-  border: 1.6px solid rgb(0, 0, 0, 0.3);
+  border: 0.3px solid rgb(0, 0, 0, 0.3);
   border-radius: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.05) 0 0 0 1px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
   background-color: white;
 }
 
 .logo-desktop {
-  font-size: 1.7rem;
+  font-size: 1.4rem;
 }
 
 .logo-desktop:hover,
@@ -227,11 +236,7 @@ h1 {
   cursor: pointer;
 }
 
-.symbol-container .navigation-symbol:active {
-  color: #bbbaba;
-}
-
-.home-button-click:active {
+.symbol-container:active {
   color: #bbbaba;
 }
 
@@ -244,12 +249,24 @@ h1 {
   text-decoration: underline;
 }
 
-.symbol-container p:active {
+.navigation-container a {
+  color: #dae0e6;
+}
+
+.navigation-container a:hover {
+  color: white;
+}
+
+.navigation-container a:active {
   color: #bbbaba;
 }
 
 .profile:hover {
   cursor: pointer;
+}
+
+.home-page {
+  background-color: #dae0e6;
 }
 
 .add-post-button:hover {
@@ -336,6 +353,7 @@ ul {
 
 .navigation-color {
   background-color: #000572;
+  box-shadow: rgba(14, 30, 37, 0.12) 0 2px 4px 0, rgba(14, 30, 37, 0.32) 0 2px 16px 0;
 }
 
 .dropdown-content button:active {
@@ -415,10 +433,6 @@ ul {
   justify-content: center;
 }
 
-.navigation-container a {
-  color: white;
-}
-
 .empty-page {
   color: red;
   font-size: 1.3rem;
@@ -434,6 +448,7 @@ textarea,
   gap: 0;
   padding-bottom: 0.5rem;
   font-size: 1rem;
+  color: #e4e6eb;
 }
 
 .home-button svg {
@@ -449,6 +464,10 @@ textarea,
   animation: spin 2s linear infinite;
 }
 
+.font-size-one-rem {
+  font-size: 1rem;
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -456,6 +475,14 @@ textarea,
 
 .full-width-height {
   height: 100vh;
+}
+
+.width-full-percent {
+  width: 100%;
+}
+
+.post-width .empty-page {
+  margin-top: 3rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -487,15 +514,21 @@ textarea,
 
   .location-box {
     width: 50%;
-    height: 2rem;
+    height: 2.3rem;
+  }
+
+  .price-box {
+    height: 2.3rem;
   }
 
   .date-box {
     width: 9rem;
+    height: 2.3rem;
   }
 
   .start-end-time-box {
     width: 7rem;
+    height: 2.3rem;
   }
 
   .time-margin {
@@ -516,9 +549,12 @@ textarea,
   }
 
   /* //HOME// */
+  .home-page {
+    background-color: revert;
+  }
 
   .home-page-container {
-    background-image: linear-gradient(to bottom, #e1effe, #d6e9fd, #cae2fc, #bfdcfa, #b3d6f9);
+    background-color: #dae0e6;
   }
 
   .profile {
