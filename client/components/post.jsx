@@ -123,7 +123,7 @@ export default class Post extends React.Component {
 
     if (post.userId === loggedInUserId) {
       return (
-    <>
+      <>
       <div className={this.state.deleteModalOpen ? '' : 'hidden'}>
         <Delete getPosts={this.props.getPosts} post={post} deleteModalClose={this.deleteModalClose} />
       </div>
@@ -173,9 +173,9 @@ export default class Post extends React.Component {
                             <tbody>
                               <tr className="table-row2 roboto-font">
                                 <td className="table-mobile-inactive">${post.price}</td>
-                                  <td className="table-mobile-inactive">{dateFormatted}</td>
-                                  <td className="table-mobile-inactive">{startTimeFormatted} - {endTimeFormatted}</td>
-                                  <td className="relative location-button table-mobile-inactive">{post.location}</td>
+                                <td className="table-mobile-inactive">{dateFormatted}</td>
+                                <td className="table-mobile-inactive">{startTimeFormatted} - {endTimeFormatted}</td>
+                                <td className="relative location-button table-mobile-inactive">{post.location}</td>
                               </tr>
                             </tbody>
                           </table>

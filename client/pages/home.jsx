@@ -31,18 +31,17 @@ export default class Home extends React.Component {
     if (!this.state.posts) {
       return (
        <>
-          <div className='home-page-container'>
-            <div className="home-page">
-              <div className='home-margin'>
-                <div className="loading-container ">
-                  <div className="loading-circle loader"></div>
+        <div className='home-page-container'>
+          <div className="home-page">
+            <div className='home-margin'>
+              <div className="loading-container ">
+                <div className="loading-circle loader">
                 </div>
-                <div className="post-width">
                 </div>
               </div>
             </div>
           </div>
-       </>
+        </>
       );
     }
     const listItems = this.state.posts.map(post => (
