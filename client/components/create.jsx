@@ -139,7 +139,7 @@ export default class Create extends React.Component {
                                     <label className="label-title" htmlFor="date-box">Date</label>
                                   </div>
                                   <div>
-                                  <input value={this.state.startDate} onChange={this.handleChange} className="date-box input-box-border font-size-one-rem" type="date" id="date-box" name="startDate" required></input>
+                                  <input value={this.state.startDate} onChange={this.handleChange} className="date-box input-box-border" type="date" id="date-box" name="startDate" required></input>
                                   </div>
                                 </div>
                               </div>
