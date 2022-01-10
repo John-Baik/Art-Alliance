@@ -11,6 +11,7 @@ CREATE TABLE "users" (
 ) WITH (
   OIDS=FALSE
 );
+
 CREATE TABLE "posts" (
     "postId" serial NOT NULL,
     "userId" integer NOT NULL,
@@ -25,6 +26,7 @@ CREATE TABLE "posts" (
 ) WITH (
   OIDS=FALSE
 );
+
 CREATE TABLE "comments" (
     "commentId" serial NOT NULL,
     "postId" integer NOT NULL,
@@ -35,15 +37,15 @@ CREATE TABLE "comments" (
 ) WITH (
   OIDS=FALSE
 );
-CREATE TABLE "favorites" (
+CREATE TABLE "saved" (
   "userId" integer NOT NULL,
   "postId" integer NOT NULL,
-  CONSTRAINT "favorites_pk" PRIMARY KEY ("userId", "postId")
+  CONSTRAINT "saved_pk" PRIMARY KEY ("userId", "postId")
 ) WITH (
   OIDS=FALSE
 );
 ALTER TABLE "posts" ADD CONSTRAINT "posts_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
 ALTER TABLE "comments" ADD CONSTRAINT "comments_fk0" FOREIGN KEY ("postId") REFERENCES "posts"("postId");
 ALTER TABLE "comments" ADD CONSTRAINT "comments_fk1" FOREIGN KEY ("userId") REFERENCES "users"("userId");
-ALTER TABLE "favorites" ADD CONSTRAINT "favorites_fk0" FOREIGN KEY ("postId") REFERENCES "posts"("postId") ON DELETE CASCADE;
-ALTER TABLE "favorites" ADD CONSTRAINT "favorites_fk1" FOREIGN KEY ("userId") REFERENCES "users"("userId") ON DELETE CASCADE;
+ALTER TABLE "saved" ADD CONSTRAINT "saved_fk0" FOREIGN KEY ("postId") REFERENCES "posts"("postId") ON DELETE CASCADE;
+ALTER TABLE "saved" ADD CONSTRAINT "saved_fk1" FOREIGN KEY ("userId") REFERENCES "users"("userId") ON DELETE CASCADE;

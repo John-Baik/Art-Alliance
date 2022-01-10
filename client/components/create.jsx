@@ -1,4 +1,5 @@
 import React from 'react';
+import AOS from 'aos';
 
 export default class Create extends React.Component {
   constructor(props) {
@@ -73,7 +74,7 @@ export default class Create extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    fetch('/api/posts/2', {
+    fetch(`/api/posts/${this.props.loggedInUserId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -98,13 +99,14 @@ export default class Create extends React.Component {
   render() {
     const button = <button onClick={this.open} className="add-post-button">+</button>;
     const isActive = this.isButtonActive();
+    AOS.init();
 
     if (this.state.isOpen) {
       return (
           <>
             {button}
             <div className={this.state.isOpen ? 'modal-container' : 'modal-container hidden'}>
-              <div className="container" onClick={this.handleClick}>
+            <div data-aos="zoom-in" className="container" onClick={this.handleClick}>
                 <div className="create-header">
                   <h1 className="header">Create Post</h1>
                 </div>
@@ -129,7 +131,7 @@ export default class Create extends React.Component {
                                     <label className="label-title" htmlFor="price-box">Price</label>
                                   </div>
                                   <div>
-                                    <input value={this.state.price} onChange={this.handleChange} className="price-box input-box-border" placeholder="0.00" type="number" id="price-box" name="price" step="0.01" required></input>
+                                  <input value={this.state.price} onChange={this.handleChange} className="price-box input-box-border font-size-one-rem" placeholder="0.00" type="number" id="price-box" name="price" step="0.01" required></input>
                                   </div>
                                 </div>
                                 <div className="">
@@ -137,7 +139,7 @@ export default class Create extends React.Component {
                                     <label className="label-title" htmlFor="date-box">Date</label>
                                   </div>
                                   <div>
-                                    <input value={this.state.startDate} onChange={this.handleChange} className="date-box input-box-border" type="date" id="date-box" name="startDate" required></input>
+                                  <input value={this.state.startDate} onChange={this.handleChange} className="date-box input-box-border" type="date" id="date-box" name="startDate" required></input>
                                   </div>
                                 </div>
                               </div>
@@ -148,7 +150,7 @@ export default class Create extends React.Component {
                                   </div>
                                   <div className="start-label-box">
                                     <label className="start-end-label" htmlFor="start-box">Start</label>
-                                    <input value={this.state.startTime} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime"
+                                  <input value={this.state.startTime} onChange={this.handleChange} className="start-end-time-box input-box-border font-size-one-rem" type="time" id="start-box" name="startTime"
                                       required></input>
                                     <div>
                                     </div>
@@ -160,7 +162,7 @@ export default class Create extends React.Component {
                                   </div>
                                   <div className="start-label-box flex">
                                     <label className="start-end-label" htmlFor="end-box">End</label>
-                                    <input value={this.state.endTime} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="end-box" name="endTime"
+                                  <input value={this.state.endTime} onChange={this.handleChange} className="start-end-time-box input-box-border font-size-one-rem" type="time" id="end-box" name="endTime"
                                       required></input>
                                   </div>
                                 </div>
@@ -173,7 +175,7 @@ export default class Create extends React.Component {
                             <label className="label-title" htmlFor="location-box">Location</label>
                           </div>
                           <div className="">
-                            <input value={this.state.location} onChange={this.handleChange} className="location-box input-box-border" type="textbox" placeholder="Address" name="location" id="location-box" required></input>
+                          <input value={this.state.location} onChange={this.handleChange} className="location-box input-box-border font-size-one-rem" type="textbox" placeholder="Address" name="location" id="location-box" required></input>
                           </div>
                         </div>
                       </div>
@@ -189,7 +191,9 @@ export default class Create extends React.Component {
           </>
       );
     } else {
-      return button;
+      return <div data-aos="zoom-in" data-aos-once="true">
+        {button}
+      </div>;
     }
   }
 }

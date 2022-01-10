@@ -1,3 +1,14 @@
+.website-title {
+  font-family: Raleway, sans-serif;
+  font-weight: 800;
+  font-size: 1.3;
+  text-transform: uppercase;
+}
+
+.website-title:active {
+  color: #bbbaba;
+}
+
 /* //CREATE MODAL// */
 
 .start-label-box {
@@ -56,11 +67,13 @@ h1 {
 .bookmark-active {
   color: #2026ae;
   transition: 0.15s;
+  margin-right: 0.4rem;
 }
 
 .bookmark-inactive {
   opacity: 30%;
   transition: 0.15s;
+  margin-right: 0.4rem;
 }
 
 .post {
@@ -84,6 +97,7 @@ h1 {
 .post-textbox {
   height: 8rem;
   resize: none;
+  font-size: 1rem;
 }
 
 .price-box {
@@ -94,6 +108,7 @@ h1 {
 .date-box {
   width: 8rem;
   height: 2rem;
+  font-size: 0.7rem;
 }
 
 .start-end-time-box {
@@ -139,6 +154,10 @@ h1 {
   background-color: #2559dc;
 }
 
+.post-button-active:active {
+  background-color: rgb(6, 40, 124);
+}
+
 .no-post {
   color: white;
   background-color: rgb(177, 175, 175);
@@ -157,20 +176,16 @@ h1 {
 }
 
 .navigation-symbol {
-  font-size: 2rem;
+  font-size: 1.7rem;
 }
 
-.navigation-title {
-  margin-block-start: 0;
-  margin-block-end: 0;
-  margin-top: 0.3rem;
+.navigation-symbol p {
   font-size: 0.9rem;
-  transition: 0.2s;
 }
 
 .profile {
   font-size: 1.8rem;
-  border: solid;
+  border: solid 2.5px;
   padding: 0.6rem;
   border-radius: 2rem;
   background-color: white;
@@ -180,7 +195,7 @@ h1 {
 }
 
 .add-post-button {
-  border: solid;
+  border: solid 2.5px;
   border-radius: 2rem;
   padding: 0.4rem;
   font-size: 2rem;
@@ -189,45 +204,85 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: #fafafa;
   color: #979797;
+  transition: 0.2s;
 }
 
 .add-post-container {
   display: flex;
+  margin-top: 2rem;
+  justify-content: center;
 }
 
-.page-header {
-  font-family: Roboto, sans-serif;
-  font-size: 3rem;
+.page-title {
+  width: 46rem;
+}
+
+.background-white {
+  background-color: white;
 }
 
 .post-container {
-  border: 1.6px solid rgb(0, 0, 0, 0.3);
-  border-radius: 1.5rem;
-  box-shadow: rgba(0, 0, 0, 0.15) 0 3px 3px 0;
+  border: 0.3px solid rgb(0, 0, 0, 0.3);
+  border-radius: 1rem;
+  box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
   background-color: white;
+}
+
+.logo-desktop {
+  font-size: 1.4rem;
 }
 
 .logo-desktop:hover,
 .navigation-symbol:hover,
-.navigation-title:hover {
+.symbol-container:hover {
   cursor: pointer;
 }
 
-.navigation-title:hover {
+.symbol-container:active {
+  color: #bbbaba;
+}
+
+.symbol-container p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.symbol-container p:hover {
   text-decoration: underline;
+}
+
+.navigation-container a {
+  color: #dae0e6;
+}
+
+.navigation-container a:hover {
+  color: white;
+}
+
+.navigation-container a:active {
+  color: #bbbaba;
 }
 
 .profile:hover {
   cursor: pointer;
 }
 
+.home-page {
+  background-color: #dae0e6;
+}
+
 .add-post-button:hover {
   cursor: pointer;
-  transform: scale(1.2);
+  transform: scale(1.2) rotate(180deg);
   color: black;
   box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0 inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+.add-post-button:active {
+  background-color: #f0f0f0;
 }
 
 .post-header {
@@ -285,9 +340,14 @@ ul {
   transition: 0.3s ease;
 }
 
+.options-button:active {
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0 inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  background-color: white;
+}
+
 .options-button:hover {
   background-color: #f0f0f0;
-  transition: 0s;
+  transition: 0.1s;
 }
 
 .comment-button:hover {
@@ -297,6 +357,12 @@ ul {
 
 .navigation-color {
   background-color: #000572;
+  box-shadow: rgba(14, 30, 37, 0.12) 0 2px 4px 0, rgba(14, 30, 37, 0.32) 0 2px 16px 0;
+}
+
+.dropdown-content button:active {
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0 inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  background-color: white;
 }
 
 .dropdown-content {
@@ -310,7 +376,7 @@ ul {
   background-color: white;
   border: none;
   font-size: 1.1rem;
-  transition: 0.2s;
+  transition: 0.1s;
 }
 
 .point-cursor {
@@ -367,6 +433,62 @@ ul {
   font-size: 0.9rem;
 }
 
+.justify-content-center {
+  justify-content: center;
+}
+
+.empty-page {
+  color: red;
+  font-size: 1.3rem;
+}
+
+textarea,
+.start-end-label,
+.input-box-border {
+  font-family: Raleway, sans-serif;
+}
+
+.home-button {
+  gap: 0;
+  padding-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #e4e6eb;
+}
+
+.home-button svg {
+  transform: scale(0.8);
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 8rem;
+  height: 8rem;
+  animation: spin 2s linear infinite;
+}
+
+.font-size-one-rem {
+  font-size: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.full-width-height {
+  height: 100vh;
+}
+
+.width-full-percent {
+  width: 100%;
+}
+
+.post-width .empty-page {
+  margin-top: 3rem;
+}
+
 @media screen and (min-width: 768px) {
   form {
     margin: 0 3rem;
@@ -396,15 +518,25 @@ ul {
 
   .location-box {
     width: 50%;
-    height: 2rem;
+    height: 2.3rem;
+    font-size: 0.9rem;
+  }
+
+  .price-box {
+    height: 2.3rem;
+    font-size: 0.9rem;
   }
 
   .date-box {
     width: 9rem;
+    height: 2.3rem;
+    font-size: 0.9rem;
   }
 
   .start-end-time-box {
     width: 7rem;
+    height: 2.3rem;
+    font-size: 0.9rem;
   }
 
   .time-margin {
@@ -425,24 +557,22 @@ ul {
   }
 
   /* //HOME// */
+  .home-page {
+    background-color: revert;
+  }
 
   .home-page-container {
-    background-color: #c0d1e2;
+    background-color: #dae0e6;
   }
 
   .profile {
-    transform: scale(1.2);
+    transform: scale(1);
   }
 
   .add-post-button {
     font-size: 3rem;
     width: 4rem;
     height: 4rem;
-    transition: 0.3s;
-  }
-
-  .home-button {
-    font-size: 2rem;
   }
 
   .user {
@@ -467,4 +597,10 @@ ul {
     width: 41rem;
     height: 15rem;
   }
+
+  .empty-page {
+    font-size: 1.6rem;
+  }
+}
+}
 }
