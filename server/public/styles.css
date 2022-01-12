@@ -209,6 +209,23 @@ h1 {
   transition: 0.2s;
 }
 
+.add-post-button-modal {
+  transform: scale(1.2) rotate(180deg);
+  color: black;
+  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0 inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  background-color: #fafafa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 2.5px;
+  border-radius: 2rem;
+  padding: 0.4rem;
+  font-size: 3rem;
+  width: 4rem;
+  height: 4rem;
+}
+
 .add-post-container {
   display: flex;
   margin-top: 2rem;

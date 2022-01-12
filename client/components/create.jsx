@@ -98,13 +98,14 @@ export default class Create extends React.Component {
 
   render() {
     const button = <button onClick={this.open} className="add-post-button">+</button>;
+    const buttonTwo = <button className="add-post-button-modal">+</button>;
     const isActive = this.isButtonActive();
     AOS.init();
 
     if (this.state.isOpen) {
       return (
           <>
-            {button}
+            {buttonTwo}
             <div className={this.state.isOpen ? 'modal-container' : 'modal-container hidden'}>
             <div data-aos="zoom-in" className="container" onClick={this.handleClick}>
                 <div className="create-header">
