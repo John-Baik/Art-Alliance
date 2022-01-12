@@ -45,7 +45,7 @@ export default class Home extends React.Component {
       );
     }
     const listItems = this.state.posts.map(post => (
-        <Post loggedInUserId={this.props.loggedInUserId} key={post.postId} post={post} getPosts={this.getPosts} />
+      <Post loggedInUserId={this.props.loggedInUserId} key={post.postId} post={post} getPosts={this.getPosts} />
     ));
     return (
       <>
