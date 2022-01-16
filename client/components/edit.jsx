@@ -132,7 +132,7 @@ export default class Edit extends React.Component {
                             </div>
                           </div>
                           <div className="placeholder">
-                            <div className="label-margin time-margin">
+                            <div className="label-margin time-margin flex">
                               <label className="label-title invisible">placeholder</label>
                             </div>
                             <div className="start-label-box flex">
