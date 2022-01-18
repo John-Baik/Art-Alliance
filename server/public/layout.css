@@ -27,8 +27,9 @@
   border: white solid;
   background-color: white;
   border-radius: 1rem;
-  width: 22rem;
-  height: 38rem;
+  width: 91vw;
+  max-width: 35rem;
+  height: 81vh;
 }
 
 .create-row1 {
@@ -43,7 +44,7 @@
 
 .price-date-container {
   justify-content: space-evenly;
-  margin: 0.5rem 0;
+  margin: 1vh 0;
 }
 
 .time-container {
@@ -57,7 +58,7 @@
 .create-buttons {
   display: flex;
   justify-content: flex-end;
-  margin-top: 1.2rem;
+  margin-top: 1vh;
   gap: 1rem;
 }
 
@@ -281,7 +282,7 @@ ul {
   align-items: center;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 974px) {
   .header {
     margin: 1rem 0;
   }
@@ -293,10 +294,11 @@ ul {
   .container {
     width: 47rem;
     height: 33rem;
+    max-width: revert;
   }
 
   .price-date-container {
-    margin-top: 0;
+    margin: 0.5rem 0;
   }
 
   .price-date-time-container {

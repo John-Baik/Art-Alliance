@@ -17,28 +17,32 @@
 }
 
 form {
-  margin: 0 1rem;
+  margin: 0 4vw;
 }
 
 .label-title {
   font-family: Roboto, sans-serif;
-  font-size: 1.2rem;
+  font-size: 2.5vh;
 }
 
 .label-margin {
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
+  margin-top: 1.5vh;
+  margin-bottom: 1.5vh;
 }
+
+/* .create-buttons button {
+  padding: 0;
+} */
 
 .input-box-border {
   border: thin solid #000;
   border-radius: 0.2rem;
-  padding-left: 0.7rem;
+  padding-left: 1.5vh;
   background-color: white;
 }
 
 .post-padding-top {
-  padding-top: 0.5rem;
+  padding-top: 1vh;
 }
 
 h1 {
@@ -47,9 +51,9 @@ h1 {
 
 .header {
   font-family: Montserrat, sans-serif;
-  margin-block-start: 0.3em;
-  margin-block-end: 0.3em;
-  font-size: 1.8rem;
+  margin-block-start: 1.5vh;
+  margin-block-end: 1vh;
+  font-size: 3.5vh;
 }
 
 .create-header {
@@ -61,7 +65,8 @@ h1 {
   border-style: none;
   color: red;
   background-color: white;
-  font-size: 1.2rem;
+  font-size: 2.5vh;
+  cursor: pointer;
 }
 
 .bookmark-active {
@@ -83,42 +88,44 @@ h1 {
   font-size: 1.5rem;
   padding: 0.4rem 1.2rem;
   border-radius: 0.3rem;
-}
-
-.post:hover {
   cursor: pointer;
 }
 
 .cancel:hover {
-  cursor: pointer;
   text-decoration: underline;
 }
 
 .post-textbox {
-  height: 8rem;
+  height: 19vh;
   resize: none;
-  font-size: 1rem;
+  font-size: 2vh;
 }
 
 .price-box {
-  width: 8rem;
-  height: 2rem;
+  width: 35vw;
+  max-width: 11rem;
+  height: 4.5vh;
+  font-size: 1.9vh;
 }
 
 .date-box {
-  width: 8rem;
-  height: 2rem;
-  font-size: 0.7rem;
+  width: 35vw;
+  max-width: 11rem;
+  height: 4.5vh;
+  font-size: 1.6vh;
 }
 
 .start-end-time-box {
-  width: 8rem;
-  height: 2rem;
+  width: 35vw;
+  max-width: 11rem;
+  height: 4.5vh;
+  font-size: 1.9vh;
 }
 
 .location-box {
   width: 100%;
-  height: 2rem;
+  height: 4.5vh;
+  font-size: 1.9vh;
 }
 
 .time-margin {
@@ -131,11 +138,11 @@ h1 {
 
 .time-container {
   gap: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 4vh;
 }
 
 .location-container {
-  margin-bottom: 2rem;
+  margin-bottom: 3vh;
 }
 
 .no-margin {
@@ -146,8 +153,9 @@ h1 {
 
 .start-end-label {
   font-family: Roboto, sans-serif;
-  margin-top: 0.5rem;
-  font-size: 0.8rem;
+  margin-top: 1vh;
+  font-size: 1.8vh;
+  margin-bottom: 1vh;
 }
 
 .post-button-active {
@@ -162,7 +170,7 @@ h1 {
   color: white;
   background-color: rgb(177, 175, 175);
   border-style: none;
-  font-size: 1.5rem;
+  font-size: 3vh;
   padding: 0.4rem 1.2rem;
   border-radius: 0.3rem;
   pointer-events: none;
@@ -177,6 +185,7 @@ h1 {
 
 .navigation-symbol {
   font-size: 1.7rem;
+  cursor: pointer;
 }
 
 .navigation-symbol p {
@@ -192,6 +201,7 @@ h1 {
   color: gray;
   width: 3.5rem;
   text-align: center;
+  cursor: pointer;
 }
 
 .add-post-button {
@@ -207,6 +217,7 @@ h1 {
   background-color: #fafafa;
   color: #979797;
   transition: 0.2s;
+  cursor: pointer;
 }
 
 .add-post-button-modal {
@@ -249,11 +260,10 @@ h1 {
 
 .logo-desktop {
   font-size: 1.4rem;
+  cursor: pointer;
 }
 
-.logo-desktop:hover,
-.navigation-symbol:hover,
-.symbol-container:hover {
+.symbol-container {
   cursor: pointer;
 }
 
@@ -282,16 +292,11 @@ h1 {
   color: #bbbaba;
 }
 
-.profile:hover {
-  cursor: pointer;
-}
-
 .home-page {
   background-color: #dae0e6;
 }
 
 .add-post-button:hover {
-  cursor: pointer;
   transform: scale(1.2) rotate(180deg);
   color: black;
   box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
@@ -367,8 +372,11 @@ ul {
   transition: 0.1s;
 }
 
-.comment-button:hover {
+.comment-button {
   cursor: pointer;
+}
+
+.comment-button:hover {
   text-decoration: underline;
 }
 
@@ -394,9 +402,6 @@ ul {
   border: none;
   font-size: 1.1rem;
   transition: 0.1s;
-}
-
-.point-cursor {
   cursor: pointer;
 }
 
@@ -406,7 +411,6 @@ ul {
 
 .dropdown-option:hover {
   background-color: #f0f0f0;
-  cursor: pointer;
 }
 
 .border-bottom {
@@ -415,11 +419,11 @@ ul {
 
 .location-button {
   color: blue;
+  cursor: pointer;
 }
 
 .location-button:hover {
   text-decoration: underline;
-  cursor: pointer;
 }
 
 /* DELETE MODAL */
@@ -506,7 +510,7 @@ textarea,
   margin-top: 3rem;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 974px) {
   form {
     margin: 0 3rem;
   }
@@ -517,9 +521,19 @@ textarea,
     font-size: 1.8rem;
   }
 
+  .label-title {
+    font-family: Roboto, sans-serif;
+    font-size: 1.2rem;
+  }
+
   .create-header {
     border-bottom: rgb(192, 192, 192) solid 2px;
     padding-left: 3rem;
+  }
+
+  .label-margin {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   .start-label-box {
@@ -539,7 +553,13 @@ textarea,
     font-size: 0.9rem;
   }
 
+  .post-textbox {
+    font-size: 1rem;
+    height: 8rem;
+  }
+
   .price-box {
+    width: 9rem;
     height: 2.3rem;
     font-size: 0.9rem;
   }
@@ -548,6 +568,14 @@ textarea,
     width: 9rem;
     height: 2.3rem;
     font-size: 0.9rem;
+  }
+
+  .create-buttons {
+    margin-top: 0.5rem;
+  }
+
+  .create-buttons button {
+    padding: ;
   }
 
   .start-end-time-box {
@@ -565,12 +593,24 @@ textarea,
   }
 
   .time-container {
+    margin: 0.5rem 0;
     justify-content: center;
     gap: 0.8rem;
   }
 
   .start-end-label {
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
     margin-top: 0;
+  }
+
+  .cancel {
+    font-size: 1.3rem;
+  }
+
+  .no-post {
+    padding: 0.6rem 1.3rem;
+    font-size: 1.5rem;
   }
 
   /* //HOME// */
