@@ -17,7 +17,7 @@
 }
 
 form {
-  margin: 0 4vw;
+  margin: 0 2rem;
 }
 
 .label-title {
@@ -532,7 +532,7 @@ textarea,
   }
 
   .label-margin {
-    margin-top: 1rem;
+    margin-top: 1.3rem;
     margin-bottom: 0.5rem;
   }
 
@@ -571,11 +571,7 @@ textarea,
   }
 
   .create-buttons {
-    margin-top: 0.5rem;
-  }
-
-  .create-buttons button {
-    padding: ;
+    margin-top: 1rem;
   }
 
   .start-end-time-box {
