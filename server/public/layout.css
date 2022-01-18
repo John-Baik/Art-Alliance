@@ -28,6 +28,7 @@
   background-color: white;
   border-radius: 1rem;
   width: 91vw;
+  max-width: 35rem;
   height: 81vh;
 }
 
@@ -281,7 +282,7 @@ ul {
   align-items: center;
 }
 
-@media screen and (min-width: 963px) {
+@media screen and (min-width: 974px) {
   .header {
     margin: 1rem 0;
   }
@@ -293,6 +294,7 @@ ul {
   .container {
     width: 47rem;
     height: 33rem;
+    max-width: revert;
   }
 
   .price-date-container {
