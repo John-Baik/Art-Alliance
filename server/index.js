@@ -130,6 +130,35 @@ app.get('/api/saved/:userId', (req, res, next) => {
     });
 });
 
+app.get('/api/comments/:postId', (req, res, next) => {
+  const id = Number(req.params.postId);
+  if (id <= 0 || !id) {
+    res.status(400).json({ error: 'invalid Id' });
+    return;
+  }
+  const sql = `
+  select "commentText", "commentId", "userId", "postId", "createdAt", "username"
+  from "comments"
+   join "users" using ("userId")
+  where "postId" = $1
+  `;
+  const values = [id];
+  db.query(sql, values)
+    .then(result => {
+      const post = result.rows[0];
+      if (!post) {
+        res.status(404).json({ error: 'postId does not exist' });
+        return;
+      }
+      res.status(201).json(post);
+    })
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      res.status(500).json({ error: 'An unexpected error has occurred' });
+    });
+});
+
 app.post('/api/posts/:userId', (req, res, next) => {
   const body = req.body;
   const userId = Number(req.params.userId);
