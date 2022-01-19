@@ -17,7 +17,7 @@
 }
 
 form {
-  margin: 0 2rem;
+  margin: 0 5vw;
 }
 
 .label-title {
@@ -58,7 +58,7 @@ h1 {
 
 .create-header {
   border-bottom: rgb(192, 192, 192) solid 2px;
-  padding-left: 1rem;
+  padding-left: 5vw;
 }
 
 .cancel {
@@ -720,6 +720,4 @@ textarea,
   .empty-page {
     font-size: 1.6rem;
   }
-}
-}
 }
