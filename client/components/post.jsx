@@ -113,7 +113,9 @@ export default class Post extends React.Component {
   }
 
   render() {
-    AOS.init();
+    AOS.init({
+      once: true
+    });
     const post = this.props.post;
     const loggedInUserId = this.props.loggedInUserId;
     const dateFormatted = format(parseISO(post.startDate), 'LLL dd, yyyy');

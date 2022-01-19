@@ -217,6 +217,7 @@ ul {
 .post-entry {
   margin: 2rem 0 3rem;
   position: relative;
+  margin-bottom: 2rem;
 }
 
 .flex-start {
@@ -410,6 +411,7 @@ ul {
 
   .post-entry {
     margin: 2.3rem 0 4rem;
+    margin-bottom: 1.9rem;
   }
 
   .post-header {
