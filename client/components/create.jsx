@@ -12,7 +12,8 @@ export default class Create extends React.Component {
       endTime: '',
       location: '',
       isOpen: false,
-      postButtonActive: false
+      postButtonActive: false,
+      errorPage: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -93,6 +94,19 @@ export default class Create extends React.Component {
           location: '',
           isOpen: false
         });
+      },
+      error => {
+        this.setState({
+          post: '',
+          price: '',
+          startDate: '',
+          startTime: '',
+          endTime: '',
+          location: '',
+          isOpen: false,
+          errorPage: true
+        });
+        console.error(error);
       });
   }
 
@@ -101,8 +115,19 @@ export default class Create extends React.Component {
     const buttonTwo = <button className="add-post-button-modal">+</button>;
     const isActive = this.isButtonActive();
     AOS.init();
-
-    if (this.state.isOpen) {
+    if (this.state.errorPage) {
+      return (
+        <div className='home-page-container'>
+          <div className="home-page home-page-padding-top">
+            <div className="flex justify-content-center">
+              <div className="post-width flex column align-items">
+                <p data-aos="fade-right" className='empty-page roboto-font text-align-center'>Sorry, there was an error connecting to the network! Please check your internet connection and try again.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    } else if (this.state.isOpen) {
       return (
           <>
             {buttonTwo}

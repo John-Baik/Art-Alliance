@@ -1,7 +1,7 @@
 .website-title {
   font-family: Raleway, sans-serif;
   font-weight: 800;
-  font-size: 1.3;
+  font-size: 7vw;
   text-transform: uppercase;
 }
 
@@ -184,7 +184,7 @@ h1 {
 }
 
 .navigation-symbol {
-  font-size: 1.7rem;
+  font-size: 5vw;
   cursor: pointer;
 }
 
@@ -264,6 +264,7 @@ h1 {
 }
 
 .symbol-container {
+  font-size: 4vw;
   cursor: pointer;
 }
 
@@ -353,6 +354,10 @@ ul {
   display: none;
 }
 
+.profile-icon-container {
+  transform: scale(0.7);
+}
+
 .options-button {
   border-radius: 0.5rem;
   transform: scale(2.9) rotate(90deg);
@@ -403,6 +408,28 @@ ul {
   font-size: 1.1rem;
   transition: 0.1s;
   cursor: pointer;
+}
+
+#home-option {
+  border: solid;
+  margin-top: 0.5rem;
+  background-color: #fafafa;
+  border-radius: 2rem;
+  padding: 0.6rem 1.3rem;
+  font-size: 1.5rem;
+  color: #979797;
+  transition: 0.2s;
+}
+
+#home-option:hover {
+  transform: scale(1.2);
+  color: black;
+  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+}
+
+#home-option:active {
+  background-color: #f0f0f0;
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0 inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
 
 .delete-color {
@@ -472,7 +499,7 @@ textarea,
 .home-button {
   gap: 0;
   padding-bottom: 0.5rem;
-  font-size: 1rem;
+  font-size: 4vw;
   color: #e4e6eb;
 }
 
@@ -510,6 +537,28 @@ textarea,
   margin-top: 3rem;
 }
 
+@media screen and (min-width: 328px) {
+  .home-button {
+    font-size: 1rem;
+  }
+
+  .website-title {
+    font-size: revert;
+  }
+
+  .symbol-container {
+    font-size: 1rem;
+  }
+
+  .profile-icon-container {
+    transform: scale(1);
+  }
+
+  .navigation-symbol {
+    font-size: 1.7rem;
+  }
+}
+
 @media screen and (min-width: 974px) {
   form {
     margin: 0 3rem;
@@ -542,6 +591,18 @@ textarea,
     align-items: center;
   }
 
+  .home-button {
+    font-size: 1rem;
+  }
+
+  .symbol-container {
+    font-size: 1rem;
+  }
+
+  .navigation-symbol {
+    font-size: 1.7rem;
+  }
+
   .checkbox {
     width: 1rem;
     height: 1rem;
@@ -568,6 +629,11 @@ textarea,
     width: 9rem;
     height: 2.3rem;
     font-size: 0.9rem;
+  }
+
+  #home-option {
+    padding: 0.6rem 1.3rem;
+    font-size: 1.5rem;
   }
 
   .create-buttons {
