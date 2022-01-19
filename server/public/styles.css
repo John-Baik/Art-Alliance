@@ -464,12 +464,23 @@ ul {
 }
 
 .delete-button-active {
-  background-color: red;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: rgb(199, 5, 5);
 }
 
-.cancel-button {
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+.delete-button-active:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+.delete-button-active:active {
+  box-shadow: rgba(50, 50, 93, 0.25) 0 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0 18px 36px -18px inset;
+}
+
+.cancel-button:hover {
+  background-color: rgb(194, 193, 193);
+}
+
+.cancel-button:active {
+  box-shadow: rgba(50, 50, 93, 0.25) 0 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0 18px 36px -18px inset;
 }
 
 .text-align-center {
