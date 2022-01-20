@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './pages/home';
 import Saved from './pages/saved';
+import Comments from './pages/comments';
 import Messages from './pages/messages';
 import parseRoute from './lib/parse-route';
 import Navigation from './components/navigation';
@@ -39,6 +40,11 @@ export default class App extends React.Component {
     } else if (route.path === 'messages') {
       return <>
         <Messages loggedInUserId={this.state.loggedInUserId} />
+      </>;
+    } else if (route.path === 'comments') {
+      const paramsPostId = route.params.get('postId');
+      return <>
+        <Comments routePath={route.path} paramsPostId={paramsPostId} loggedInUserId={this.state.loggedInUserId} />
       </>;
     }
     return <h1>Unknown Page</h1>;

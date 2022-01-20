@@ -74,7 +74,7 @@ app.get('/api/posts/:postId', (req, res, next) => {
         res.status(404).json({ error: 'postId does not exist' });
         return;
       }
-      res.status(200).json(result.rows);
+      res.status(200).json(post);
     })
     .catch(err => next(err));
 });
