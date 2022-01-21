@@ -145,7 +145,7 @@ app.get('/api/comments/:postId', (req, res, next) => {
   const values = [id];
   db.query(sql, values)
     .then(result => {
-      const post = result.rows[0];
+      const post = result.rows;
       if (!post) {
         res.status(404).json({ error: 'postId does not exist' });
         return;

@@ -15,4 +15,7 @@ insert into "posts"
 
 insert into "comments"
   ("commentText", "postId", "userId")
-  values ('Test comment', '2', '1');
+  values ('Test comment', '2', '1'),
+  ('Test Comment 2', '2', '2'),
+  ('Test Comment 3', '2', '3'),
+  ('Test Comment 4', '1', '2');

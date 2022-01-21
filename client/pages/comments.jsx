@@ -1,6 +1,7 @@
 import React from 'react';
 // import AOS from 'aos';
 import Post from '../components/post';
+import SingleComment from '../components/singleComment';
 
 export default class Comments extends React.Component {
   constructor(props) {
@@ -54,6 +55,9 @@ export default class Comments extends React.Component {
         </div>
       );
     } else if (this.state.comments && this.state.post) {
+      const listComments = this.state.comments.map(singleComment => (
+        <SingleComment loggedInUserId={this.props.loggedInUserId} key={singleComment.commentId} singleComment={singleComment} findComments={this.findComments} />
+      ));
       return (
         <div className='home-page-container'>
           <div className="home-page">
@@ -65,6 +69,27 @@ export default class Comments extends React.Component {
                 <ul className='home-posts'>
                   <Post routePath={this.props.routePath} loggedInUserId={this.props.loggedInUserId} key={postId} post={this.state.post} getPosts={this.getPosts} />
                 </ul>
+              </div>
+            </div>
+            <div className="flex justify-content-center">
+              <div className="post-width">
+                <div className="post-container">
+                  <div className="post-second-container">
+                    <div className="post-header">
+                      <div>
+                        <p>Comments</p>
+                      </div>
+                      <div>
+                        <button>Add Comment</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="post-second-container">
+                    <ul className='home-posts'>
+                    {listComments}
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
