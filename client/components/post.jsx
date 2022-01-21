@@ -10,6 +10,8 @@ export default class Post extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      numberOfComments: null,
+      length: null,
       dropdownButton: false,
       editModalOpen: false,
       deleteModalOpen: false,
@@ -23,6 +25,7 @@ export default class Post extends React.Component {
     this.addSaved = this.addSaved.bind(this);
     this.removeSaved = this.removeSaved.bind(this);
     this.handleBookmarks = this.handleBookmarks.bind(this);
+    this.findComments = this.findComments.bind(this);
   }
 
   dropdownClose() {
@@ -90,6 +93,19 @@ export default class Post extends React.Component {
       });
   }
 
+  findComments() {
+    const postId = this.props.post.postId;
+    fetch(`/api/comments/${postId}`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          comments: data
+        });
+        const numberOfComments = this.state.comments.length;
+        this.setState({ numberOfComments: numberOfComments });
+      });
+  }
+
   handleBookmarks() {
     const post = this.props.post;
     const loggedInUserId = this.props.loggedInUserId;
@@ -110,12 +126,13 @@ export default class Post extends React.Component {
 
   componentDidMount() {
     this.handleBookmarks();
+    this.findComments();
 
   }
 
   render() {
     const routePath = this.props.routePath;
-
+    const numberOfComments = this.state.numberOfComments;
     AOS.init({
       once: true
     });
@@ -213,7 +230,7 @@ export default class Post extends React.Component {
                     </div>
                     <div className="post-comments priority">
                       <div>
-                        <a href={`#comments?postId=${post.postId}`} className={routePath === 'comments' ? 'hidden' : 'relative comment-button roboto-font'}>Comments(1)</a>
+                        <a href={`#comments?postId=${post.postId}`} className={routePath === 'comments' ? 'hidden' : 'relative comment-button roboto-font'}>Comments ({numberOfComments})</a>
                       </div>
                     </div>
                   </div>
