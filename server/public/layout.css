@@ -184,7 +184,7 @@ td {
   margin-bottom: 2rem;
 }
 
-.post-body p {
+.post-body .post-text {
   margin-top: 1.3rem;
   margin-bottom: 1.5rem;
   line-height: 1.4rem;

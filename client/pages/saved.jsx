@@ -28,6 +28,7 @@ export default class Saved extends React.Component {
 
   componentDidMount() {
     this.getSavedPosts();
+    window.scrollTo(0, 0);
   }
 
   render() {

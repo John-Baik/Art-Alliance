@@ -13,6 +13,8 @@ export default class Home extends React.Component {
     const routePath = this.props.routePath.path;
     return (
       <>
+        <div className="background">
+        </div>
         <div className="home-container flex column">
           <div className="navigation-color">
             <div className="navigation-container flex align-item">
