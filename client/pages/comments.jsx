@@ -59,6 +59,7 @@ export default class Comments extends React.Component {
         </div>
       );
     } else if (this.state.comments && this.state.post) {
+      const numberOfComments = this.state.comments.length;
       const listComments = this.state.comments.map(singleComment => (
         <SingleComment loggedInUserId={this.props.loggedInUserId} key={singleComment.commentId} singleComment={singleComment} findComments={this.findComments} />
       ));
@@ -81,7 +82,7 @@ export default class Comments extends React.Component {
                   <div className="post-second-container">
                     <div className="post-header no-border-bottom">
                       <div>
-                        <p className="comment-header">Comments</p>
+                        <p className="comment-header">{numberOfComments} Comments</p>
                       </div>
                     </div>
                   </div>

@@ -11,7 +11,7 @@ export default class Post extends React.Component {
     super(props);
     this.state = {
       numberOfComments: null,
-      length: null,
+      comments: null,
       dropdownButton: false,
       editModalOpen: false,
       deleteModalOpen: false,
@@ -127,7 +127,6 @@ export default class Post extends React.Component {
   componentDidMount() {
     this.handleBookmarks();
     this.findComments();
-
   }
 
   render() {
@@ -142,8 +141,8 @@ export default class Post extends React.Component {
     const createdAtFormatted = format(parseISO(post.createdAt), 'LLL dd, yyyy');
     const startTimeFormatted = format(parse(post.startTime, 'H:mm:ss', new Date()), 'h:mm a');
     const endTimeFormatted = format(parse(post.endTime, 'H:mm:ss', new Date()), 'h:mm a');
-
-    return (
+    if (!this.numberOfComments) {
+      return (
       <>
       <div className={this.state.deleteModalOpen ? '' : 'hidden'}>
         <Delete getPosts={this.props.getPosts} post={post} deleteModalClose={this.deleteModalClose} />
@@ -240,7 +239,8 @@ export default class Post extends React.Component {
           </li>
         </div>
       </>
-    );
+      );
+    }
   }
 
 }
