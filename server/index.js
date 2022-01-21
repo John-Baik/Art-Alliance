@@ -141,6 +141,7 @@ app.get('/api/comments/:postId', (req, res, next) => {
   from "comments"
    join "users" using ("userId")
   where "postId" = $1
+  order BY "createdAt" desc
   `;
   const values = [id];
   db.query(sql, values)

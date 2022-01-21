@@ -1,5 +1,5 @@
 import React from 'react';
-// import AOS from 'aos';
+import AOS from 'aos';
 import Post from '../components/post';
 import SingleComment from '../components/singleComment';
 
@@ -37,10 +37,14 @@ export default class Comments extends React.Component {
   componentDidMount() {
     this.findComments();
     this.findPost();
+    window.scrollTo(0, 0);
   }
 
   render() {
     const postId = this.props.paramsPostId;
+    AOS.init({
+      once: true
+    });
     if (!this.state.comments || !this.state.post) {
       return (
         <div className='home-page-container'>
@@ -59,7 +63,7 @@ export default class Comments extends React.Component {
         <SingleComment loggedInUserId={this.props.loggedInUserId} key={singleComment.commentId} singleComment={singleComment} findComments={this.findComments} />
       ));
       return (
-        <div className='home-page-container'>
+        <div className='home-page-container comments-padding-bottom'>
           <div className="home-page">
             <div className="add-post-container">
               <a href="#" data-aos="zoom-in" data-aos-once="true" id="home-option" className='roboto-font text-align-center'>Back</a>
@@ -73,15 +77,17 @@ export default class Comments extends React.Component {
             </div>
             <div className="flex justify-content-center">
               <div className="post-width">
-                <div className="post-container">
+                <div data-aos="fade-up" data-aos-offset="40" className="post-container">
                   <div className="post-second-container">
-                    <div className="post-header">
+                    <div className="post-header no-border-bottom">
                       <div>
-                        <p>Comments</p>
+                        <p className="comment-header">Comments</p>
                       </div>
-                      <div>
-                        <button>Add Comment</button>
-                      </div>
+                    </div>
+                  </div>
+                  <div className="post-second-container">
+                    <div className="post-header no-border-bottom comment-button-spacing">
+                      <button className="add-comment-button">Add a Public Comment...</button>
                     </div>
                   </div>
                   <div className="post-second-container">

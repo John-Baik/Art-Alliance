@@ -12,9 +12,10 @@ export default class SingleComment extends React.Component {
 
   render() {
     const singleComment = this.props.singleComment;
+
     const createdAtFormatted = format(parseISO(singleComment.createdAt), 'LLL dd, yyyy');
     return (
-      <div className="transparent-border-bottom ">
+      <div className="transparent-border-top">
         <div className="post-header no-border-bottom no-bottom-padding">
           <div className="flex profile-user-date">
             <div className="flex align-items">
