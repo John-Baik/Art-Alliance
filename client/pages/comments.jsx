@@ -143,11 +143,16 @@ export default class Comments extends React.Component {
                   </div>
                   <form className="no-margin">
                   <div className="post-second-container">
-                      <div className='post-header no-border-bottom'>
+                      <div className='post-header no-border-bottom no-padding-top'>
                       <button onClick={this.commentBoxOpen} className={this.state.commentBoxOpen ? 'hidden' : 'add-comment-button'}>Add a Public Comment...</button>
-                      <textarea className={this.state.commentBoxOpen ? 'post-textbox input-box-border post-padding-top comment-textbox-width' : 'hidden'} onChange={this.handleChange} value={this.state.commentText} name="commentText" placeholder="Add a new Comment..." id="post-title"></textarea>
+                      <textarea className={this.state.commentBoxOpen ? 'post-textbox input-box-border post-padding-top comment-textbox-width' : 'hidden'} onChange={this.handleChange} value={this.state.commentText} name="commentText" placeholder="Add a Public Comment..." id="post-title"
+                      ref={inputElement => {
+                        if (inputElement) {
+                          inputElement.focus();
+                        }
+                      }}></textarea>
                     </div>
-                      <div className={this.state.commentBoxOpen ? 'create-buttons comment-button-margin-bottom padding-right-comment-buttons ' : 'hidden'}>
+                      <div className={this.state.commentBoxOpen ? 'create-comment-buttons comment-button-margin-bottom padding-right-comment-buttons' : 'hidden'}>
                       <button onClick={this.commentBoxClose} type="button" className='cancel'>Cancel</button>
                       <button onClick={this.addComment} className={isActive ? 'post post-button-active' : 'no-post'}>Post</button>
                     </div>
