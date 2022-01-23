@@ -213,6 +213,39 @@ app.post('/api/saved/:userId', (req, res, next) => {
     });
 });
 
+app.post('/api/comments/:userId', (req, res, next) => {
+  const userId = Number(req.params.userId);
+  const commentText = req.body.commentText;
+  const postId = Number(req.body.postId);
+  if (!userId || userId <= 0) {
+    res.status(400).json({ error: 'invalid userId' });
+    return;
+  } else if (!postId || postId <= 0) {
+    res.status(400).json({ error: 'invalid postId' });
+    return;
+  }
+  const sql = `
+  insert into "comments" ("commentText", "userId", "postId")
+  values ($1, $2, $3)
+  returning "commentText", "userId", "postId"
+  `;
+  const values = [commentText, userId, postId];
+  db.query(sql, values)
+    .then(result => {
+      const comment = result.rows[0];
+      if (!comment) {
+        res.status(400).json({ error: 'userId does not exist' });
+        return;
+      }
+      res.status(200).json(comment);
+    })
+    .catch(error => {
+    // eslint-disable-next-line no-console
+      console.log(error);
+      res.status(500).json({ error: 'An unexpected error has occurred' });
+    });
+});
+
 app.patch('/api/posts/:postId', (req, res) => {
   const body = req.body;
   const id = Number(req.params.postId);

@@ -101,6 +101,10 @@ h1 {
   font-size: 2vh;
 }
 
+.comment-textbox-width {
+  width: 100vw;
+}
+
 .price-box {
   width: 35vw;
   max-width: 11rem;
@@ -565,6 +569,7 @@ textarea,
   font-size: 1rem;
   padding: 0.5rem 0.9rem;
   color: rgb(107, 107, 107);
+  margin-bottom: 1rem;
 }
 
 .add-comment-button:hover {
@@ -572,10 +577,10 @@ textarea,
   border: black solid 2px;
 }
 
-.comment-button-spacing {
+/* .comment-button-spacing {
   padding-bottom: 2rem;
   padding-top: 0.5rem;
-}
+} */
 
 .background {
   background-color: #dae0e6;
@@ -583,6 +588,18 @@ textarea,
   width: 100vw;
   height: 100vh;
   z-index: -1;
+}
+
+.comment-button-margin-bottom {
+  margin-bottom: 1rem;
+}
+
+.no-padding-bottom {
+  padding-bottom: 0;
+}
+
+.padding-right-comment-buttons {
+  padding-right: 0;
 }
 
 @keyframes spin {
@@ -627,6 +644,10 @@ textarea,
 @media screen and (min-width: 974px) {
   form {
     margin: 0 3rem;
+  }
+
+  .padding-right-comment-buttons {
+    padding-right: 1rem;
   }
 
   .header {
