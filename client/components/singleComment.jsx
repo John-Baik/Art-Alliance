@@ -1,14 +1,32 @@
 import React from 'react';
 import { format, parseISO } from 'date-fns';
 import OutsideClickHandler from 'react-outside-click-handler';
+import Dropdown from './dropdown';
 
 export default class SingleComment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      state: null
+      state: null,
+      dropdownButton: false
     };
+    this.dropdownOpen = this.dropdownOpen.bind(this);
+    this.dropdownClose = this.dropdownClose.bind(this);
+  }
 
+  editModal() {
+    this.setState({
+      dropdownButton: false,
+      editModalOpen: !this.state.editModalOpen
+    });
+  }
+
+  dropdownOpen() {
+    this.setState({ dropdownButton: !this.state.dropdownButton });
+  }
+
+  dropdownClose() {
+    this.setState({ dropdownButton: false });
   }
 
   render() {
@@ -17,6 +35,7 @@ export default class SingleComment extends React.Component {
     const createdAtFormatted = format(parseISO(singleComment.createdAt), 'LLL dd, yyyy');
     return (
       <div className="transparent-border-top">
+        <div className="comment-entry">
         <div className="post-header no-border-bottom no-bottom-padding">
           <div className="flex profile-user-date">
             <div className="flex align-items">
@@ -33,9 +52,13 @@ export default class SingleComment extends React.Component {
                 <svg onClick={this.dropdownOpen} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-three-dots-vertical options-button relative" viewBox="0 0 16 16">
                   <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
                 </svg>
+                <div className={this.state.dropdownButton ? 'dropdown-content comment-dropdown' : 'hidden'}>
+                  <Dropdown />
+                </div>
               </div>
             </OutsideClickHandler>
           </div>
+        </div>
         </div>
         <div>
           <div className="post-body">
