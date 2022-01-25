@@ -176,7 +176,7 @@ export default class Post extends React.Component {
                       </div>
                     </OutsideClickHandler>
                     <div className={this.state.editModalOpen ? '' : 'hidden'}>
-                      <Edit closeEditModal={this.closeEditModal} editModal={this.editModal} post={post} getPosts={this.props.getPosts} />
+                        <Edit routePath={this.props.routePath} findPost={this.props.findPost} closeEditModal={this.closeEditModal} editModal={this.editModal} post={post} getPosts={this.props.getPosts} />
                     </div>
                   </div>
                 </div>
