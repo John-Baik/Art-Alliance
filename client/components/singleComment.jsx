@@ -54,6 +54,7 @@ export default class SingleComment extends React.Component {
       .then(data => {
         this.props.findComments();
         this.commentBoxClose();
+        this.setState({ commentText: data.commentText });
       });
   }
 
@@ -126,7 +127,7 @@ export default class SingleComment extends React.Component {
                   <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
                 </svg>
                 <div className={this.state.dropdownButton ? 'dropdown-content comment-dropdown' : 'hidden'}>
-                      <Dropdown singleComment={this.props.singleComment} commentBoxOpen={this.commentBoxOpen} />
+                  <Dropdown singleComment={this.props.singleComment} commentBoxOpen={this.commentBoxOpen} />
                 </div>
               </div>
             </OutsideClickHandler>

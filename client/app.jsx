@@ -53,7 +53,7 @@ export default class App extends React.Component {
   render() {
     return (
       <>
-        <Navigation routePath={this.state.route} onClick={this.isDropdownActive} />
+        <Navigation routePath={this.state.route} />
     { this.renderPage() }
       </>
     );

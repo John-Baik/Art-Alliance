@@ -10,9 +10,11 @@ export default class Dropdown extends React.Component {
   }
 
   handleEditMode() {
-    // this.props.editModal();
-    this.props.commentBoxOpen();
-
+    if (typeof this.props.singleComment !== 'undefined') {
+      this.props.commentBoxOpen();
+    } else {
+      this.props.editModal();
+    }
   }
 
   render() {
