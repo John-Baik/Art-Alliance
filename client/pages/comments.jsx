@@ -143,7 +143,7 @@ export default class Comments extends React.Component {
                   </div>
                   <form className="no-margin">
                   <div className="post-second-container">
-                      <div className='post-header no-border-bottom no-padding-top'>
+                    <div className='post-header no-border-bottom no-padding-top'>
                       <button onClick={this.commentBoxOpen} className={this.state.commentBoxOpen ? 'hidden' : 'add-comment-button'}>Add a Public Comment...</button>
                       <textarea className={this.state.commentBoxOpen ? 'post-textbox input-box-border post-padding-top comment-textbox-width' : 'hidden'} onChange={this.handleChange} value={this.state.commentText} name="commentText" placeholder="Add a Public Comment..." id="post-title"
                       ref={inputElement => {
