@@ -145,7 +145,7 @@ export default class Post extends React.Component {
       return (
       <>
       <div className={this.state.deleteModalOpen ? '' : 'hidden'}>
-        <Delete getPosts={this.props.getPosts} post={post} deleteModalClose={this.deleteModalClose} />
+            <Delete routePath={this.props.routePath} getPosts={this.props.getPosts} findPost={this.props.findPost} post={post} deleteModalClose={this.deleteModalClose} />
       </div>
         <div data-aos="fade-up" data-aos-offset="40">
           <li className="post-entry">

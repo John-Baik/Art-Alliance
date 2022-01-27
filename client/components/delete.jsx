@@ -20,7 +20,12 @@ export default class Delete extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        this.props.getPosts();
+        if (this.props.routePath !== 'comments') {
+          this.props.getPosts();
+        } else {
+          // eslint-disable-next-line no-console
+          console.log('work on this later. Set routh path to home page somehow');
+        }
       });
   }
 

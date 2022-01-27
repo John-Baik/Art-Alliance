@@ -329,26 +329,45 @@ app.delete('/api/posts/:postId', (req, res, next) => {
     res.status(400).json({ error: 'invalid id' });
     return;
   }
-  const sql = `
-  delete from "posts"
-    where "postId" = $1
-    returning "postId", "userId", "post", "price", "startTime", "endTime", "location", "createdAt", "startDate"
+  const deleteSavedSQL = `
+  delete from "saved"
+  where "postId" = $1
   `;
+
+  const deleteCommentsSQL = `
+  delete from "comments"
+  where "postId" = $1
+  `;
+
+  const deletePostsSQL = `
+  delete from "posts"
+  where "postId" = $1
+     returning "postId", "userId", "post", "price", "startTime", "endTime", "location", "createdAt", "startDate"
+  `;
+
   const values = [id];
-  db.query(sql, values)
-    .then(result => {
-      const deletedPost = result.rows[0];
-      if (!deletedPost) {
-        res.status(404).json({ error: 'postId does not exist' });
-        return;
-      }
-      res.status(200).json(deletedPost);
-    })
-    .catch(error => {
-      // eslint-disable-next-line no-console
-      console.log(error);
-      res.status(500).json({ error: 'An unexpected error has occurred' });
+
+  db.query(deleteSavedSQL, values)
+    .then(() => {
+      db.query(deleteCommentsSQL, values)
+        .then(() => {
+          db.query(deletePostsSQL, values)
+            .then(result => {
+              const deletedPost = result.rows[0];
+              if (!deletedPost) {
+                res.status(404).json({ error: 'postId does not exist' });
+                return;
+              }
+              res.status(200).json(deletedPost);
+            })
+            .catch(error => {
+              // eslint-disable-next-line no-console
+              console.log(error);
+              res.status(500).json({ error: 'An unexpected error has occurred' });
+            });
+        });
     });
+
 });
 
 app.delete('/api/saved/:postId', (req, res, next) => {

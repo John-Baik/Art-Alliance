@@ -127,7 +127,7 @@ export default class Comments extends React.Component {
             <div className="flex justify-content-center">
               <div className="post-width">
                 <ul className='home-posts'>
-                  <Post routePath={this.props.routePath} loggedInUserId={this.props.loggedInUserId} key={postId} post={this.state.post} findPost={this.findPost} getPosts={this.getPosts} />
+                  <Post routePath={this.props.routePath} loggedInUserId={this.props.loggedInUserId} key={postId} post={this.state.post} findPost={this.findPost} />
                 </ul>
               </div>
             </div>
