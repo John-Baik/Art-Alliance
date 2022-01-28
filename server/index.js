@@ -246,6 +246,39 @@ app.post('/api/comments/:userId', (req, res, next) => {
     });
 });
 
+app.patch('/api/comments/:commentId', (req, res) => {
+  const commentText = req.body.commentText;
+  const commentId = Number(req.params.commentId);
+  if (!commentId || commentId <= 0) {
+    res.status(400).json({ error: 'invalid id' });
+    return;
+  } else if (!commentText) {
+    res.status(400).json({ error: 'Entry must contain a commentText' });
+    return;
+  }
+  const sql = `
+  update "comments"
+    set "commentText" = $1
+  where "commentId" = $2
+  returning "commentText", "commentId"
+  `;
+  const values = [commentText, commentId];
+  db.query(sql, values)
+    .then(result => {
+      const updatedComment = result.rows[0];
+      if (!updatedComment) {
+        res.status(404).json({ error: 'commentId does not exist' });
+        return;
+      }
+      res.status(200).json(updatedComment);
+    })
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      res.status(500).json({ error: 'An unexpected error has occurred' });
+    });
+});
+
 app.patch('/api/posts/:postId', (req, res) => {
   const body = req.body;
   const id = Number(req.params.postId);
@@ -271,7 +304,7 @@ app.patch('/api/posts/:postId', (req, res) => {
       "location" = $5,
       "startDate" = $6
     where "postId" = $7
-    returning  "postId", "userId", "post", "price", "startTime", "endTime", "location", "createdAt", "startDate"
+    returning "postId", "userId", "post", "price", "startTime", "endTime", "location", "createdAt", "startDate"
   `;
   const values = [post, price, startTime, endTime, location, startDate, id];
   db.query(sql, values)
@@ -296,26 +329,45 @@ app.delete('/api/posts/:postId', (req, res, next) => {
     res.status(400).json({ error: 'invalid id' });
     return;
   }
-  const sql = `
-  delete from "posts"
-    where "postId" = $1
-    returning "postId", "userId", "post", "price", "startTime", "endTime", "location", "createdAt", "startDate"
+  const deleteSavedSQL = `
+  delete from "saved"
+  where "postId" = $1
   `;
+
+  const deleteCommentsSQL = `
+  delete from "comments"
+  where "postId" = $1
+  `;
+
+  const deletePostsSQL = `
+  delete from "posts"
+  where "postId" = $1
+     returning "postId", "userId", "post", "price", "startTime", "endTime", "location", "createdAt", "startDate"
+  `;
+
   const values = [id];
-  db.query(sql, values)
-    .then(result => {
-      const deletedPost = result.rows[0];
-      if (!deletedPost) {
-        res.status(404).json({ error: 'postId does not exist' });
-        return;
-      }
-      res.status(200).json(deletedPost);
-    })
-    .catch(error => {
-      // eslint-disable-next-line no-console
-      console.log(error);
-      res.status(500).json({ error: 'An unexpected error has occurred' });
+
+  db.query(deleteSavedSQL, values)
+    .then(() => {
+      db.query(deleteCommentsSQL, values)
+        .then(() => {
+          db.query(deletePostsSQL, values)
+            .then(result => {
+              const deletedPost = result.rows[0];
+              if (!deletedPost) {
+                res.status(404).json({ error: 'postId does not exist' });
+                return;
+              }
+              res.status(200).json(deletedPost);
+            })
+            .catch(error => {
+              // eslint-disable-next-line no-console
+              console.log(error);
+              res.status(500).json({ error: 'An unexpected error has occurred' });
+            });
+        });
     });
+
 });
 
 app.delete('/api/saved/:postId', (req, res, next) => {

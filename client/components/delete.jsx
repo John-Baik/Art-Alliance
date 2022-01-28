@@ -20,7 +20,11 @@ export default class Delete extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        this.props.getPosts();
+        if (this.props.routePath !== 'comments') {
+          this.props.getPosts();
+        } else {
+          this.props.deletedCommentStatus();
+        }
       });
   }
 

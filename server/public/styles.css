@@ -608,6 +608,22 @@ textarea,
   gap: 1rem;
 }
 
+.comment-entry {
+  position: relative;
+}
+
+.comment-dropdown {
+  right: -17px;
+}
+
+.edit-comment-textbox {
+  border-top: rgb(192, 192, 192) solid 2px;
+}
+
+.edit-comment-margin-top {
+  margin-top: 1rem;
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }

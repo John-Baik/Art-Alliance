@@ -62,6 +62,7 @@ export default class Edit extends React.Component {
 
   handleUpdate(event) {
     const post = this.props.post;
+    const routePath = this.props.routePath;
     event.preventDefault();
     fetch(`/api/posts/${post.postId}`, {
       method: 'PATCH',
@@ -72,7 +73,11 @@ export default class Edit extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        this.props.getPosts();
+        if (routePath === 'comments') {
+          this.props.findPost();
+        } else {
+          this.props.getPosts();
+        }
       });
   }
 

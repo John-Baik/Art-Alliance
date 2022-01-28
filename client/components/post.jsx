@@ -145,7 +145,7 @@ export default class Post extends React.Component {
       return (
       <>
       <div className={this.state.deleteModalOpen ? '' : 'hidden'}>
-        <Delete getPosts={this.props.getPosts} post={post} deleteModalClose={this.deleteModalClose} />
+            <Delete routePath={this.props.routePath} getPosts={this.props.getPosts} post={post} deleteModalClose={this.deleteModalClose} findPost={this.props.findPost} deletedCommentStatus={this.props.deletedCommentStatus}/>
       </div>
         <div data-aos="fade-up" data-aos-offset="40">
           <li className="post-entry">
@@ -176,7 +176,7 @@ export default class Post extends React.Component {
                       </div>
                     </OutsideClickHandler>
                     <div className={this.state.editModalOpen ? '' : 'hidden'}>
-                      <Edit closeEditModal={this.closeEditModal} editModal={this.editModal} post={post} getPosts={this.props.getPosts} />
+                        <Edit routePath={this.props.routePath} findPost={this.props.findPost} closeEditModal={this.closeEditModal} editModal={this.editModal} post={post} getPosts={this.props.getPosts} />
                     </div>
                   </div>
                 </div>

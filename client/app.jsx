@@ -10,7 +10,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedInUserId: 5,
+      loggedInUserId: 2,
       route: parseRoute(window.location.hash)
     };
   }
@@ -53,7 +53,7 @@ export default class App extends React.Component {
   render() {
     return (
       <>
-        <Navigation routePath={this.state.route} onClick={this.isDropdownActive} />
+        <Navigation routePath={this.state.route} />
     { this.renderPage() }
       </>
     );
