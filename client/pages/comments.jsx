@@ -11,7 +11,8 @@ export default class Comments extends React.Component {
       post: null,
       commentText: '',
       commentBoxOpen: false,
-      postButtonActive: false
+      postButtonActive: false,
+      commentDeleted: false
 
     };
     this.findComments = this.findComments.bind(this);
@@ -21,6 +22,7 @@ export default class Comments extends React.Component {
     this.commentBoxClose = this.commentBoxClose.bind(this);
     this.addComment = this.addComment.bind(this);
     this.isButtonActive = this.isButtonActive.bind(this);
+    this.deletedCommentStatus = this.deletedCommentStatus.bind(this);
   }
 
   findComments() {
@@ -30,6 +32,10 @@ export default class Comments extends React.Component {
       .then(data => {
         this.setState({ comments: data });
       });
+  }
+
+  deletedCommentStatus() {
+    this.setState({ commentDeleted: true });
   }
 
   findPost() {
@@ -99,7 +105,20 @@ export default class Comments extends React.Component {
     AOS.init({
       once: true
     });
-    if (!this.state.comments || !this.state.post) {
+    if (this.state.commentDeleted) {
+      return (
+        <div className='home-page-container'>
+          <div className="home-page home-page-padding-top">
+            <div className="flex justify-content-center">
+              <div className="post-width flex column align-items">
+                <a href="#" data-aos="zoom-in" data-aos-once="true" id="home-option" className='roboto-font text-align-center'>Home</a>
+                <p data-aos="fade-right" className='empty-page roboto-font text-align-center'>Post has been deleted. Return to Home Page!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    } else if (!this.state.comments || !this.state.post) {
       return (
         <div className='home-page-container'>
           <div className="home-page">
@@ -127,7 +146,7 @@ export default class Comments extends React.Component {
             <div className="flex justify-content-center">
               <div className="post-width">
                 <ul className='home-posts'>
-                  <Post routePath={this.props.routePath} loggedInUserId={this.props.loggedInUserId} key={postId} post={this.state.post} findPost={this.findPost} />
+                  <Post routePath={this.props.routePath} loggedInUserId={this.props.loggedInUserId} key={postId} post={this.state.post} findPost={this.findPost} deletedCommentStatus={this.deletedCommentStatus} />
                 </ul>
               </div>
             </div>

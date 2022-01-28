@@ -18,6 +18,8 @@ export default class SingleComment extends React.Component {
     this.commentBoxClose = this.commentBoxClose.bind(this);
     this.updateComment = this.updateComment.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.moveCaretAtEnd = this.moveCaretAtEnd.bind(this);
+
   }
 
   commentBoxOpen(event) {
@@ -85,6 +87,12 @@ export default class SingleComment extends React.Component {
     this.setState({ dropdownButton: false });
   }
 
+  moveCaretAtEnd(e) {
+    const tempValue = e.target.value;
+    e.target.value = '';
+    e.target.value = tempValue;
+  }
+
   render() {
     const singleComment = this.props.singleComment;
     const isActive = this.isButtonActive();
@@ -92,20 +100,18 @@ export default class SingleComment extends React.Component {
     const createdAtFormatted = format(parseISO(singleComment.createdAt), 'LLL dd, yyyy');
     return (
       <>
-      <form className="no-margin">
-        <div className="post-second-container">
-          <div className='post-header no-border-bottom no-padding-top'>
-              <textarea className={this.state.commentBoxOpen ? 'post-textbox input-box-border post-padding-top comment-textbox-width' : 'hidden'} onChange={this.handleChange} value={this.state.commentText} name="commentText" placeholder="Add a Public Comment..." id="post-title"
-            ref={inputElement => {
-              if (inputElement) {
-                inputElement.focus();
-              }
-            }}></textarea>
-          </div>
-          <div className={this.state.commentBoxOpen ? 'create-comment-buttons comment-button-margin-bottom padding-right-comment-buttons' : 'hidden'}>
-            <button onClick={this.commentBoxClose} type="button" className='cancel'>Cancel</button>
-            <button onClick={this.updateComment} className={isActive ? 'post post-button-active' : 'no-post'}>Post</button>
-          </div>
+      <form className={this.state.commentBoxOpen ? 'no-margin' : 'hidden'}>
+          <div className='edit-comment-textbox post-header no-border-bottom no-padding-top'>
+            <textarea className={this.state.commentBoxOpen ? 'edit-comment-margin-top post-textbox input-box-border post-padding-top comment-textbox-width' : 'hidden'} onChange={this.handleChange} value={this.state.commentText} onFocus={this.moveCaretAtEnd} name="commentText" placeholder="Add a Public Comment..." id="post-title"
+          ref={inputElement => {
+            if (inputElement) {
+              inputElement.focus();
+            }
+          }}></textarea>
+        </div>
+        <div className={this.state.commentBoxOpen ? 'create-comment-buttons comment-button-margin-bottom padding-right-comment-buttons' : 'hidden'}>
+          <button onClick={this.commentBoxClose} type="button" className='cancel'>Cancel</button>
+          <button onClick={this.updateComment} className={isActive ? 'post post-button-active' : 'no-post'}>Post</button>
         </div>
       </form>
         <div className={this.state.commentBoxOpen ? 'hidden' : 'transparent-border-top'}>
