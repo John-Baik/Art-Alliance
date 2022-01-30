@@ -7,6 +7,7 @@ export default class Dropdown extends React.Component {
       setting: false
     };
     this.handleEditMode = this.handleEditMode.bind(this);
+    this.handleDeleteMode = this.handleDeleteMode.bind(this);
   }
 
   handleEditMode() {
@@ -17,11 +18,19 @@ export default class Dropdown extends React.Component {
     }
   }
 
+  handleDeleteMode() {
+    if (typeof this.props.singleComment === 'undefined') {
+      this.props.deleteModalOpen();
+    } else {
+      this.props.deleteCommentModalOpen();
+    }
+  }
+
   render() {
     return (
       <>
         <button onClick={this.handleEditMode} className="dropdown-option border-bottom dropdown-top">Edit</button>
-        <button onClick={this.props.deleteModalOpen} className="delete-color dropdown-option dropdown-bottom">Delete</button>
+        <button onClick={this.handleDeleteMode} className="delete-color dropdown-option dropdown-bottom">Delete</button>
       </>
     );
   }
