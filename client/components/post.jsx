@@ -28,10 +28,6 @@ export default class Post extends React.Component {
     this.findComments = this.findComments.bind(this);
   }
 
-  dropdownClose() {
-    this.setState({ dropdownButton: false });
-  }
-
   editModal() {
     this.setState({
       dropdownButton: false,
@@ -56,6 +52,10 @@ export default class Post extends React.Component {
     this.setState({
       deleteModalOpen: false
     });
+  }
+
+  dropdownClose() {
+    this.setState({ dropdownButton: false });
   }
 
   dropdownOpen() {
@@ -145,7 +145,7 @@ export default class Post extends React.Component {
       return (
       <>
       <div className={this.state.deleteModalOpen ? '' : 'hidden'}>
-            <Delete routePath={this.props.routePath} getPosts={this.props.getPosts} post={post} deleteModalClose={this.deleteModalClose} findPost={this.props.findPost} deletedCommentStatus={this.props.deletedCommentStatus}/>
+        <Delete routePath={this.props.routePath} getPosts={this.props.getPosts} post={post} deleteModalClose={this.deleteModalClose} findPost={this.props.findPost} deletedCommentStatus={this.props.deletedCommentStatus}/>
       </div>
         <div data-aos="fade-up" data-aos-offset="40">
           <li className="post-entry">

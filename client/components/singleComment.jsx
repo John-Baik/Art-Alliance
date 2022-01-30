@@ -2,6 +2,7 @@ import React from 'react';
 import { format, parseISO } from 'date-fns';
 import OutsideClickHandler from 'react-outside-click-handler';
 import Dropdown from './dropdown';
+import Delete from '../components/delete';
 
 export default class SingleComment extends React.Component {
   constructor(props) {
@@ -10,16 +11,19 @@ export default class SingleComment extends React.Component {
       state: null,
       dropdownButton: false,
       commentBoxOpen: false,
-      commentText: this.props.singleComment.commentText
+      commentText: this.props.singleComment.commentText,
+      deleteCommentModalOpen: false
     };
     this.dropdownOpen = this.dropdownOpen.bind(this);
     this.dropdownClose = this.dropdownClose.bind(this);
     this.commentBoxOpen = this.commentBoxOpen.bind(this);
+    this.deleteCommentModalOpen = this.deleteCommentModalOpen.bind(this);
+    this.deleteCommentModalClose = this.deleteCommentModalClose.bind(this);
     this.commentBoxClose = this.commentBoxClose.bind(this);
     this.updateComment = this.updateComment.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.moveCaretAtEnd = this.moveCaretAtEnd.bind(this);
-
+    this.handleDeleteComment = this.handleDeleteComment.bind(this);
   }
 
   commentBoxOpen(event) {
@@ -60,6 +64,22 @@ export default class SingleComment extends React.Component {
       });
   }
 
+  handleDeleteComment() {
+    event.preventDefault();
+    const commentId = this.props.singleComment.commentId;
+    fetch(`/api/comments/${commentId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.props.findComments();
+        this.deleteCommentModalClose();
+      });
+  }
+
   editModal() {
     this.setState({
       dropdownButton: false,
@@ -93,6 +113,19 @@ export default class SingleComment extends React.Component {
     e.target.value = tempValue;
   }
 
+  deleteCommentModalOpen() {
+    this.setState({
+      dropdownButton: false,
+      deleteCommentModalOpen: true
+    });
+  }
+
+  deleteCommentModalClose() {
+    this.setState({
+      deleteCommentModalOpen: false
+    });
+  }
+
   render() {
     const singleComment = this.props.singleComment;
     const isActive = this.isButtonActive();
@@ -100,6 +133,9 @@ export default class SingleComment extends React.Component {
     const createdAtFormatted = format(parseISO(singleComment.createdAt), 'LLL dd, yyyy');
     return (
       <>
+      <div className={this.state.deleteCommentModalOpen ? '' : 'hidden'}>
+        <Delete routePath={this.props.routePath} handleDeleteComment={this.handleDeleteComment} singleComment={singleComment} deleteCommentModalClose={this.deleteCommentModalClose} findComments={this.props.findComments} />
+      </div>
       <form className={this.state.commentBoxOpen ? 'no-margin' : 'hidden'}>
           <div className='edit-comment-textbox post-header no-border-bottom no-padding-top'>
             <textarea className={this.state.commentBoxOpen ? 'edit-comment-margin-top post-textbox input-box-border post-padding-top comment-textbox-width' : 'hidden'} onChange={this.handleChange} value={this.state.commentText} onFocus={this.moveCaretAtEnd} name="commentText" placeholder="Add a Public Comment..." id="post-title"
@@ -133,7 +169,7 @@ export default class SingleComment extends React.Component {
                   <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
                 </svg>
                 <div className={this.state.dropdownButton ? 'dropdown-content comment-dropdown' : 'hidden'}>
-                  <Dropdown singleComment={this.props.singleComment} commentBoxOpen={this.commentBoxOpen} />
+                  <Dropdown deleteCommentModalOpen={this.deleteCommentModalOpen} singleComment={this.props.singleComment} commentBoxOpen={this.commentBoxOpen} />
                 </div>
               </div>
             </OutsideClickHandler>
