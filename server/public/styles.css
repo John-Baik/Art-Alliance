@@ -453,7 +453,7 @@ ul {
 
 /* DELETE MODAL */
 .delete-modal {
-  width: 24rem;
+  width: 87vw;
   height: 16rem;
 }
 
@@ -622,6 +622,10 @@ textarea,
 
 .edit-comment-margin-top {
   margin-top: 1rem;
+}
+
+.post-header textarea {
+  padding: 0.5rem 0.9rem;
 }
 
 @keyframes spin {
