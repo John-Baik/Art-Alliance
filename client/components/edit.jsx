@@ -78,6 +78,14 @@ export default class Edit extends React.Component {
         } else {
           this.props.getPosts();
         }
+      },
+      error => {
+        console.error(error);
+        if (this.props.routePath === 'comments') {
+          this.props.noInternetPopUp();
+        } else {
+          this.props.noInternetPopUpHome();
+        }
       });
   }
 

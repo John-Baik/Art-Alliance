@@ -10,7 +10,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedInUserId: 2,
+      loggedInUserId: 1,
       route: parseRoute(window.location.hash)
     };
   }
@@ -35,7 +35,7 @@ export default class App extends React.Component {
       </>;
     } else if (route.path === 'saved') {
       return <>
-        <Saved loggedInUserId={this.state.loggedInUserId} />
+        <Saved loggedInUserId={this.state.loggedInUserId} routePath={route.path} />
         </>;
     } else if (route.path === 'messages') {
       return <>

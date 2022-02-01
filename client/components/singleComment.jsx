@@ -61,6 +61,10 @@ export default class SingleComment extends React.Component {
         this.props.findComments();
         this.commentBoxClose();
         this.setState({ commentText: data.commentText });
+      },
+      error => {
+        console.error(error);
+        this.props.noInternetPopUp();
       });
   }
 
@@ -77,6 +81,10 @@ export default class SingleComment extends React.Component {
       .then(data => {
         this.props.findComments();
         this.deleteCommentModalClose();
+      },
+      error => {
+        console.error(error);
+        this.props.noInternetPopUp();
       });
   }
 

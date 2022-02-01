@@ -26,6 +26,10 @@ export default class Delete extends React.Component {
         } else {
           this.props.deletedCommentStatus();
         }
+      },
+      error => {
+        console.error(error);
+        this.props.noInternetPopUpHome();
       });
   }
 
