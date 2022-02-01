@@ -13,6 +13,11 @@ export default class Home extends React.Component {
       errorPage: false
     };
     this.getPosts = this.getPosts.bind(this);
+    this.noInternetPopUpHome = this.noInternetPopUpHome.bind(this);
+  }
+
+  noInternetPopUpHome() {
+    this.setState({ errorPage: true });
   }
 
   getPosts() {
@@ -60,7 +65,7 @@ export default class Home extends React.Component {
       );
     }
     const listItems = this.state.posts.map(post => (
-      <Post loggedInUserId={this.props.loggedInUserId} key={post.postId} post={post} getPosts={this.getPosts} />
+      <Post noInternetPopUpHome={this.noInternetPopUpHome} loggedInUserId={this.props.loggedInUserId} key={post.postId} post={post} getPosts={this.getPosts} />
     ));
     return (
       <div className='home-page-container'>

@@ -6,11 +6,26 @@ export default class savedPost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      numberOfComments: null,
       savedPost: this.props.savedPost,
       bookmarkActive: true
     };
     this.removeSaved = this.removeSaved.bind(this);
     this.addSaved = this.addSaved.bind(this);
+    this.findComments = this.findComments.bind(this);
+  }
+
+  findComments() {
+    const postId = this.props.savedPost.postId;
+    fetch(`/api/comments/${postId}`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          comments: data
+        });
+        const numberOfComments = this.state.comments.length;
+        this.setState({ numberOfComments: numberOfComments });
+      });
   }
 
   addSaved(event) {
@@ -44,8 +59,14 @@ export default class savedPost extends React.Component {
       });
   }
 
+  componentDidMount() {
+    this.findComments();
+  }
+
   render() {
     AOS.init();
+    const routePath = this.props.routePath;
+    const numberOfComments = this.state.numberOfComments;
     const savedPost = this.props.savedPost;
     const dateFormatted = format(parseISO(savedPost.startDate), 'LLL dd, yyyy');
     const createdAtFormatted = format(parseISO(savedPost.createdAt), 'LLL dd, yyyy');
@@ -121,7 +142,7 @@ export default class savedPost extends React.Component {
                       </div>
                       <div className="post-comments priority">
                         <div>
-                          <a href="" className="relative comment-button roboto-font">Comments(1)</a>
+                        <a href={`#comments?postId=${savedPost.postId}`} className={routePath === 'comments' ? 'hidden' : 'relative comment-button roboto-font'}>Comments ({numberOfComments})</a>
                         </div>
                       </div>
                     </div>

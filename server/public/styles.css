@@ -81,7 +81,7 @@ h1 {
   color: white;
   background-color: rgb(177, 175, 175);
   border-style: none;
-  font-size: 1.5rem;
+  font-size: 1rem;
   padding: 0.4rem 1.2rem;
   border-radius: 0.3rem;
   cursor: pointer;
@@ -139,6 +139,11 @@ h1 {
 .time-container {
   gap: 2rem;
   margin-bottom: 4vh;
+}
+
+.delete-modal-body {
+  /* width: 21rem; */
+  font-size: 0.7rem;
 }
 
 .location-container {
@@ -453,12 +458,13 @@ ul {
 
 /* DELETE MODAL */
 .delete-modal {
-  width: 24rem;
+  max-width: 41rem;
+  width: 95vw;
   height: 16rem;
 }
 
 .delete-modal-buttons {
-  gap: 6rem;
+  gap: 8vw;
 }
 
 .delete-button-active {
@@ -483,11 +489,6 @@ ul {
 
 .text-align-center {
   text-align: center;
-}
-
-.delete-modal-body {
-  width: 21rem;
-  font-size: 0.9rem;
 }
 
 .justify-content-center {
@@ -624,6 +625,10 @@ textarea,
   margin-top: 1rem;
 }
 
+.post-header textarea {
+  padding: 0.5rem 0.9rem;
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -646,6 +651,15 @@ textarea,
     font-size: 1rem;
   }
 
+  .post {
+    font-size: 1.5rem;
+  }
+
+  .delete-modal-body {
+    /* width: 21rem; */
+    font-size: 0.7rem;
+  }
+
   .website-title {
     font-size: revert;
   }
@@ -660,6 +674,17 @@ textarea,
 
   .navigation-symbol {
     font-size: 1.7rem;
+  }
+}
+
+@media screen and (min-width: 568px) {
+  .delete-modal-body {
+    /* width: 21rem; */
+    font-size: 0.9rem;
+  }
+
+  .delete-modal-buttons {
+    gap: 6rem;
   }
 }
 
@@ -817,7 +842,7 @@ textarea,
   /* DELETE MODAL */
   .delete-modal-body {
     width: 36rem;
-    font-size: 0.9rem;
+    max-width: revert;
   }
 
   .delete-modal {

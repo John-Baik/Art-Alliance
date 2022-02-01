@@ -28,7 +28,8 @@
   background-color: white;
   border-radius: 1rem;
   width: 91vw;
-  max-width: 35rem;
+
+  /* max-width: 35rem; */
   height: 81vh;
 }
 

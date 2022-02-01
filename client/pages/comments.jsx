@@ -12,8 +12,8 @@ export default class Comments extends React.Component {
       commentText: '',
       commentBoxOpen: false,
       postButtonActive: false,
-      commentDeleted: false
-
+      commentDeleted: false,
+      errorPage: false
     };
     this.findComments = this.findComments.bind(this);
     this.findPost = this.findPost.bind(this);
@@ -23,6 +23,7 @@ export default class Comments extends React.Component {
     this.addComment = this.addComment.bind(this);
     this.isButtonActive = this.isButtonActive.bind(this);
     this.deletedCommentStatus = this.deletedCommentStatus.bind(this);
+    this.noInternetPopUp = this.noInternetPopUp.bind(this);
   }
 
   findComments() {
@@ -44,6 +45,10 @@ export default class Comments extends React.Component {
       .then(response => response.json())
       .then(data => {
         this.setState({ post: data });
+      },
+      error => {
+        this.setState({ errorPage: true });
+        console.error(error);
       });
   }
 
@@ -66,6 +71,10 @@ export default class Comments extends React.Component {
       .then(data => {
         this.findComments();
         this.commentBoxClose();
+      },
+      error => {
+        this.setState({ errorPage: true });
+        console.error(error);
       });
   }
 
@@ -94,6 +103,10 @@ export default class Comments extends React.Component {
     }
   }
 
+  noInternetPopUp() {
+    this.setState({ errorPage: true });
+  }
+
   componentDidMount() {
     this.findComments();
     this.findPost();
@@ -105,7 +118,20 @@ export default class Comments extends React.Component {
     AOS.init({
       once: true
     });
-    if (this.state.commentDeleted) {
+    if (this.state.errorPage) {
+      return (
+        <div className='home-page-container'>
+          <div className="home-page home-page-padding-top">
+            <div className="flex justify-content-center">
+              <div className="post-width flex column align-items">
+                <p data-aos="fade-right" className='empty-page roboto-font text-align-center'>Sorry, there was an error connecting to the network! Please check your internet connection and try again.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+
+    } else if (this.state.commentDeleted) {
       return (
         <div className='home-page-container'>
           <div className="home-page home-page-padding-top">
@@ -135,7 +161,7 @@ export default class Comments extends React.Component {
       const numberOfComments = this.state.comments.length;
       const isActive = this.isButtonActive();
       const listComments = this.state.comments.map(singleComment => (
-        <SingleComment loggedInUserId={this.props.loggedInUserId} key={singleComment.commentId} singleComment={singleComment} findComments={this.findComments} />
+        <SingleComment noInternetPopUp={this.noInternetPopUp} loggedInUserId={this.props.loggedInUserId} key={singleComment.commentId} singleComment={singleComment} findComments={this.findComments} />
       ));
       return (
         <div className='home-page-container comments-padding-bottom'>
@@ -146,7 +172,7 @@ export default class Comments extends React.Component {
             <div className="flex justify-content-center">
               <div className="post-width">
                 <ul className='home-posts'>
-                  <Post routePath={this.props.routePath} loggedInUserId={this.props.loggedInUserId} key={postId} post={this.state.post} findPost={this.findPost} deletedCommentStatus={this.deletedCommentStatus} />
+                  <Post noInternetPopUp={this.noInternetPopUp} routePath={this.props.routePath} loggedInUserId={this.props.loggedInUserId} key={postId} post={this.state.post} findPost={this.findPost} deletedCommentStatus={this.deletedCommentStatus} />
                 </ul>
               </div>
             </div>
