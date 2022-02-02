@@ -63,11 +63,11 @@ export default class Home extends React.Component {
           </div>
         </div>
       );
-    }
-    const listItems = this.state.posts.map(post => (
+    } else {
+      const listItems = this.state.posts.map(post => (
       <Post noInternetPopUpHome={this.noInternetPopUpHome} loggedInUserId={this.props.loggedInUserId} key={post.postId} post={post} getPosts={this.getPosts} />
-    ));
-    return (
+      ));
+      return (
       <div className='home-page-container'>
         <div className="home-page">
           <div className="add-post-container">
@@ -81,6 +81,7 @@ export default class Home extends React.Component {
           </div>
         </div>
       </div>
-    );
+      );
+    }
   }
 }
