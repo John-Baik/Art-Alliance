@@ -35,7 +35,7 @@ export default class Edit extends React.Component {
     this.setState({
       post: post.post,
       price: post.price,
-      startDate: post.startDate,
+      startDate: format(parseISO(post.startDate), 'yyyy-MM-dd'),
       startTime: post.startTime,
       endTime: post.endTime,
       location: post.location
