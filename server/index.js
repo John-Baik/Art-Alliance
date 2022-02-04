@@ -116,7 +116,6 @@ app.get('/api/saved/:userId', (req, res, next) => {
   join "users" as "A" on ("p"."userId" = "A"."userId")
   where "s"."userId" = $1
   `;
-
   const values = [id];
   db.query(sql, values)
     .then(result => {
@@ -178,6 +177,9 @@ app.post('/api/posts/:userId', (req, res, next) => {
   }
   if (!body.startDate) {
     body.startDate = null;
+  }
+  if (!body.location) {
+    body.location = null;
   }
   const sql = `
   insert into "posts" ("post", "price", "startDate", "startTime", "endTime", "location", "userId")
@@ -295,14 +297,29 @@ app.patch('/api/posts/:postId', (req, res) => {
   const body = req.body;
   const id = Number(req.params.postId);
   const post = body.post;
-  const price = body.price;
-  const startTime = body.startTime;
-  const endTime = body.endTime;
-  const location = body.location;
-  const startDate = body.startDate;
+  let price = body.price;
+  let startTime = body.startTime;
+  let endTime = body.endTime;
+  let location = body.location;
+  let startDate = body.startDate;
   if (!id || id <= 0) {
     res.status(400).json({ error: 'invalid id' });
     return;
+  }
+  if (!price) {
+    price = null;
+  }
+  if (!startTime) {
+    startTime = null;
+  }
+  if (!endTime) {
+    endTime = null;
+  }
+  if (!startDate) {
+    startDate = null;
+  }
+  if (!location) {
+    location = null;
   }
   const sql = `
     update "posts"

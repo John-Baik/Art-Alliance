@@ -10,9 +10,6 @@ export default class Post extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: this.props.post.startDate ? format(parseISO(this.props.post.startDate), 'LLL dd, yyyy') : '',
-      startTime: this.props.post.startTime ? format(parse(this.props.post.startTime, 'H:mm:ss', new Date()), 'h:mm a') : '',
-      endTime: this.props.post.endTime ? format(parse(this.props.post.endTime, 'H:mm:ss', new Date()), 'h:mm a') : '',
       numberOfComments: null,
       comments: null,
       dropdownButton: false,
@@ -213,8 +210,8 @@ export default class Post extends React.Component {
                             <tbody>
                               <tr className="table-row2 roboto-font">
                                 <td className="table-mobile-inactive">${post.price}</td>
-                                <td className="table-mobile-inactive">{this.state.startDate}</td>
-                                <td className="table-mobile-inactive">{this.state.startTime} - {this.state.endTime}</td>
+                                  <td className="table-mobile-inactive">{post.startDate ? format(parseISO(post.startDate), 'LLL dd, yyyy') : ''}</td>
+                                  <td className="table-mobile-inactive">{post.startTime ? format(parse(post.startTime, 'H:mm:ss', new Date()), 'h:mm a') : ''} - {post.endTime ? format(parse(post.endTime, 'H:mm:ss', new Date()), 'h:mm a') : ''}</td>
                                 <td className="relative location-button table-mobile-inactive">{post.location}</td>
                               </tr>
                             </tbody>
@@ -227,11 +224,11 @@ export default class Post extends React.Component {
                               </tr>
                               <tr className="table-row1">
                                 <th scope="column" className="table-mobile-active">DATE</th>
-                                  <td scope="column" className="table-mobile-active">{this.state.startDate}</td>
+                                  <td scope="column" className="table-mobile-active">{post.startDate ? format(parseISO(post.startDate), 'LLL dd, yyyy') : ''}</td>
                               </tr>
                               <tr className="table-row1">
                                 <th scope="column" className="table-mobile-active">TIME</th>
-                                  <td scope="column" className="table-mobile-active">{this.state.startTime} - {this.state.endTime}</td>
+                                  <td scope="column" className="table-mobile-active">{post.startTime ? format(parse(post.startTime, 'H:mm:ss', new Date()), 'h:mm a') : ''} - {post.endTime ? format(parse(post.endTime, 'H:mm:ss', new Date()), 'h:mm a') : ''}</td>
                               </tr>
                               <tr className="table-row1">
                                 <th scope="column" className="table-mobile-active">LOCATION</th>
