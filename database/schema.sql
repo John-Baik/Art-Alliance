@@ -16,12 +16,12 @@ CREATE TABLE "posts" (
     "postId" serial NOT NULL,
     "userId" integer NOT NULL,
     "post" TEXT NOT NULL,
-    "price" DECIMAL NOT NULL,
-    "startTime" TIME NOT NULL,
-    "endTime" TIME NOT NULL,
-    "location" TEXT NOT NULL,
+    "price" DECIMAL,
+    "startTime" TIME,
+    "endTime" TIME,
+    "location" TEXT,
     "createdAt" timestamptz NOT NULL default now(),
-    "startDate" DATE NOT NULL,
+    "startDate" DATE,
     CONSTRAINT "posts_pk" PRIMARY KEY ("postId")
 ) WITH (
   OIDS=FALSE

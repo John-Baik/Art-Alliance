@@ -167,6 +167,18 @@ app.post('/api/posts/:userId', (req, res, next) => {
     res.status(400).json({ error: 'invalid userId' });
     return;
   }
+  if (!body.price) {
+    body.price = null;
+  }
+  if (!body.startTime) {
+    body.startTime = null;
+  }
+  if (!body.endTime) {
+    body.endTime = null;
+  }
+  if (!body.startDate) {
+    body.startDate = null;
+  }
   const sql = `
   insert into "posts" ("post", "price", "startDate", "startTime", "endTime", "location", "userId")
   values ($1, $2, $3, $4, $5, $6, $7)
@@ -290,9 +302,6 @@ app.patch('/api/posts/:postId', (req, res) => {
   const startDate = body.startDate;
   if (!id || id <= 0) {
     res.status(400).json({ error: 'invalid id' });
-    return;
-  } else if (!post || !price || !startTime || !endTime || !location || !startDate) {
-    res.status(400).json({ error: 'Entry must contain a price, startTime, endTime, and location' });
     return;
   }
   const sql = `
