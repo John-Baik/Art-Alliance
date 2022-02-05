@@ -68,10 +68,7 @@ export default class savedPost extends React.Component {
     const routePath = this.props.routePath;
     const numberOfComments = this.state.numberOfComments;
     const savedPost = this.props.savedPost;
-    const dateFormatted = format(parseISO(savedPost.startDate), 'LLL dd, yyyy');
     const createdAtFormatted = format(parseISO(savedPost.createdAt), 'LLL dd, yyyy');
-    const startTimeFormatted = format(parse(savedPost.startTime, 'H:mm:ss', new Date()), 'h:mm a');
-    const endTimeFormatted = format(parse(savedPost.endTime, 'H:mm:ss', new Date()), 'h:mm a');
     return (
       <div data-aos="fade-up" data-aos-offset="0">
         <li className="post-entry">
@@ -97,41 +94,23 @@ export default class savedPost extends React.Component {
                   <div className="post-table">
                     <div className="table">
                       <div className="align-items-center flex column">
-                        <table className="table-width">
-                          <thead>
-                            <tr className="table-row1 roboto-font">
-                              <th scope="column" className="table-mobile-inactive">PRICE</th>
-                              <th scope="column" className="table-mobile-inactive">DATE</th>
-                              <th scope="column" className="table-mobile-inactive">TIME</th>
-                              <th scope="column" className="table-mobile-inactive">LOCATION</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr className="table-row2 roboto-font">
-                              <td className="table-mobile-inactive">${savedPost.price}</td>
-                              <td className="table-mobile-inactive">{dateFormatted}</td>
-                              <td className="table-mobile-inactive">{startTimeFormatted} - {endTimeFormatted}</td>
-                              <td className="relative location-button table-mobile-inactive">{savedPost.location}</td>
-                            </tr>
-                          </tbody>
-                        </table>
                         <table className="table-width roboto-font">
                           <thead>
                             <tr className="table-row1">
-                              <th scope="column" className="table-mobile-active">PRICE</th>
-                              <td scope="column" className="table-mobile-active">${savedPost.price}</td>
+                              <th scope="column" className={savedPost.price ? 'table' : 'hidden'}>PRICE</th>
+                              <td scope="column" className={savedPost.price ? 'table' : 'hidden'}>${savedPost.price}</td>
                             </tr>
                             <tr className="table-row1">
-                              <th scope="column" className="table-mobile-active">DATE</th>
-                              <td scope="column" className="table-mobile-active">{dateFormatted}</td>
+                              <th scope="column" className={savedPost.startDate ? 'table' : 'hidden'}>DATE</th>
+                              <td scope="column" className={savedPost.startDate ? 'table-mobile-active' : 'hidden'}>{savedPost.startDate ? format(parseISO(savedPost.startDate), 'LLL dd, yyyy') : ''}</td>
                             </tr>
                             <tr className="table-row1">
-                              <th scope="column" className="table-mobile-active">TIME</th>
-                              <td scope="column" className="table-mobile-active">{startTimeFormatted} - {endTimeFormatted}</td>
+                              <th scope="column" className={savedPost.startTime ? 'table' : 'hidden'}>TIME</th>
+                              <td scope="column" className={savedPost.startTime ? 'table' : 'hidden'}>{savedPost.startTime ? format(parse(savedPost.startTime, 'H:mm:ss', new Date()), 'h:mm a') : ''} - {savedPost.endTime ? format(parse(savedPost.endTime, 'H:mm:ss', new Date()), 'h:mm a') : ''}</td>
                             </tr>
                             <tr className="table-row1">
-                              <th scope="column" className="table-mobile-active">LOCATION</th>
-                              <td scope="column" className="relative location-button table-mobile-active">{savedPost.location}</td>
+                              <th scope="column" className={savedPost.location ? 'table' : 'hidden'}>LOCATION</th>
+                              <td scope="column" className={savedPost.location ? 'relative location-button table' : 'hidden'}>{savedPost.location}</td>
                             </tr>
                           </thead>
                         </table>

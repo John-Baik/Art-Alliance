@@ -199,10 +199,6 @@ ul {
   padding-inline-start: 0;
 }
 
-.table-mobile-inactive {
-  display: none;
-}
-
 .align-items-center {
   align-items: center;
 }
@@ -211,7 +207,7 @@ ul {
   padding: 0.6rem;
 }
 
-.table-mobile-active {
+.table {
   padding: 0.6rem;
 }
 
@@ -396,14 +392,6 @@ ul {
 
   td {
     padding: 1rem;
-  }
-
-  .table-mobile-inactive {
-    display: revert;
-  }
-
-  .table-mobile-active {
-    display: none;
   }
 
   th {
