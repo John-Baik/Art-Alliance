@@ -91,7 +91,7 @@ export default class savedPost extends React.Component {
               <div>
                 <div className="post-body">
                   <p className="post-text roboto-font">{savedPost.post}</p>
-                  <div className="post-table">
+                  <div className={!savedPost.price && !savedPost.startDate && !savedPost.startTime && !savedPost.endTime && !savedPost.location ? 'hidden' : 'post-table'}>
                     <div className="table">
                       <div className="align-items-center flex column">
                         <table className="table-width roboto-font">
@@ -102,7 +102,7 @@ export default class savedPost extends React.Component {
                             </tr>
                             <tr className="table-row1">
                               <th scope="column" className={savedPost.startDate ? 'table' : 'hidden'}>DATE</th>
-                              <td scope="column" className={savedPost.startDate ? 'table-mobile-active' : 'hidden'}>{savedPost.startDate ? format(parseISO(savedPost.startDate), 'LLL dd, yyyy') : ''}</td>
+                              <td scope="column" className={savedPost.startDate ? 'table' : 'hidden'}>{savedPost.startDate ? format(parseISO(savedPost.startDate), 'LLL dd, yyyy') : ''}</td>
                             </tr>
                             <tr className="table-row1">
                               <th scope="column" className={savedPost.startTime ? 'table' : 'hidden'}>TIME</th>

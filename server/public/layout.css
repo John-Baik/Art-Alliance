@@ -192,7 +192,7 @@ td {
 }
 
 .table-width {
-  width: 100%;
+  max-width: 31rem;
 }
 
 ul {
@@ -261,6 +261,7 @@ ul {
 }
 
 .post-width {
+  max-width: 46rem;
   width: 90vw;
 }
 
@@ -327,6 +328,11 @@ ul {
     display: revert;
   }
 
+  .post-table {
+    display: flex;
+    justify-content: center;
+  }
+
   /* //HOME// */
   .logo-mobile {
     display: none;
@@ -376,6 +382,7 @@ ul {
 
   .table-width {
     display: revert;
+    width: 110%;
   }
 
   .table-row1 {

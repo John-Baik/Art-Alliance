@@ -195,10 +195,10 @@ export default class Post extends React.Component {
                 <div>
                   <div className="post-body">
                     <p className="post-text roboto-font">{post.post}</p>
-                    <div className="post-table">
+                      <div className={!post.price && !post.startDate && !post.startTime && !post.endTime && !post.location ? 'hidden' : 'post-table'}>
                       <div className="table">
                         <div className="align-items-center flex column">
-                          <table className="table-width roboto-font">
+                            <table className='table-width roboto-font'>
                             <thead>
                               <tr className="table-row1">
                                 <th scope="column" className={post.price ? 'table' : 'hidden'}>PRICE</th>
@@ -206,7 +206,7 @@ export default class Post extends React.Component {
                               </tr>
                               <tr className="table-row1">
                                 <th scope="column" className={post.startDate ? 'table' : 'hidden'}>DATE</th>
-                                  <td scope="column" className={post.startDate ? 'table-mobile-active' : 'hidden'}>{post.startDate ? format(parseISO(post.startDate), 'LLL dd, yyyy') : ''}</td>
+                                  <td scope="column" className={post.startDate ? 'table' : 'hidden'}>{post.startDate ? format(parseISO(post.startDate), 'LLL dd, yyyy') : ''}</td>
                               </tr>
                               <tr className="table-row1">
                                 <th scope="column" className={post.startTime ? 'table' : 'hidden'}>TIME</th>
