@@ -175,7 +175,7 @@ export default class Create extends React.Component {
                               <div className="price-date-container flex price-date-gap">
                                 <div>
                                   <div className="label-margin flex align-items">
-                                  <label className={this.state.priceInput ? 'label-title' : 'gray label-title'} htmlFor="price-box">Price</label>
+                                  <label className={this.state.priceInput || this.state.price ? 'label-title' : 'gray label-title'} htmlFor="price-box">Price</label>
                                   </div>
                                   <div className="flex">
                                   <input value={this.state.price} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="price-box input-box-border" placeholder="0.00" type="number" id="price-box" name="price" step="0.01"></input>
@@ -183,7 +183,7 @@ export default class Create extends React.Component {
                                 </div>
                                 <div className="">
                                   <div className="label-margin flex align-items">
-                                  <label className={this.state.startDateInput ? 'label-title' : 'gray label-title'} htmlFor="date-box">Date</label>
+                                  <label className={this.state.startDateInput || this.state.startDate ? 'label-title' : 'gray label-title'} htmlFor="date-box">Date</label>
                                   </div>
                                   <div className="flex">
                                   <input value={this.state.startDate} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="date-box input-box-border" type="date" id="date-box" name="startDate"></input>
@@ -193,10 +193,10 @@ export default class Create extends React.Component {
                               <div className="time-container flex">
                                 <div className="">
                                   <div className="label-margin time-margin flex align-items">
-                                  <label className={this.state.startTimeInput || this.state.endTimeInput ? 'label-title' : 'gray label-title'} htmlFor="start-box">Time</label>
+                                  <label className={this.state.startTimeInput || this.state.endTimeInput || this.state.startTime || this.state.endTime ? 'label-title' : 'gray label-title'} htmlFor={!this.state.startTime ? 'start-box' : 'end-box'}>Time</label>
                                   </div>
                                   <div className="start-label-box">
-                                  <label className={this.state.startTimeInput ? 'start-end-label' : 'gray start-end-label'} htmlFor="start-box">Start</label>
+                                  <label className={this.state.startTimeInput || this.state.startTime ? 'start-end-label' : 'gray start-end-label'} htmlFor="start-box">Start</label>
                                   <input value={this.state.startTime} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime"></input>
                                     <div>
                                     </div>
@@ -207,7 +207,7 @@ export default class Create extends React.Component {
                                     <label className="label-title invisible">Test</label>
                                   </div>
                                   <div className="start-label-box flex">
-                                  <label className={this.state.endTimeInput ? 'start-end-label' : 'gray start-end-label'} htmlFor={!this.state.startTime ? 'start-box' : 'end-box'}>End</label>
+                                  <label className={this.state.endTimeInput || this.state.endTime ? 'start-end-label' : 'gray start-end-label'} htmlFor={!this.state.startTime ? 'start-box' : 'end-box'}>End</label>
                                   <input value={this.state.endTime} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="end-box" name="endTime"></input>
                                   </div>
                                 </div>
@@ -217,7 +217,7 @@ export default class Create extends React.Component {
                         </div>
                         <div className="location-container">
                           <div className="label-margin flex align-items">
-                          <label className={this.state.locationInput ? 'label-title' : 'gray label-title'} htmlFor="location-box">Location</label>
+                          <label className={this.state.locationInput || this.state.location ? 'label-title' : 'gray label-title'} htmlFor="location-box">Location</label>
                           </div>
                           <div className="flex">
                           <input value={this.state.location} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="location-box input-box-border" type="textbox" placeholder="Address" name="location" id="location-box"></input>
