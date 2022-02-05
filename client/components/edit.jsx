@@ -6,11 +6,11 @@ export default class Edit extends React.Component {
     super(props);
     this.state = {
       post: this.props.post.post,
-      price: this.props.post.price,
-      startDate: format(parseISO(this.props.post.startDate), 'yyyy-MM-dd'),
-      startTime: this.props.post.startTime,
-      endTime: this.props.post.endTime,
-      location: this.props.post.location
+      price: this.props.post.price ? this.props.post.price : '',
+      startDate: this.props.post.startDate ? format(parseISO(this.props.post.startDate), 'yyyy-MM-dd') : '',
+      startTime: this.props.post.startTime ? this.props.post.startTime : '',
+      endTime: this.props.post.endTime ? this.props.post.endTime : '',
+      location: this.props.post.location ? this.props.post.location : ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
@@ -21,9 +21,10 @@ export default class Edit extends React.Component {
 
   isButtonActive() {
     const post = this.props.post;
+    const startDate = post.startDate;
     if (this.state.post === post.post && this.state.price === post.price && this.state.startDate === post.startDate && this.state.startTime === post.startTime && this.state.endTime === post.endTime && this.state.location === post.location) {
       return false;
-    } else if (this.state.post !== '' && this.state.price !== '' && this.state.startDate !== '' && this.state.startTime !== '' && this.state.endTime !== '' && this.state.location !== '') {
+    } else if ((this.state.post !== '' && this.state.post !== post.post) || (this.state.price !== post.price || this.state.startDate !== (startDate ? format(parseISO(startDate), 'yyyy-MM-dd') : '') || this.state.startTime !== post.startTime || this.state.endTime !== post.endTime || this.state.location !== post.location)) {
       return true;
     } else {
       return false;
@@ -34,11 +35,11 @@ export default class Edit extends React.Component {
     const post = this.props.post;
     this.setState({
       post: post.post,
-      price: post.price,
-      startDate: post.startDate,
-      startTime: post.startTime,
-      endTime: post.endTime,
-      location: post.location
+      price: post.price ? post.price : '',
+      startDate: post.startDate ? format(parseISO(post.startDate), 'yyyy-MM-dd') : '',
+      startTime: post.startTime ? post.startTime : '',
+      endTime: post.endTime ? post.endTime : '',
+      location: post.location ? post.location : ''
     });
   }
 
@@ -72,7 +73,7 @@ export default class Edit extends React.Component {
       body: JSON.stringify(this.state)
     })
       .then(response => response.json())
-      .then(data => {
+      .then(() => {
         if (routePath === 'comments') {
           this.props.findPost();
         } else {
@@ -81,7 +82,7 @@ export default class Edit extends React.Component {
       },
       error => {
         console.error(error);
-        if (this.props.routePath === 'comments') {
+        if (routePath === 'comments') {
           this.props.noInternetPopUp();
         } else {
           this.props.noInternetPopUpHome();
@@ -107,7 +108,7 @@ export default class Edit extends React.Component {
                       <label className="label-title no-margin" htmlFor="post-title">Post</label>
                     </div>
                   </div>
-                  <textarea className="post-textbox input-box-border post-padding-top" value={this.state.post} onChange={this.handleChange} name="post" placeholder="Description" id="post-title" required></textarea>
+                  <textarea className="post-textbox input-box-border post-padding-top" value={this.state.post} onChange={this.handleChange} name="post" placeholder="Description" id="post-title"></textarea>
                 </div>
                 <div className="">
                   <div className="">
@@ -119,7 +120,7 @@ export default class Edit extends React.Component {
                               <label className="label-title" htmlFor="price-box">Price</label>
                             </div>
                             <div>
-                              <input value={this.state.price} onChange={this.handleChange} className="price-box input-box-border" placeholder="0.00" type="number" id="price-box" name="price" step="0.01" required></input>
+                              <input value={this.state.price} onChange={this.handleChange} className="price-box input-box-border" placeholder="0.00" type="number" id="price-box" name="price" step="0.01"></input>
                             </div>
                           </div>
                           <div className="">
@@ -127,7 +128,7 @@ export default class Edit extends React.Component {
                               <label className="label-title" htmlFor="date-box">Date</label>
                             </div>
                             <div>
-                              <input value={this.state.startDate} onChange={this.handleChange} className="date-box input-box-border" type="date" id="date-box" name="startDate" required></input>
+                              <input value={this.state.startDate} onChange={this.handleChange} className="date-box input-box-border" type="date" id="date-box" name="startDate"></input>
                             </div>
                           </div>
                         </div>
@@ -138,8 +139,7 @@ export default class Edit extends React.Component {
                             </div>
                             <div className="start-label-box">
                               <label className="start-end-label" htmlFor="start-box">Start</label>
-                              <input value={this.state.startTime} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime"
-                                required></input>
+                              <input value={this.state.startTime} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime"></input>
                               <div>
                               </div>
                             </div>
@@ -150,8 +150,7 @@ export default class Edit extends React.Component {
                             </div>
                             <div className="start-label-box flex">
                               <label className="start-end-label" htmlFor="end-box">End</label>
-                              <input value={this.state.endTime} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="end-box" name="endTime"
-                                required></input>
+                              <input value={this.state.endTime} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="end-box" name="endTime"></input>
                             </div>
                           </div>
                         </div>
@@ -163,7 +162,7 @@ export default class Edit extends React.Component {
                       <label className="label-title" htmlFor="location-box">Location</label>
                     </div>
                     <div className="">
-                      <input value={this.state.location} onChange={this.handleChange} className="location-box input-box-border" type="textbox" placeholder="Address" name="location" id="location-box" required></input>
+                      <input value={this.state.location} onChange={this.handleChange} className="location-box input-box-border" type="textbox" placeholder="Address" name="location" id="location-box"></input>
                     </div>
                   </div>
                 </div>

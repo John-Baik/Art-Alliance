@@ -31,7 +31,7 @@ export default class Create extends React.Component {
   close() {
     this.setState({
       post: '',
-      price: '',
+      price: 0,
       startDate: '',
       startTime: '',
       endTime: '',
@@ -41,7 +41,7 @@ export default class Create extends React.Component {
   }
 
   isButtonActive() {
-    if (this.state.post !== '' && this.state.price !== '' && this.state.startDate !== '' && this.state.startTime !== '' && this.state.endTime !== '' && this.state.location !== '') {
+    if (this.state.post !== '') {
       return true;
     } else {
       return false;
@@ -49,7 +49,7 @@ export default class Create extends React.Component {
   }
 
   handleClick() {
-    if (this.state.post !== '' && this.state.price !== '' && this.state.startDate !== '' && this.state.startTime !== '' && this.state.endTime !== '' && this.state.location !== '') {
+    if (this.state.post !== '') {
       this.setState({ postButtonActive: true });
     } else {
       this.setState({ postButtonActive: false });
@@ -157,7 +157,7 @@ export default class Create extends React.Component {
                                     <label className="label-title" htmlFor="price-box">Price</label>
                                   </div>
                                   <div className="flex">
-                                  <input value={this.state.price} onChange={this.handleChange} className="price-box input-box-border" placeholder="0.00" type="number" id="price-box" name="price" step="0.01" required></input>
+                                  <input value={this.state.price} onChange={this.handleChange} className="price-box input-box-border" placeholder="0.00" type="number" id="price-box" name="price" step="0.01"></input>
                                   </div>
                                 </div>
                                 <div className="">
@@ -165,7 +165,7 @@ export default class Create extends React.Component {
                                     <label className="label-title" htmlFor="date-box">Date</label>
                                   </div>
                                   <div className="flex">
-                                  <input value={this.state.startDate} onChange={this.handleChange} className="date-box input-box-border" type="date" id="date-box" name="startDate" required></input>
+                                  <input value={this.state.startDate} onChange={this.handleChange} className="date-box input-box-border" type="date" id="date-box" name="startDate"></input>
                                   </div>
                                 </div>
                               </div>
@@ -176,8 +176,7 @@ export default class Create extends React.Component {
                                   </div>
                                   <div className="start-label-box">
                                     <label className="start-end-label" htmlFor="start-box">Start</label>
-                                  <input value={this.state.startTime} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime"
-                                      required></input>
+                                  <input value={this.state.startTime} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime"></input>
                                     <div>
                                     </div>
                                   </div>
@@ -188,8 +187,7 @@ export default class Create extends React.Component {
                                   </div>
                                   <div className="start-label-box flex">
                                     <label className="start-end-label" htmlFor="end-box">End</label>
-                                  <input value={this.state.endTime} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="end-box" name="endTime"
-                                      required></input>
+                                  <input value={this.state.endTime} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="end-box" name="endTime"></input>
                                   </div>
                                 </div>
                               </div>
@@ -201,7 +199,7 @@ export default class Create extends React.Component {
                             <label className="label-title" htmlFor="location-box">Location</label>
                           </div>
                           <div className="flex">
-                          <input value={this.state.location} onChange={this.handleChange} className="location-box input-box-border" type="textbox" placeholder="Address" name="location" id="location-box" required></input>
+                          <input value={this.state.location} onChange={this.handleChange} className="location-box input-box-border" type="textbox" placeholder="Address" name="location" id="location-box"></input>
                           </div>
                         </div>
                       </div>

@@ -136,11 +136,23 @@ export default class Post extends React.Component {
       once: true
     });
     const post = this.props.post;
+    if (!post.price) {
+      post.price = '';
+    }
+    if (!post.startTime) {
+      post.startTime = '';
+    }
+    if (!post.endTime) {
+      post.endTime = '';
+    }
+    if (!post.startDate) {
+      post.startDate = '';
+    }
+    if (!post.location) {
+      post.location = '';
+    }
     const loggedInUserId = this.props.loggedInUserId;
-    const dateFormatted = format(parseISO(post.startDate), 'LLL dd, yyyy');
     const createdAtFormatted = format(parseISO(post.createdAt), 'LLL dd, yyyy');
-    const startTimeFormatted = format(parse(post.startTime, 'H:mm:ss', new Date()), 'h:mm a');
-    const endTimeFormatted = format(parse(post.endTime, 'H:mm:ss', new Date()), 'h:mm a');
     if (!this.numberOfComments) {
       return (
       <>
@@ -158,7 +170,7 @@ export default class Post extends React.Component {
                     </div>
                     <div className="username-date flex column flex-start">
                       <p className="post-creator-creation username roboto-font">{post.username}</p>
-                        <p className="date post-creator-creation roboto-font">{createdAtFormatted}</p>
+                      <p className="date post-creator-creation roboto-font">{createdAtFormatted}</p>
                     </div>
                   </div>
                   <div>
@@ -176,51 +188,33 @@ export default class Post extends React.Component {
                       </div>
                     </OutsideClickHandler>
                     <div className={this.state.editModalOpen ? '' : 'hidden'}>
-                        <Edit noInternetPopUpHome={this.props.noInternetPopUpHome} noInternetPopUp={this.props.noInternetPopUp} routePath={this.props.routePath} findPost={this.props.findPost} closeEditModal={this.closeEditModal} editModal={this.editModal} post={post} getPosts={this.props.getPosts} />
+                      <Edit noInternetPopUpHome={this.props.noInternetPopUpHome} noInternetPopUp={this.props.noInternetPopUp} routePath={this.props.routePath} findPost={this.props.findPost} closeEditModal={this.closeEditModal} editModal={this.editModal} post={post} getPosts={this.props.getPosts} />
                     </div>
                   </div>
                 </div>
                 <div>
                   <div className="post-body">
                     <p className="post-text roboto-font">{post.post}</p>
-                    <div className="post-table">
+                      <div className={!post.price && !post.startDate && !post.startTime && !post.endTime && !post.location ? 'hidden' : 'post-table'}>
                       <div className="table">
                         <div className="align-items-center flex column">
-                          <table className="table-width">
-                            <thead>
-                              <tr className="table-row1 roboto-font">
-                                <th scope="column" className="table-mobile-inactive">PRICE</th>
-                                <th scope="column" className="table-mobile-inactive">DATE</th>
-                                <th scope="column" className="table-mobile-inactive">TIME</th>
-                                <th scope="column" className="table-mobile-inactive">LOCATION</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr className="table-row2 roboto-font">
-                                <td className="table-mobile-inactive">${post.price}</td>
-                                <td className="table-mobile-inactive">{dateFormatted}</td>
-                                <td className="table-mobile-inactive">{startTimeFormatted} - {endTimeFormatted}</td>
-                                <td className="relative location-button table-mobile-inactive">{post.location}</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          <table className="table-width roboto-font">
+                            <table className='table-width roboto-font'>
                             <thead>
                               <tr className="table-row1">
-                                <th scope="column" className="table-mobile-active">PRICE</th>
-                                <td scope="column" className="table-mobile-active">${post.price}</td>
+                                <th scope="column" className={post.price ? 'table' : 'hidden'}>PRICE</th>
+                                <td scope="column" className={post.price ? 'table' : 'hidden'}>${post.price}</td>
                               </tr>
                               <tr className="table-row1">
-                                <th scope="column" className="table-mobile-active">DATE</th>
-                                  <td scope="column" className="table-mobile-active">{dateFormatted}</td>
+                                <th scope="column" className={post.startDate ? 'table' : 'hidden'}>DATE</th>
+                                  <td scope="column" className={post.startDate ? 'table' : 'hidden'}>{post.startDate ? format(parseISO(post.startDate), 'LLL dd, yyyy') : ''}</td>
                               </tr>
                               <tr className="table-row1">
-                                <th scope="column" className="table-mobile-active">TIME</th>
-                                  <td scope="column" className="table-mobile-active">{startTimeFormatted} - {endTimeFormatted}</td>
+                                <th scope="column" className={post.startTime ? 'table' : 'hidden'}>TIME</th>
+                                <td scope="column" className={post.startTime ? 'table' : 'hidden'}>{post.startTime ? format(parse(post.startTime, 'H:mm:ss', new Date()), 'h:mm a') : ''} - {post.endTime ? format(parse(post.endTime, 'H:mm:ss', new Date()), 'h:mm a') : ''}</td>
                               </tr>
                               <tr className="table-row1">
-                                <th scope="column" className="table-mobile-active">LOCATION</th>
-                                <td scope="column" className="relative location-button table-mobile-active">{post.location}</td>
+                                <th scope="column" className={post.location ? 'table' : 'hidden'}>LOCATION</th>
+                                <td scope="column" className={post.location ? 'relative location-button table' : 'hidden'}>{post.location}</td>
                               </tr>
                             </thead>
                           </table>
