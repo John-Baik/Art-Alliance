@@ -114,7 +114,7 @@ export default class Edit extends React.Component {
   render() {
     const isActive = this.isButtonActive();
     const startTime = <input value={this.state.startTime} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime"></input>;
-    const startTimeRequired = <input value={this.state.startTime} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime"></input>;
+    const startTimeRequired = <input value={this.state.startTime} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime" required></input>;
     return (
     <div className='modal-container'>
       <div className="container">
