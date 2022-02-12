@@ -13,7 +13,12 @@ export default class Create extends React.Component {
       location: '',
       isOpen: false,
       postButtonActive: false,
-      errorPage: false
+      errorPage: false,
+      priceInput: false,
+      startDateInput: false,
+      locationInput: false,
+      startTimeInput: false,
+      endTimeInput: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,6 +27,7 @@ export default class Create extends React.Component {
     this.open = this.open.bind(this);
     this.close = this.close.bind(this);
     this.isButtonActive = this.isButtonActive.bind(this);
+    this.isInputActive = this.isInputActive.bind(this);
   }
 
   open() {
@@ -31,7 +37,7 @@ export default class Create extends React.Component {
   close() {
     this.setState({
       post: '',
-      price: 0,
+      price: '',
       startDate: '',
       startTime: '',
       endTime: '',
@@ -71,6 +77,21 @@ export default class Create extends React.Component {
       endTime: '',
       location: ''
     });
+  }
+
+  isInputActive() {
+    const name = event.target.name;
+    if (name === 'price') {
+      this.setState({ priceInput: !this.state.priceInput });
+    } else if (name === 'startDate') {
+      this.setState({ startDateInput: !this.state.startDateInput });
+    } else if (name === 'location') {
+      this.setState({ locationInput: !this.state.locationInput });
+    } else if (name === 'startTime') {
+      this.setState({ startTimeInput: !this.state.startTimeInput });
+    } else if (name === 'endTime') {
+      this.setState({ endTimeInput: !this.state.endTimeInput });
+    }
   }
 
   handleSubmit(event) {
@@ -128,11 +149,13 @@ export default class Create extends React.Component {
         </div>
       );
     } else if (this.state.isOpen) {
+      const startTime = <input value={this.state.startTime} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime"></input>;
+      const startTimeRequired = <input value={this.state.startTime} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime" required></input>;
       return (
           <>
             {buttonTwo}
             <div className={this.state.isOpen ? 'modal-container' : 'modal-container hidden'}>
-            <div data-aos="zoom-in" className="container" onClick={this.handleClick}>
+              <div data-aos="zoom-in" className="container" onClick={this.handleClick}>
                 <div className="create-header">
                   <h1 className="header">Create Post</h1>
                 </div>
@@ -152,54 +175,52 @@ export default class Create extends React.Component {
                           <div className="">
                             <div className="price-date-time-container label-gap">
                               <div className="price-date-container flex price-date-gap">
-                                <div className="">
+                                <div className={this.state.priceInput || this.state.price ? '' : 'light-opacity'}>
                                   <div className="label-margin flex align-items">
-                                    <label className="label-title" htmlFor="price-box">Price</label>
+                                    <label className='label-title' htmlFor="price-box">Price</label>
                                   </div>
                                   <div className="flex">
-                                  <input value={this.state.price} onChange={this.handleChange} className="price-box input-box-border" placeholder="0.00" type="number" id="price-box" name="price" step="0.01"></input>
+                                    <input value={this.state.price} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="price-box input-box-border" placeholder="0.00" type="number" id="price-box" name="price" step="0.01"></input>
                                   </div>
                                 </div>
-                                <div className="">
+                                <div className={this.state.startDateInput || this.state.startDate ? '' : 'light-opacity'}>
                                   <div className="label-margin flex align-items">
-                                    <label className="label-title" htmlFor="date-box">Date</label>
+                                    <label className='label-title' htmlFor="date-box">Date</label>
                                   </div>
                                   <div className="flex">
-                                  <input value={this.state.startDate} onChange={this.handleChange} className="date-box input-box-border" type="date" id="date-box" name="startDate"></input>
+                                    <input value={this.state.startDate} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="date-box input-box-border" type="date" id="date-box" name="startDate"></input>
                                   </div>
                                 </div>
                               </div>
                               <div className="time-container flex">
-                                <div className="">
+                                <div className=''>
                                   <div className="label-margin time-margin flex align-items">
-                                    <label className="label-title" htmlFor="start-box">Time</label>
+                                  <label className={this.state.startTimeInput || this.state.endTimeInput || this.state.startTime || this.state.endTime ? 'label-title' : 'light-opacity label-title'} htmlFor={!this.state.startTime ? 'start-box' : 'end-box'}>Time</label>
                                   </div>
-                                  <div className="start-label-box">
-                                    <label className="start-end-label" htmlFor="start-box">Start</label>
-                                  <input value={this.state.startTime} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime"></input>
-                                    <div>
-                                    </div>
+                                <div className={this.state.startTimeInput || this.state.startTime ? 'start-label-box' : 'light-opacity start-label-box'}>
+                                  <label className='start-end-label' htmlFor="start-box">Start</label>
+                                  {this.state.endTime ? startTimeRequired : startTime}
                                   </div>
                                 </div>
-                                <div className="placeholder">
+                                <div className={this.state.endTimeInput || this.state.endTime ? 'placeholder' : 'light-opacity placeholder'}>
                                   <div className="label-margin time-margin flex">
                                     <label className="label-title invisible">Test</label>
                                   </div>
                                   <div className="start-label-box flex">
-                                    <label className="start-end-label" htmlFor="end-box">End</label>
-                                  <input value={this.state.endTime} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="end-box" name="endTime"></input>
+                                    <label className='start-end-label' htmlFor='end-box'>End</label>
+                                    <input value={this.state.endTime} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="end-box" name="endTime"></input>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div className="location-container">
+                        <div className={this.state.locationInput || this.state.location ? 'location-container' : 'light-opacity location-container'}>
                           <div className="label-margin flex align-items">
-                            <label className="label-title" htmlFor="location-box">Location</label>
+                            <label className='label-title' htmlFor="location-box">Location</label>
                           </div>
                           <div className="flex">
-                          <input value={this.state.location} onChange={this.handleChange} className="location-box input-box-border" type="textbox" placeholder="Address" name="location" id="location-box"></input>
+                            <input value={this.state.location} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="location-box input-box-border" type="textbox" placeholder="Address" name="location" id="location-box"></input>
                           </div>
                         </div>
                       </div>

@@ -210,7 +210,7 @@ export default class Post extends React.Component {
                               </tr>
                               <tr className="table-row1">
                                 <th scope="column" className={post.startTime ? 'table' : 'hidden'}>TIME</th>
-                                <td scope="column" className={post.startTime ? 'table' : 'hidden'}>{post.startTime ? format(parse(post.startTime, 'H:mm:ss', new Date()), 'h:mm a') : ''} - {post.endTime ? format(parse(post.endTime, 'H:mm:ss', new Date()), 'h:mm a') : ''}</td>
+                                  <td scope="column" className={post.startTime ? 'table' : 'hidden'}>{post.startTime ? format(parse(post.startTime, 'H:mm:ss', new Date()), 'h:mm a') : ''} {post.endTime ? '-' : ''} {post.endTime ? format(parse(post.endTime, 'H:mm:ss', new Date()), 'h:mm a') : ''}</td>
                               </tr>
                               <tr className="table-row1">
                                 <th scope="column" className={post.location ? 'table' : 'hidden'}>LOCATION</th>
