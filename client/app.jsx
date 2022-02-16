@@ -1,6 +1,6 @@
 import React from 'react';
-// import Home from './pages/home';
-import Location from './pages/location';
+import Home from './pages/home';
+// import Location from './pages/location';
 import Saved from './pages/saved';
 import Comments from './pages/comments';
 import Messages from './pages/messages';
@@ -32,7 +32,7 @@ export default class App extends React.Component {
     const { route } = this.state;
     if (route.path === '') {
       return <>
-        <Location loggedInUserId={this.state.loggedInUserId} />
+        <Home loggedInUserId={this.state.loggedInUserId} />
       </>;
     } else if (route.path === 'saved') {
       return <>

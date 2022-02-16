@@ -15,6 +15,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@googlemaps/react-wrapper": "^1.1.24",
     "aos": "^3.0.0-beta.6",
     "argon2": "^0.28.3",
     "bootstrap-icons": "^1.7.2",

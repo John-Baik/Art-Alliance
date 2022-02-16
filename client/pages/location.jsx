@@ -1,16 +1,13 @@
-import React from 'react';
+// import React from 'react';
+// import { Wrapper, Status } from '@googlemaps/react-wrapper';
 
-export default class Location extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state. = {
-      is: true
-    };
-  }
+// const ref = React.useRef < HTMLDivElement > (null);
+// const [map, setMap] = React.useState < google.maps.Map > ();
 
-  render() {
-    return (
-      <div id='map'>test</div>
-    )
-  }
-}
+// React.useEffect(() => {
+//   if (ref.current && !map) {
+//     setMap(new window.google.maps.Map(ref.current, {}));
+//   }
+// }, [ref, map]);
+
+// return <div ref={ref} />
