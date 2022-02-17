@@ -1,13 +1,36 @@
-// import React from 'react';
-// import { Wrapper, Status } from '@googlemaps/react-wrapper';
+import React from 'react';
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+class Location extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: true
+    };
+  }
 
-// const ref = React.useRef < HTMLDivElement > (null);
-// const [map, setMap] = React.useState < google.maps.Map > ();
+  render() {
+    return (
+      <>
+      <div id="map" ></div>
+        <Map google={this.props.google} zoom={14} initialCenter={{
+          lat: 33.880507794384975,
+          lng: -118.31463590118855
+        }}>
 
-// React.useEffect(() => {
-//   if (ref.current && !map) {
-//     setMap(new window.google.maps.Map(ref.current, {}));
-//   }
-// }, [ref, map]);
+        <Marker onClick={this.onMarkerClick}
+                name={'Current location'} />
 
-// return <div ref={ref} />
+        <InfoWindow onClose={this.onInfoWindowClose}>
+            {/* <div>
+              <h1>{this.state.selectedPlace.name}</h1>
+            </div> */}
+        </InfoWindow>
+      </Map>
+      </>
+    );
+  }
+}
+
+export default GoogleApiWrapper({
+  apiKey: ('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE')
+})(Location);
