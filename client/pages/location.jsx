@@ -1,33 +1,64 @@
 import React from 'react';
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
+import Geocode from 'react-geocode';
 class Location extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: true
+      message: true,
+      lat: null,
+      lng: null
     };
+    this.getCoordinates = this.getCoordinates.bind(this);
+  }
+
+  getCoordinates() {
+    const address = this.props.paramsPostLocation;
+    Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
+    Geocode.fromAddress(address).then(
+      response => {
+        const { lat, lng } = response.results[0].geometry.location;
+        this.setState({
+          lat: lat,
+          lng: lng
+        });
+      },
+      error => {
+        console.error(error);
+      }
+    );
+  }
+
+  componentDidMount() {
+    this.getCoordinates();
   }
 
   render() {
-    return (
+    if (!this.state.lat || !this.state.lng) {
+      return (
+        <div>shit</div>
+      );
+    } else {
+      return (
       <>
-      <div id="map" ></div>
+      <div id="map"></div>
         <Map google={this.props.google} zoom={14} initialCenter={{
-          lat: 33.880507794384975,
-          lng: -118.31463590118855
+          lat: this.state.lat,
+          lng: this.state.lng
         }}>
 
         <Marker onClick={this.onMarkerClick}
                 name={'Current location'} />
-
+{/*
         <InfoWindow onClose={this.onInfoWindowClose}>
-            {/* <div>
+            <div>
               <h1>{this.state.selectedPlace.name}</h1>
-            </div> */}
-        </InfoWindow>
+            </div>
+        </InfoWindow> */}
       </Map>
       </>
-    );
+      );
+    }
   }
 }
 

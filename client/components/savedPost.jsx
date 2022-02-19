@@ -110,7 +110,9 @@ export default class savedPost extends React.Component {
                             </tr>
                             <tr className="table-row1">
                               <th scope="column" className={savedPost.location ? 'table' : 'hidden'}>LOCATION</th>
-                              <td scope="column" className={savedPost.location ? 'relative location-button table' : 'hidden'}>{savedPost.location}</td>
+                              <td scope="column" className={savedPost.location ? 'relative location-button table' : 'hidden'}>
+                                <a href={`#location?postLocation=${savedPost.location}`}>{savedPost.location}</a>
+                              </td>
                             </tr>
                           </thead>
                         </table>

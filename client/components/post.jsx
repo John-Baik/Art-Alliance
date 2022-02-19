@@ -215,8 +215,8 @@ export default class Post extends React.Component {
                               <tr className="table-row1">
                                 <th scope="column" className={post.location ? 'table' : 'hidden'}>LOCATION</th>
                                 <td scope="column" className={post.location ? 'relative location-button table' : 'hidden'}>
-                                    <a href={`#location?postLocation=${post.location}`}>{post.location}</a>
-                                  </td>
+                                  <a href={`#location?postLocation=${post.location}`}>{post.location}</a>
+                                </td>
                               </tr>
                             </thead>
                           </table>

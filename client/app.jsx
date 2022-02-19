@@ -50,7 +50,7 @@ export default class App extends React.Component {
     } else if (route.path === 'location') {
       const paramsPostLocation = route.params.get('postLocation');
       return <>
-        <Location routePath={route.path} paramsPossLocation={paramsPostLocation} loggedInUserId={this.state.loggedInUserId} />
+        <Location paramsPostLocation={paramsPostLocation} />
       </>;
     }
     return <h1>Unknown Page</h1>;
