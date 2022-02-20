@@ -36,26 +36,29 @@ class Location extends React.Component {
   render() {
     if (!this.state.lat || !this.state.lng) {
       return (
-        <div>shit</div>
+        <div className='home-page-container'>
+          <div className="home-page">
+            <div className='home-margin'>
+              <div className="loading-container ">
+                <div className="loading-circle loader">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       );
     } else {
       return (
       <>
-      <div id="map"></div>
+      <div id="map flex justify-content-center">
         <Map google={this.props.google} zoom={14} initialCenter={{
           lat: this.state.lat,
           lng: this.state.lng
         }}>
-
         <Marker onClick={this.onMarkerClick}
                 name={'Current location'} />
-{/*
-        <InfoWindow onClose={this.onInfoWindowClose}>
-            <div>
-              <h1>{this.state.selectedPlace.name}</h1>
-            </div>
-        </InfoWindow> */}
-      </Map>
+        </Map>
+      </div>
       </>
       );
     }
