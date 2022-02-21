@@ -5,7 +5,6 @@ class Location extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: true,
       lat: null,
       lng: null
     };
@@ -13,7 +12,7 @@ class Location extends React.Component {
   }
 
   getCoordinates() {
-    const address = this.props.paramsPostLocation;
+    const address = this.props.postLocation;
     Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
     Geocode.fromAddress(address).then(
       response => {
@@ -36,7 +35,8 @@ class Location extends React.Component {
   render() {
     if (!this.state.lat || !this.state.lng) {
       return (
-        <div className='home-page-container'>
+        <div className="modal-container">
+        <div className='home-page-container loading-map'>
           <div className="home-page">
             <div className='home-margin'>
               <div className="loading-container ">
@@ -45,20 +45,25 @@ class Location extends React.Component {
               </div>
             </div>
           </div>
+          </div>
         </div>
       );
     } else {
       return (
       <>
-      <div id="map flex justify-content-center">
-        <Map google={this.props.google} zoom={14} initialCenter={{
-          lat: this.state.lat,
-          lng: this.state.lng
-        }}>
-        <Marker onClick={this.onMarkerClick}
+        <div className="modal-container">
+          <div className="location-component flex justify-content-center">
+            <div className="map-wrapper">
+              <Map google={this.props.google} zoom={14} initialCenter={{
+                lat: this.state.lat,
+                lng: this.state.lng
+              }}>
+              <Marker onClick={this.onMarkerClick}
                 name={'Current location'} />
-        </Map>
-      </div>
+              </Map>
+            </div>
+          </div>
+        </div>
       </>
       );
     }

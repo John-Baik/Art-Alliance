@@ -633,6 +633,21 @@ textarea,
   opacity: 50%;
 }
 
+.map-wrapper {
+  position: relative;
+  width: 50rem;
+  height: 31rem;
+}
+
+.location-component {
+  width: 100%;
+}
+
+.loading-map {
+  width: 50rem;
+  height: 31rem;
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }

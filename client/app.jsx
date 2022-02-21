@@ -1,6 +1,6 @@
 import React from 'react';
 import Home from './pages/home';
-import Location from './pages/location';
+
 import Saved from './pages/saved';
 import Comments from './pages/comments';
 import Messages from './pages/messages';
@@ -46,11 +46,6 @@ export default class App extends React.Component {
       const paramsPostId = route.params.get('postId');
       return <>
         <Comments routePath={route.path} paramsPostId={paramsPostId} loggedInUserId={this.state.loggedInUserId} />
-      </>;
-    } else if (route.path === 'location') {
-      const paramsPostLocation = route.params.get('postLocation');
-      return <>
-        <Location paramsPostLocation={paramsPostLocation} />
       </>;
     }
     return <h1>Unknown Page</h1>;
