@@ -66,7 +66,7 @@ export default class Post extends React.Component {
   }
 
   locationActive() {
-    this.setState({ locationActive: true });
+    this.setState({ locationActive: !this.state.locationActive });
   }
 
   removeSaved(event) {
@@ -163,7 +163,7 @@ export default class Post extends React.Component {
     if (!this.numberOfComments) {
       return (
       <>
-      {this.state.locationActive ? <Location postLocation={post.location} className={this.state.locationActive ? '' : 'hidden'}/> : <></>}
+      {this.state.locationActive ? <Location postLocation={post.location} locationActive={this.locationActive} className={this.state.locationActive ? '' : 'hidden'}/> : <></>}
       <div className={this.state.deleteModalOpen ? '' : 'hidden'}>
       <Delete noInternetPopUpHome={this.props.noInternetPopUpHome} routePath={this.props.routePath} getPosts={this.props.getPosts} post={post} deleteModalClose={this.deleteModalClose} findPost={this.props.findPost} deletedCommentStatus={this.props.deletedCommentStatus}/>
       </div>
@@ -222,8 +222,8 @@ export default class Post extends React.Component {
                               </tr>
                               <tr className="table-row1">
                                 <th scope="column" className={post.location ? 'table' : 'hidden'}>LOCATION</th>
-                                <td scope="column" className={post.location ? 'relative location-button table' : 'hidden'}>
-                                  <button onClick={this.locationActive}>{post.location}</button>
+                                <td scope="column" className={post.location ? 'relative table' : 'hidden'}>
+                                  <button className="location-button" onClick={this.locationActive}>{post.location}</button>
                                 </td>
                               </tr>
                             </thead>

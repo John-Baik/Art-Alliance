@@ -36,6 +36,9 @@ class Location extends React.Component {
     if (!this.state.lat || !this.state.lng) {
       return (
         <div className="modal-container">
+          <div className="exit-location-container">
+            <button className="exit-location-button" onClick={this.props.locationActive}>&times;</button>
+          </div>
         <div className='home-page-container loading-map'>
           <div className="home-page">
             <div className='home-margin'>
@@ -52,6 +55,9 @@ class Location extends React.Component {
       return (
       <>
         <div className="modal-container">
+            <div className="exit-location-container">
+              <button className="exit-location-button" onClick={this.props.locationActive}>&times;</button>
+            </div>
           <div className="location-component flex justify-content-center">
             <div className="map-wrapper">
               <Map google={this.props.google} zoom={14} initialCenter={{

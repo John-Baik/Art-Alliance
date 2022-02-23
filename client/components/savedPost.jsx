@@ -1,6 +1,7 @@
 import React from 'react';
 import { format, parseISO, parse } from 'date-fns';
 import AOS from 'aos';
+import Location from '../components/location';
 
 export default class savedPost extends React.Component {
   constructor(props) {
@@ -8,11 +9,13 @@ export default class savedPost extends React.Component {
     this.state = {
       numberOfComments: null,
       savedPost: this.props.savedPost,
-      bookmarkActive: true
+      bookmarkActive: true,
+      locationActive: false
     };
     this.removeSaved = this.removeSaved.bind(this);
     this.addSaved = this.addSaved.bind(this);
     this.findComments = this.findComments.bind(this);
+    this.locationActive = this.locationActive.bind(this);
   }
 
   findComments() {
@@ -26,6 +29,10 @@ export default class savedPost extends React.Component {
         const numberOfComments = this.state.comments.length;
         this.setState({ numberOfComments: numberOfComments });
       });
+  }
+
+  locationActive() {
+    this.setState({ locationActive: !this.state.locationActive });
   }
 
   addSaved(event) {
@@ -70,6 +77,8 @@ export default class savedPost extends React.Component {
     const savedPost = this.props.savedPost;
     const createdAtFormatted = format(parseISO(savedPost.createdAt), 'LLL dd, yyyy');
     return (
+      <>
+      { this.state.locationActive ? <Location postLocation={savedPost.location} locationActive={this.locationActive} className={this.state.locationActive ? '' : 'hidden'} /> : <></> }
       <div data-aos="fade-up" data-aos-offset="0">
         <li className="post-entry">
           <div className="post-container">
@@ -111,7 +120,7 @@ export default class savedPost extends React.Component {
                             <tr className="table-row1">
                               <th scope="column" className={savedPost.location ? 'table' : 'hidden'}>LOCATION</th>
                               <td scope="column" className={savedPost.location ? 'relative location-button table' : 'hidden'}>
-                                <a href={`#location?postLocation=${savedPost.location}`}>{savedPost.location}</a>
+                                <button className="location-button" onClick={this.locationActive}>{savedPost.location}</button>
                               </td>
                             </tr>
                           </thead>
@@ -130,6 +139,7 @@ export default class savedPost extends React.Component {
           </div>
         </li>
       </div>
+      </>
     );
   }
 }

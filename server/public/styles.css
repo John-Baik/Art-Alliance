@@ -447,15 +447,6 @@ ul {
   border-top: rgb(192, 192, 192) solid 2px;
 }
 
-.location-button {
-  color: blue;
-  cursor: pointer;
-}
-
-.location-button:hover {
-  text-decoration: underline;
-}
-
 /* DELETE MODAL */
 .delete-modal {
   max-width: 41rem;
@@ -635,8 +626,8 @@ textarea,
 
 .map-wrapper {
   position: relative;
-  width: 50rem;
-  height: 31rem;
+  width: 90vw;
+  height: 81vh;
 }
 
 .location-component {
@@ -646,6 +637,31 @@ textarea,
 .loading-map {
   width: 50rem;
   height: 31rem;
+}
+
+.exit-location-button {
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.location-button {
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  color: blue;
+  background-color: transparent;
+  font-size: 1rem;
+}
+
+.location-button:hover {
+  text-decoration: underline;
+}
+
+.exit-location-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 90vw;
+  margin-bottom: 0.5rem;
 }
 
 @keyframes spin {
@@ -871,5 +887,14 @@ textarea,
 
   .empty-page {
     font-size: 1.6rem;
+  }
+
+  .map-wrapper {
+    width: 50rem;
+    height: 31rem;
+  }
+
+  .exit-location-container {
+    width: 50rem;
   }
 }
