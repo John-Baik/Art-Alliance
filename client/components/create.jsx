@@ -1,5 +1,6 @@
 import React from 'react';
 import AOS from 'aos';
+import Geocode from 'react-geocode';
 
 export default class Create extends React.Component {
   constructor(props) {
@@ -18,7 +19,8 @@ export default class Create extends React.Component {
       startDateInput: false,
       locationInput: false,
       startTimeInput: false,
-      endTimeInput: false
+      endTimeInput: false,
+      locationError: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,6 +30,7 @@ export default class Create extends React.Component {
     this.close = this.close.bind(this);
     this.isButtonActive = this.isButtonActive.bind(this);
     this.isInputActive = this.isInputActive.bind(this);
+    this.testCoordinates = this.testCoordinates.bind(this);
   }
 
   open() {
@@ -94,41 +97,61 @@ export default class Create extends React.Component {
     }
   }
 
+  testCoordinates() {
+    const address = this.state.location;
+    if (this.state.location) {
+
+      Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
+      Geocode.fromAddress(address).then(
+        response => {
+          this.setState({ locationError: false });
+          // console.log(response);
+        },
+        error => {
+          // console.log(error);
+          this.setState({ locationError: true });
+          console.error(error);
+        }
+      );
+    }
+  }
+
   handleSubmit(event) {
-    event.preventDefault();
-    fetch(`/api/posts/${this.props.loggedInUserId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(this.state)
-    })
-      .then(response => response.json())
-      .then(() => {
-        this.props.getPosts();
-        this.setState({
-          post: '',
-          price: '',
-          startDate: '',
-          startTime: '',
-          endTime: '',
-          location: '',
-          isOpen: false
+    if (!this.state.locationError) {
+      fetch(`/api/posts/${this.props.loggedInUserId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.state)
+      })
+        .then(response => response.json())
+        .then(() => {
+          this.props.getPosts();
+          this.setState({
+            post: '',
+            price: '',
+            startDate: '',
+            startTime: '',
+            endTime: '',
+            location: '',
+            isOpen: false
+          });
+        },
+        error => {
+          this.setState({
+            post: '',
+            price: '',
+            startDate: '',
+            startTime: '',
+            endTime: '',
+            location: '',
+            isOpen: false,
+            errorPage: true
+          });
+          console.error(error);
         });
-      },
-      error => {
-        this.setState({
-          post: '',
-          price: '',
-          startDate: '',
-          startTime: '',
-          endTime: '',
-          location: '',
-          isOpen: false,
-          errorPage: true
-        });
-        console.error(error);
-      });
+    }
   }
 
   render() {
@@ -226,7 +249,14 @@ export default class Create extends React.Component {
                       </div>
                       <div className="create-buttons">
                         <button type="button" onClick={this.close} className="cancel">Cancel</button>
-                        <button onSubmit={this.handleSubmit} className={isActive ? 'post post-button-active' : 'no-post'}>Post</button>
+                        <button onClick={() => {
+                          this.testCoordinates();
+                          if (this.state.locationError) {
+                            alert('Incorrect Location');
+                          } else {
+                            this.handleSubmit();
+                          }
+                        }} type="button" className={isActive ? 'post post-button-active' : 'no-post'}>Post</button>
                       </div>
                     </form>
                   </div>

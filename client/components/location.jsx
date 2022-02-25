@@ -6,7 +6,8 @@ class Location extends React.Component {
     super(props);
     this.state = {
       lat: null,
-      lng: null
+      lng: null,
+      errorPage: null
     };
     this.getCoordinates = this.getCoordinates.bind(this);
   }
@@ -23,6 +24,7 @@ class Location extends React.Component {
         });
       },
       error => {
+        this.setState({ errorPage: true });
         console.error(error);
       }
     );
@@ -33,7 +35,24 @@ class Location extends React.Component {
   }
 
   render() {
-    if (!this.state.lat || !this.state.lng) {
+    if (this.state.errorPage) {
+      return (
+        <div className="modal-container">
+          <div className="exit-location-container">
+            <button className="exit-location-button" onClick={this.props.locationActive}>&times;</button>
+          </div>
+          <div className='home-page-container loading-map'>
+            <div className="home-page">
+              <div className='home-margin'>
+                <div className="loading-container ">
+                  crap
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    } else if (!this.state.lat || !this.state.lng) {
       return (
         <div className="modal-container">
           <div className="exit-location-container">
@@ -55,9 +74,9 @@ class Location extends React.Component {
       return (
       <>
         <div className="modal-container">
-            <div className="exit-location-container">
-              <button className="exit-location-button" onClick={this.props.locationActive}>&times;</button>
-            </div>
+          <div className="exit-location-container">
+            <button className="exit-location-button" onClick={this.props.locationActive}>&times;</button>
+          </div>
           <div className="location-component flex justify-content-center">
             <div className="map-wrapper">
               <Map google={this.props.google} zoom={14} initialCenter={{

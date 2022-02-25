@@ -119,7 +119,7 @@ export default class savedPost extends React.Component {
                             </tr>
                             <tr className="table-row1">
                               <th scope="column" className={savedPost.location ? 'table' : 'hidden'}>LOCATION</th>
-                              <td scope="column" className={savedPost.location ? 'relative location-button table' : 'hidden'}>
+                              <td scope="column" className={savedPost.location ? 'relative table' : 'hidden'}>
                                 <button className="location-button" onClick={this.locationActive}>{savedPost.location}</button>
                               </td>
                             </tr>
