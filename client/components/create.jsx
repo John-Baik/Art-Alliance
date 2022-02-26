@@ -19,8 +19,7 @@ export default class Create extends React.Component {
       startDateInput: false,
       locationInput: false,
       startTimeInput: false,
-      endTimeInput: false,
-      locationError: null
+      endTimeInput: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -99,21 +98,17 @@ export default class Create extends React.Component {
 
   testCoordinates() {
     const address = this.state.location;
-    if (this.state.location) {
-
-      Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
-      Geocode.fromAddress(address).then(
-        response => {
-          this.setState({ locationError: false });
-          // console.log(response);
-        },
-        error => {
-          // console.log(error);
-          this.setState({ locationError: true });
-          console.error(error);
-        }
-      );
-    }
+    Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
+    Geocode.fromAddress(address).then(
+      response => {
+        // console.log(response);
+        this.handleSubmit();
+      },
+      error => {
+        console.error(error);
+        alert('Incorrect Location');
+      }
+    );
   }
 
   handleSubmit(event) {
@@ -250,9 +245,8 @@ export default class Create extends React.Component {
                       <div className="create-buttons">
                         <button type="button" onClick={this.close} className="cancel">Cancel</button>
                         <button onClick={() => {
-                          this.testCoordinates();
-                          if (this.state.locationError) {
-                            alert('Incorrect Location');
+                          if (this.state.location) {
+                            this.testCoordinates();
                           } else {
                             this.handleSubmit();
                           }

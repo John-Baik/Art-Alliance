@@ -1,5 +1,6 @@
 import React from 'react';
 import { format, parseISO } from 'date-fns';
+import Geocode from 'react-geocode';
 
 export default class Edit extends React.Component {
   constructor(props) {
@@ -67,6 +68,21 @@ export default class Edit extends React.Component {
     } else if (name === 'endTime') {
       this.setState({ endTimeInput: !this.state.endTimeInput });
     }
+  }
+
+  testCoordinates() {
+    const address = this.state.location;
+    Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
+    Geocode.fromAddress(address).then(
+      response => {
+        // console.log(response);
+        this.handleSubmit();
+      },
+      error => {
+        console.error(error);
+        alert('Incorrect Location');
+      }
+    );
   }
 
   handleUpdate(event) {
