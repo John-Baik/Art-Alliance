@@ -72,17 +72,21 @@ export default class Edit extends React.Component {
 
   testCoordinates() {
     const address = this.state.location;
-    Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
-    Geocode.fromAddress(address).then(
-      response => {
-        // console.log(response);
-        this.handleSubmit();
-      },
-      error => {
-        console.error(error);
-        alert('Incorrect Location');
-      }
-    );
+    if (address) {
+      Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
+      Geocode.fromAddress(address).then(
+        response => {
+          // console.log(response);
+          this.handleUpdate();
+        },
+        error => {
+          console.error(error);
+          alert('Incorrect Location');
+        }
+      );
+    } else {
+      this.handleUpdate();
+    }
   }
 
   handleUpdate(event) {
@@ -111,6 +115,7 @@ export default class Edit extends React.Component {
           this.props.noInternetPopUpHome();
         }
       });
+
   }
 
   render() {
@@ -196,7 +201,7 @@ export default class Edit extends React.Component {
                     alert('Start Time Input is missing');
                   } else {
                     this.props.editModal();
-                    this.handleUpdate();
+                    this.testCoordinates();
                   }
                 }} type="button" className={isActive ? 'post post-button-active' : 'no-post'}>Post</button>
               </div>

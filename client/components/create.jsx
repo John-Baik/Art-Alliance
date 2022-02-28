@@ -101,7 +101,6 @@ export default class Create extends React.Component {
     Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
     Geocode.fromAddress(address).then(
       response => {
-        // console.log(response);
         this.handleSubmit();
       },
       error => {
