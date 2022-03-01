@@ -77,6 +77,7 @@ export default class Edit extends React.Component {
       Geocode.fromAddress(address).then(
         response => {
           // console.log(response);
+          this.props.editModal();
           this.handleUpdate();
         },
         error => {
@@ -199,9 +200,12 @@ export default class Edit extends React.Component {
                 <button onClick={() => {
                   if (this.state.endTime && !this.state.startTime) {
                     alert('Start Time Input is missing');
-                  } else {
-                    this.props.editModal();
+                  } else if (this.state.location) {
                     this.testCoordinates();
+                  } else {
+
+                    this.handleUpdate();
+                    this.props.editModal();
                   }
                 }} type="button" className={isActive ? 'post post-button-active' : 'no-post'}>Post</button>
               </div>
