@@ -105,7 +105,7 @@ export default class Create extends React.Component {
       },
       error => {
         console.error(error);
-        alert('Incorrect Location');
+        alert('Invalid Location');
       }
     );
   }

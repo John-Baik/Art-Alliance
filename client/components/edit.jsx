@@ -82,7 +82,7 @@ export default class Edit extends React.Component {
         },
         error => {
           console.error(error);
-          alert('Incorrect Location');
+          alert('Invalid Location');
         }
       );
     } else {
