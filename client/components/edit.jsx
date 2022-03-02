@@ -1,5 +1,6 @@
 import React from 'react';
 import { format, parseISO } from 'date-fns';
+import Geocode from 'react-geocode';
 
 export default class Edit extends React.Component {
   constructor(props) {
@@ -69,6 +70,26 @@ export default class Edit extends React.Component {
     }
   }
 
+  testCoordinates() {
+    const address = this.state.location;
+    if (address) {
+      Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
+      Geocode.fromAddress(address).then(
+        response => {
+          // console.log(response);
+          this.props.editModal();
+          this.handleUpdate();
+        },
+        error => {
+          console.error(error);
+          alert('Incorrect Location');
+        }
+      );
+    } else {
+      this.handleUpdate();
+    }
+  }
+
   handleUpdate(event) {
     const post = this.props.post;
     const routePath = this.props.routePath;
@@ -95,6 +116,7 @@ export default class Edit extends React.Component {
           this.props.noInternetPopUpHome();
         }
       });
+
   }
 
   render() {
@@ -102,6 +124,7 @@ export default class Edit extends React.Component {
     const startTime = <input value={this.state.startTime} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime"></input>;
     const startTimeRequired = <input value={this.state.startTime} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime" required></input>;
     return (
+      <>
     <div className='modal-container'>
       <div className="container">
         <div className="create-header">
@@ -177,9 +200,12 @@ export default class Edit extends React.Component {
                 <button onClick={() => {
                   if (this.state.endTime && !this.state.startTime) {
                     alert('Start Time Input is missing');
+                  } else if (this.state.location) {
+                    this.testCoordinates();
                   } else {
-                    this.props.editModal();
+
                     this.handleUpdate();
+                    this.props.editModal();
                   }
                 }} type="button" className={isActive ? 'post post-button-active' : 'no-post'}>Post</button>
               </div>
@@ -188,6 +214,7 @@ export default class Edit extends React.Component {
         </div>
       </div>
     </div>
+    </>
     );
   }
 }

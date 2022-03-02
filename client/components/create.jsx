@@ -1,5 +1,6 @@
 import React from 'react';
 import AOS from 'aos';
+import Geocode from 'react-geocode';
 
 export default class Create extends React.Component {
   constructor(props) {
@@ -28,6 +29,7 @@ export default class Create extends React.Component {
     this.close = this.close.bind(this);
     this.isButtonActive = this.isButtonActive.bind(this);
     this.isInputActive = this.isInputActive.bind(this);
+    this.testCoordinates = this.testCoordinates.bind(this);
   }
 
   open() {
@@ -94,41 +96,56 @@ export default class Create extends React.Component {
     }
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    fetch(`/api/posts/${this.props.loggedInUserId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(this.state)
-    })
-      .then(response => response.json())
-      .then(() => {
-        this.props.getPosts();
-        this.setState({
-          post: '',
-          price: '',
-          startDate: '',
-          startTime: '',
-          endTime: '',
-          location: '',
-          isOpen: false
-        });
+  testCoordinates() {
+    const address = this.state.location;
+    Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
+    Geocode.fromAddress(address).then(
+      response => {
+        this.handleSubmit();
       },
       error => {
-        this.setState({
-          post: '',
-          price: '',
-          startDate: '',
-          startTime: '',
-          endTime: '',
-          location: '',
-          isOpen: false,
-          errorPage: true
-        });
         console.error(error);
-      });
+        alert('Incorrect Location');
+      }
+    );
+  }
+
+  handleSubmit(event) {
+    if (!this.state.locationError) {
+      fetch(`/api/posts/${this.props.loggedInUserId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.state)
+      })
+        .then(response => response.json())
+        .then(() => {
+          this.props.getPosts();
+          this.setState({
+            post: '',
+            price: '',
+            startDate: '',
+            startTime: '',
+            endTime: '',
+            location: '',
+            isOpen: false
+          });
+        },
+        error => {
+          this.setState({
+            post: '',
+            price: '',
+            startDate: '',
+            startTime: '',
+            endTime: '',
+            location: '',
+            isOpen: false,
+            errorPage: true
+          });
+          console.error(error);
+        });
+    }
   }
 
   render() {
@@ -226,7 +243,13 @@ export default class Create extends React.Component {
                       </div>
                       <div className="create-buttons">
                         <button type="button" onClick={this.close} className="cancel">Cancel</button>
-                        <button onSubmit={this.handleSubmit} className={isActive ? 'post post-button-active' : 'no-post'}>Post</button>
+                        <button onClick={() => {
+                          if (this.state.location) {
+                            this.testCoordinates();
+                          } else {
+                            this.handleSubmit();
+                          }
+                        }} type="button" className={isActive ? 'post post-button-active' : 'no-post'}>Post</button>
                       </div>
                     </form>
                   </div>

@@ -5,6 +5,7 @@ import Edit from './edit';
 import Dropdown from './dropdown';
 import { format, parseISO, parse } from 'date-fns';
 import AOS from 'aos';
+import Location from '../components/location';
 
 export default class Post extends React.Component {
   constructor(props) {
@@ -15,7 +16,8 @@ export default class Post extends React.Component {
       dropdownButton: false,
       editModalOpen: false,
       deleteModalOpen: false,
-      bookmarkActive: false
+      bookmarkActive: false,
+      locationActive: false
     };
     this.dropdownOpen = this.dropdownOpen.bind(this);
     this.editModal = this.editModal.bind(this);
@@ -26,6 +28,7 @@ export default class Post extends React.Component {
     this.removeSaved = this.removeSaved.bind(this);
     this.handleBookmarks = this.handleBookmarks.bind(this);
     this.findComments = this.findComments.bind(this);
+    this.locationActive = this.locationActive.bind(this);
   }
 
   editModal() {
@@ -60,6 +63,10 @@ export default class Post extends React.Component {
 
   dropdownOpen() {
     this.setState({ dropdownButton: !this.state.dropdownButton });
+  }
+
+  locationActive() {
+    this.setState({ locationActive: !this.state.locationActive });
   }
 
   removeSaved(event) {
@@ -156,8 +163,9 @@ export default class Post extends React.Component {
     if (!this.numberOfComments) {
       return (
       <>
+      {this.state.locationActive ? <Location postLocation={post.location} locationActive={this.locationActive} className={this.state.locationActive ? '' : 'hidden'}/> : <></>}
       <div className={this.state.deleteModalOpen ? '' : 'hidden'}>
-        <Delete noInternetPopUpHome={this.props.noInternetPopUpHome} routePath={this.props.routePath} getPosts={this.props.getPosts} post={post} deleteModalClose={this.deleteModalClose} findPost={this.props.findPost} deletedCommentStatus={this.props.deletedCommentStatus}/>
+      <Delete noInternetPopUpHome={this.props.noInternetPopUpHome} routePath={this.props.routePath} getPosts={this.props.getPosts} post={post} deleteModalClose={this.deleteModalClose} findPost={this.props.findPost} deletedCommentStatus={this.props.deletedCommentStatus}/>
       </div>
         <div data-aos="fade-up" data-aos-offset="40">
           <li className="post-entry">
@@ -214,7 +222,9 @@ export default class Post extends React.Component {
                               </tr>
                               <tr className="table-row1">
                                 <th scope="column" className={post.location ? 'table' : 'hidden'}>LOCATION</th>
-                                <td scope="column" className={post.location ? 'relative location-button table' : 'hidden'}>{post.location}</td>
+                                <td scope="column" className={post.location ? 'relative table' : 'hidden'}>
+                                  <button className="location-button" onClick={this.locationActive}>{post.location}</button>
+                                </td>
                               </tr>
                             </thead>
                           </table>
