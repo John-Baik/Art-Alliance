@@ -906,16 +906,16 @@ textarea,
   }
 
   .map-wrapper {
-    width: 50rem;
-    height: 81vh;
+    width: 39rem;
+    height: 22rem;
   }
 
   .exit-location-container {
-    width: 50rem;
+    width: 39rem;
   }
 
   .loading-map {
-    width: 50rem;
-    height: 81vh;
+    width: 39rem;
+    height: 22rem;
   }
 }
