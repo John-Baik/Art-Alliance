@@ -36,7 +36,7 @@ export default class Saved extends React.Component {
     if (this.state.errorPage) {
       return (
         <div className='home-page-container'>
-          <div className="home-page home-page-padding-top">
+          <div className="home-page-padding-top">
             <div className="flex justify-content-center">
               <div className="post-width flex column align-items">
                 <p data-aos="fade-right" className='empty-page roboto-font text-align-center'>Sorry, there was an error connecting to the network! Please check your internet connection and try again.</p>
