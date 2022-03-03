@@ -37,20 +37,18 @@ class Location extends React.Component {
   render() {
     if (this.state.errorPage) {
       return (
+
         <div className="modal-container">
           <div className="exit-location-container">
             <button className="exit-location-button" onClick={this.props.locationActive}>&times;</button>
           </div>
-          <div className='home-page-container loading-map'>
-            <div className="home-page">
-              <div className='home-margin'>
-                <div className="loading-container ">
-                  crap
-                </div>
-              </div>
+          <div className='location-component flex justify-content-center loading-map'>
+            <div className="map-wrapper no-min-width home-page flex align-items-center location-error-padding">
+              <p className="empty-page">Sorry, there was an error connecting to the network! Please check your internet connection and try again.</p>
             </div>
-          </div>
         </div>
+      </div>
+
       );
     } else if (!this.state.lat || !this.state.lng) {
       return (
@@ -59,9 +57,9 @@ class Location extends React.Component {
             <button className="exit-location-button" onClick={this.props.locationActive}>&times;</button>
           </div>
         <div className='home-page-container loading-map'>
-          <div className="home-page">
+          <div className="home-page no-min-width">
             <div className='home-margin'>
-              <div className="loading-container ">
+                <div className="loading-container loading-map-width">
                 <div className="loading-circle loader">
                 </div>
               </div>
@@ -96,5 +94,5 @@ class Location extends React.Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: ('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE')
+  apiKey: (process.env.GOOGLE_API_KEY)
 })(Location);

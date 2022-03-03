@@ -36,7 +36,7 @@ export default class Saved extends React.Component {
     if (this.state.errorPage) {
       return (
         <div className='home-page-container'>
-          <div className="home-page home-page-padding-top">
+          <div className="home-page-padding-top">
             <div className="flex justify-content-center">
               <div className="post-width flex column align-items">
                 <p data-aos="fade-right" className='empty-page roboto-font text-align-center'>Sorry, there was an error connecting to the network! Please check your internet connection and try again.</p>
@@ -48,7 +48,7 @@ export default class Saved extends React.Component {
     } else if (!this.state.savedPosts) {
       return (
         <div className='home-page-container'>
-          <div className="home-page">
+          <div>
             <div className='home-margin'>
               <div className="loading-container ">
                 <div className="loading-circle loader">
@@ -64,7 +64,7 @@ export default class Saved extends React.Component {
     ));
     return (
       <div className='home-page-container'>
-        <div className="home-page home-page-padding-top">
+        <div className="home-page-padding-top">
           <div className="flex justify-content-center">
             <div className="post-width flex column align-items">
               <a href="#" data-aos="zoom-in" data-aos-once="true" id="home-option" className={savedListItems.length === 0 ? 'roboto-font text-align-center' : 'hidden'}>Home</a>
