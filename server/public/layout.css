@@ -91,7 +91,11 @@
 
 .home-page {
   min-width: 100%;
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* min-height: 100vh; */
 }
 
 .home-page-padding-top {
@@ -279,6 +283,11 @@ ul {
   display: flex;
   height: 30rem;
   align-items: center;
+}
+
+.loading-map-width {
+  width: 91vw;
+  height: 81vh;
 }
 
 @media screen and (min-width: 974px) {

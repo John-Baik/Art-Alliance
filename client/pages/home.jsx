@@ -53,7 +53,7 @@ export default class Home extends React.Component {
     } else if (!this.state.posts) {
       return (
         <div className='home-page-container'>
-          <div className="home-page">
+          <div>
             <div className='home-margin'>
               <div className="loading-container ">
                 <div className="loading-circle loader">
@@ -69,7 +69,7 @@ export default class Home extends React.Component {
       ));
       return (
       <div className='home-page-container'>
-        <div className="home-page">
+        <div>
           <div className="add-post-container">
             <Create loggedInUserId={this.state.loggedInUserId} getPosts={this.getPosts} />
           </div>

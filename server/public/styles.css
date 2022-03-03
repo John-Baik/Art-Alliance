@@ -635,8 +635,8 @@ textarea,
 }
 
 .loading-map {
-  width: 50rem;
-  height: 31rem;
+  width: 90vw;
+  height: 81vh;
 }
 
 .exit-location-button {
@@ -662,6 +662,20 @@ textarea,
   justify-content: flex-end;
   width: 90vw;
   margin-bottom: 0.5rem;
+}
+
+.no-min-width {
+  min-width: 0;
+}
+
+.error-page-padding {
+  padding: 2rem;
+  padding-top: 0;
+}
+
+.location-error-padding {
+  padding: 0 3rem;
+  padding-top: 0;
 }
 
 @keyframes spin {
@@ -709,6 +723,11 @@ textarea,
 
   .navigation-symbol {
     font-size: 1.7rem;
+  }
+
+  .location-error-padding {
+    padding: 0 3rem;
+    padding-top: 0;
   }
 }
 
@@ -844,9 +863,6 @@ textarea,
   }
 
   /* //HOME// */
-  .home-page {
-    background-color: revert;
-  }
 
   .home-page-container {
     background-color: #dae0e6;
@@ -891,10 +907,15 @@ textarea,
 
   .map-wrapper {
     width: 50rem;
-    height: 31rem;
+    height: 81vh;
   }
 
   .exit-location-container {
     width: 50rem;
+  }
+
+  .loading-map {
+    width: 50rem;
+    height: 81vh;
   }
 }
