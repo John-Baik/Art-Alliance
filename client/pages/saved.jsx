@@ -1,5 +1,5 @@
 import React from 'react';
-import SavedPost from '../components/savedPost';
+import SavedPost from '../components/saved-post';
 import AOS from 'aos';
 
 export default class Saved extends React.Component {
