@@ -285,11 +285,6 @@ ul {
   align-items: center;
 }
 
-.loading-map-width {
-  width: 91vw;
-  height: 81vh;
-}
-
 @media screen and (min-width: 974px) {
   .header {
     margin: 1rem 0;

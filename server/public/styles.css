@@ -695,6 +695,11 @@ textarea,
   margin-top: 3rem;
 }
 
+.loading-map-width {
+  width: 91vw;
+  height: 81vh;
+}
+
 @media screen and (min-width: 328px) {
   .home-button {
     font-size: 1rem;
@@ -915,6 +920,11 @@ textarea,
   }
 
   .loading-map {
+    width: 39rem;
+    height: 22rem;
+  }
+
+  .loading-map-width {
     width: 39rem;
     height: 22rem;
   }

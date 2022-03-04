@@ -81,8 +81,8 @@ class Location extends React.Component {
                 lat: this.state.lat,
                 lng: this.state.lng
               }}>
-              <Marker onClick={this.onMarkerClick}
-                name={'Current location'} />
+                <Marker onClick={this.onMarkerClick}
+                  name={'Current location'} />
               </Map>
             </div>
           </div>
