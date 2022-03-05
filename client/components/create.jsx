@@ -152,6 +152,7 @@ export default class Create extends React.Component {
     const button = <button onClick={this.open} className="add-post-button">+</button>;
     const buttonTwo = <button className="add-post-button-modal">+</button>;
     const isActive = this.isButtonActive();
+    // console.log('create: ', this.state.startDate);
     AOS.init();
     if (this.state.errorPage) {
       return (
