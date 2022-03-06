@@ -161,6 +161,8 @@ export default class Post extends React.Component {
     const loggedInUserId = this.props.loggedInUserId;
     const createdAtFormatted = format(parseISO(post.createdAt), 'LLL dd, yyyy');
     if (!this.numberOfComments) {
+      // console.log(post.startDate, (format(parseISO(post.startDate), 'LLL dd, yyyy')));
+      // date is incorrect for some reason. FIX!
       return (
       <>
       {this.state.locationActive ? <Location postLocation={post.location} locationActive={this.locationActive} className={this.state.locationActive ? '' : 'hidden'}/> : <></>}
