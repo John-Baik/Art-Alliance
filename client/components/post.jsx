@@ -168,10 +168,9 @@ export default class Post extends React.Component {
     const createdAtFormatted = format(parseISO(post.createdAt), 'LLL dd, yyyy');
     if (!this.numberOfComments) {
       // const startDate = post.startDate;
-
       // const dt = new Date(startDate);
       // const date = dt.toUTCString();
-      // console.log(date);
+      // console.log(date, date[1]);
 
       return (
       <>
