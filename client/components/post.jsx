@@ -170,7 +170,9 @@ export default class Post extends React.Component {
       // const startDate = post.startDate;
       // const dt = new Date(startDate);
       // const date = dt.toUTCString();
-      // console.log(date, date[1]);
+      // const dateArray = date.split(' ');
+      // const startDateFinal = `${dateArray[2]} ${dateArray[1]}, ${dateArray[3]}`;
+      // console.log(startDateFinal);
 
       return (
       <>
