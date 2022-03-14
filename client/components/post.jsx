@@ -166,14 +166,13 @@ export default class Post extends React.Component {
     }
     const loggedInUserId = this.props.loggedInUserId;
     const createdAtFormatted = format(parseISO(post.createdAt), 'LLL dd, yyyy');
-    if (!this.numberOfComments) {
-      // const startDate = post.startDate;
-      // const dt = new Date(startDate);
-      // const date = dt.toUTCString();
-      // const dateArray = date.split(' ');
-      // const startDateFinal = `${dateArray[2]} ${dateArray[1]}, ${dateArray[3]}`;
-      // console.log(startDateFinal);
 
+    if (!this.numberOfComments) {
+      const startDate = post.startDate;
+      const dt = new Date(startDate);
+      const date = dt.toUTCString();
+      const dateArray = date.split(' ');
+      const startDateFinal = `${dateArray[2]} ${dateArray[1]}, ${dateArray[3]}`;
       return (
       <>
       {this.state.locationActive ? <Location postLocation={post.location} locationActive={this.locationActive} className={this.state.locationActive ? '' : 'hidden'}/> : <></>}
@@ -227,7 +226,7 @@ export default class Post extends React.Component {
                               </tr>
                               <tr className="table-row1">
                                 <th scope="column" className={post.startDate ? 'table' : 'hidden'}>DATE</th>
-                                  <td scope="column" className={post.startDate ? 'table' : 'hidden'}>{post.startDate ? format(parseISO(post.startDate), 'LLL dd, yyyy') : ''}</td>
+                                  <td scope="column" className={post.startDate ? 'table' : 'hidden'}>{post.startDate ? startDateFinal : ''}</td>
                               </tr>
                               <tr className="table-row1">
                                 <th scope="column" className={post.startTime ? 'table' : 'hidden'}>TIME</th>
