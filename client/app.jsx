@@ -10,7 +10,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedInUserId: 1,
+      loggedInUserId: 5,
       route: parseRoute(window.location.hash)
     };
   }

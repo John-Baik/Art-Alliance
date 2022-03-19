@@ -143,12 +143,6 @@ export default class Post extends React.Component {
       once: true
     });
     const post = this.props.post;
-    // const startDate = post.startDate;
-    // function formatDate(date) {
-    //   const dateObj = new Date(date);
-    //   console.log(dateObj.getUTCDate());
-    // }
-    // console.log(formatDate(startDate));
     if (!post.price) {
       post.price = '';
     }
@@ -166,7 +160,6 @@ export default class Post extends React.Component {
     }
     const loggedInUserId = this.props.loggedInUserId;
     const createdAtFormatted = format(parseISO(post.createdAt), 'LLL dd, yyyy');
-
     if (!this.numberOfComments) {
       const startDate = post.startDate;
       const dt = new Date(startDate);

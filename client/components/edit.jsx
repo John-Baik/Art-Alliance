@@ -8,7 +8,7 @@ export default class Edit extends React.Component {
     this.state = {
       post: this.props.post.post,
       price: this.props.post.price ? this.props.post.price : '',
-      startDate: this.props.post.startDate ? format(parseISO(this.props.post.startDate), 'yyyy-MM-dd') : '',
+      startDate: this.props.post.startDate,
       startTime: this.props.post.startTime ? this.props.post.startTime : '',
       endTime: this.props.post.endTime ? this.props.post.endTime : '',
       location: this.props.post.location ? this.props.post.location : '',
@@ -123,7 +123,12 @@ export default class Edit extends React.Component {
     const isActive = this.isButtonActive();
     const startTime = <input value={this.state.startTime} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime"></input>;
     const startTimeRequired = <input value={this.state.startTime} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime" required></input>;
-
+    const dt = new Date(this.state.startDate);
+    const monthNumber = dt.getMonth();
+    const date = dt.toUTCString();
+    const dateArray = date.split(' ');
+    const zeroPad = (num, places) => String(monthNumber + 1).padStart(places, '0');
+    const startDateFinal = `${dateArray[3]}-${zeroPad(5, 2)}-${dateArray[1]}`;
     return (
     <>
     <div className='modal-container'>
@@ -158,7 +163,7 @@ export default class Edit extends React.Component {
                         <label className='label-title' htmlFor="date-box">Date</label>
                       </div>
                       <div>
-                        <input value={this.state.startDate} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="date-box input-box-border" type="date" id="date-box" name="startDate"></input>
+                        <input value={this.state.startDate ? startDateFinal : ''} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="date-box input-box-border" type="date" id="date-box" name="startDate"></input>
                       </div>
                     </div>
                   </div>
