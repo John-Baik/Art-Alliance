@@ -152,7 +152,6 @@ export default class Create extends React.Component {
     const button = <button onClick={this.open} className="add-post-button">+</button>;
     const buttonTwo = <button className="add-post-button-modal">+</button>;
     const isActive = this.isButtonActive();
-    // console.log('create: ', this.state.startDate);
     AOS.init();
     if (this.state.errorPage) {
       return (
@@ -245,7 +244,9 @@ export default class Create extends React.Component {
                       <div className="create-buttons">
                         <button type="button" onClick={this.close} className="cancel">Cancel</button>
                         <button onClick={() => {
-                          if (this.state.location) {
+                          if (this.state.endTime && !this.state.startTime) {
+                            alert('Start Time Input is missing');
+                          } else if (this.state.location) {
                             this.testCoordinates();
                           } else {
                             this.handleSubmit();
