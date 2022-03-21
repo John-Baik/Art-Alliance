@@ -196,9 +196,9 @@ export default class Post extends React.Component {
                           <Dropdown editModal={this.editModal} deleteModalOpen={this.deleteModalOpen} />
                         </div>
                       </div>
-                      <div className={post.userId === loggedInUserId ? 'hidden' : ''}>
+                      <button className={post.userId === loggedInUserId ? 'hidden' : 'save-button'}>
                         <i onClick={this.state.bookmarkActive ? this.removeSaved : this.addSaved} className={this.state.bookmarkActive ? 'fas fa-bookmark navigation-symbol bookmark-active' : 'far fa-bookmark navigation-symbol bookmark-inactive'}></i>
-                      </div>
+                      </button>
                     </OutsideClickHandler>
                     <div className={this.state.editModalOpen ? '' : 'hidden'}>
                       <Edit noInternetPopUpHome={this.props.noInternetPopUpHome} noInternetPopUp={this.props.noInternetPopUp} routePath={this.props.routePath} findPost={this.props.findPost} closeEditModal={this.closeEditModal} editModal={this.editModal} post={post} getPosts={this.props.getPosts} />

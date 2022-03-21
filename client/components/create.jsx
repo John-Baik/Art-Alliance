@@ -154,16 +154,10 @@ export default class Create extends React.Component {
     const isActive = this.isButtonActive();
     AOS.init();
     if (this.state.errorPage) {
+      this.props.getPosts();
       return (
-        <div className='home-page-container'>
-          <div className="home-page home-page-padding-top">
-            <div className="flex justify-content-center">
-              <div className="post-width flex column align-items">
-                <p data-aos="fade-right" className='empty-page roboto-font text-align-center'>Sorry, there was an error connecting to the network! Please check your internet connection and try again.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <>
+        </>
       );
     } else if (this.state.isOpen) {
       const startTime = <input value={this.state.startTime} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime"></input>;
