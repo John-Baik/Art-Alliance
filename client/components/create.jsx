@@ -98,16 +98,20 @@ export default class Create extends React.Component {
 
   testCoordinates() {
     const address = this.state.location;
-    Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
-    Geocode.fromAddress(address).then(
-      response => {
-        this.handleSubmit();
-      },
-      error => {
-        console.error(error);
-        alert('Invalid Location');
-      }
-    );
+    if (navigator.onLine) {
+      Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
+      Geocode.fromAddress(address).then(
+        response => {
+          this.handleSubmit();
+        },
+        error => {
+          console.error(error);
+          alert('Invalid Location');
+        }
+      );
+    } else {
+      this.props.getPosts();
+    }
   }
 
   handleSubmit(event) {

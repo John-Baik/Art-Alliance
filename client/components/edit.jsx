@@ -72,21 +72,26 @@ export default class Edit extends React.Component {
 
   testCoordinates() {
     const address = this.state.location;
-    if (address) {
-      Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
-      Geocode.fromAddress(address).then(
-        response => {
+    if (navigator.onLine) {
+      if (address) {
+        Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
+        Geocode.fromAddress(address).then(
+          response => {
           // console.log(response);
-          this.props.editModal();
-          this.handleUpdate();
-        },
-        error => {
-          console.error(error);
-          alert('Invalid Location');
-        }
-      );
+            this.props.editModal();
+            this.handleUpdate();
+          },
+          error => {
+            console.error(error);
+            alert('Invalid Location');
+          }
+        );
+      } else {
+        this.handleUpdate();
+      }
     } else {
-      this.handleUpdate();
+      this.props.getPosts();
+
     }
   }
 
