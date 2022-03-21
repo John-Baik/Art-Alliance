@@ -76,13 +76,11 @@ export default class savedPost extends React.Component {
     const numberOfComments = this.state.numberOfComments;
     const savedPost = this.props.savedPost;
     const createdAtFormatted = format(parseISO(savedPost.createdAt), 'LLL dd, yyyy');
-
     const startDate = savedPost.startDate;
     const dt = new Date(startDate);
     const date = dt.toUTCString();
     const dateArray = date.split(' ');
     const startDateFinal = `${dateArray[2]} ${dateArray[1]}, ${dateArray[3]}`;
-
     return (
       <>
       { this.state.locationActive ? <Location postLocation={savedPost.location} locationActive={this.locationActive} className={this.state.locationActive ? '' : 'hidden'} /> : <></> }
