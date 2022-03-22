@@ -19,7 +19,9 @@ export default class Create extends React.Component {
       startDateInput: false,
       locationInput: false,
       startTimeInput: false,
-      endTimeInput: false
+      endTimeInput: false,
+      invalidLocation: false,
+      invalidTime: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,6 +32,8 @@ export default class Create extends React.Component {
     this.isButtonActive = this.isButtonActive.bind(this);
     this.isInputActive = this.isInputActive.bind(this);
     this.testCoordinates = this.testCoordinates.bind(this);
+    this.invalidTime = this.invalidTime.bind(this);
+    this.invalidLocation = this.invalidLocation.bind(this);
   }
 
   open() {
@@ -44,7 +48,9 @@ export default class Create extends React.Component {
       startTime: '',
       endTime: '',
       location: '',
-      isOpen: false
+      isOpen: false,
+      invalidLocation: false,
+      invalidTime: false
     });
   }
 
@@ -98,15 +104,19 @@ export default class Create extends React.Component {
 
   testCoordinates() {
     const address = this.state.location;
+    this.invalidTime();
     if (navigator.onLine) {
       Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
       Geocode.fromAddress(address).then(
         response => {
-          this.handleSubmit();
+          if (!this.state.invalidTime) {
+            this.handleSubmit();
+          }
+          this.setState({ invalidLocation: false });
         },
         error => {
           console.error(error);
-          alert('Invalid Location');
+          this.setState({ invalidLocation: true });
         }
       );
     } else {
@@ -114,7 +124,24 @@ export default class Create extends React.Component {
     }
   }
 
+  invalidTime() {
+    if ((this.state.startTime && this.state.endTime) || (!this.state.startTime && !this.state.endTime) || (this.state.startTime && !this.state.endTime)) {
+      this.setState({ invalidTime: false });
+    } else {
+      this.setState({ invalidTime: true });
+    }
+  }
+
+  invalidLocation() {
+    if (!this.state.location) {
+      this.setState({ invalidLocation: false });
+    } else {
+      this.testCoordinates();
+    }
+  }
+
   handleSubmit(event) {
+    this.invalidTime();
     if (!this.state.locationError) {
       fetch(`/api/posts/${this.props.loggedInUserId}`, {
         method: 'POST',
@@ -133,7 +160,9 @@ export default class Create extends React.Component {
             startTime: '',
             endTime: '',
             location: '',
-            isOpen: false
+            isOpen: false,
+            invalidLocation: false,
+            invalidTime: false
           });
         },
         error => {
@@ -185,47 +214,46 @@ export default class Create extends React.Component {
                         </div>
                         <textarea className="post-textbox input-box-border post-padding-top" value={this.state.post} onChange={this.handleChange} name="post" placeholder="Description" id="post-title" required></textarea>
                       </div>
-                      <div className="">
-                        <div className="">
-                          <div className="">
-                            <div className="price-date-time-container label-gap">
-                              <div className="price-date-container flex price-date-gap">
-                                <div className={this.state.priceInput || this.state.price ? '' : 'light-opacity'}>
-                                  <div className="label-margin flex align-items">
-                                    <label className='label-title' htmlFor="price-box">Price</label>
-                                  </div>
-                                  <div className="flex">
-                                    <input value={this.state.price} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="price-box input-box-border" placeholder="0.00" type="number" id="price-box" name="price" step="0.01"></input>
-                                  </div>
-                                </div>
-                                <div className={this.state.startDateInput || this.state.startDate ? '' : 'light-opacity'}>
-                                  <div className="label-margin flex align-items">
-                                    <label className='label-title' htmlFor="date-box">Date</label>
-                                  </div>
-                                  <div className="flex">
-                                    <input value={this.state.startDate} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="date-box input-box-border" type="date" id="date-box" name="startDate"></input>
-                                  </div>
+                      <div>
+                        <div className="price-date-time-container label-gap">
+                          <div className="price-date-container flex price-date-gap">
+                            <div className={this.state.priceInput || this.state.price ? '' : 'light-opacity'}>
+                              <div className="label-margin flex align-items">
+                                <label className='label-title' htmlFor="price-box">Price</label>
+                              </div>
+                              <div className="flex">
+                                <input value={this.state.price} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="price-box input-box-border" placeholder="0.00" type="number" id="price-box" name="price" step="0.01"></input>
+                              </div>
+                            </div>
+                            <div className={this.state.startDateInput || this.state.startDate ? '' : 'light-opacity'}>
+                              <div className="label-margin flex align-items">
+                                <label className='label-title' htmlFor="date-box">Date</label>
+                              </div>
+                              <div className="flex">
+                                <input value={this.state.startDate} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="date-box input-box-border" type="date" id="date-box" name="startDate"></input>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="time-container flex">
+                            <div className=''>
+                              <div className="label-margin time-margin flex align-items">
+                                <label className={this.state.startTimeInput || this.state.endTimeInput || this.state.startTime || this.state.endTime ? 'label-title' : 'light-opacity label-title'} htmlFor={!this.state.startTime ? 'start-box' : 'end-box'}>Time</label>
+                                <div className="flex align-items-center">
+                                  <p className={this.state.invalidTime ? 'invalid start-time-missing' : 'hidden'}>Start Time Missing</p>
                                 </div>
                               </div>
-                              <div className="time-container flex">
-                                <div className=''>
-                                  <div className="label-margin time-margin flex align-items">
-                                  <label className={this.state.startTimeInput || this.state.endTimeInput || this.state.startTime || this.state.endTime ? 'label-title' : 'light-opacity label-title'} htmlFor={!this.state.startTime ? 'start-box' : 'end-box'}>Time</label>
-                                  </div>
-                                <div className={this.state.startTimeInput || this.state.startTime ? 'start-label-box' : 'light-opacity start-label-box'}>
-                                  <label className='start-end-label' htmlFor="start-box">Start</label>
-                                  {this.state.endTime ? startTimeRequired : startTime}
-                                  </div>
-                                </div>
-                                <div className={this.state.endTimeInput || this.state.endTime ? 'placeholder' : 'light-opacity placeholder'}>
-                                  <div className="label-margin time-margin flex">
-                                    <label className="label-title invisible">Test</label>
-                                  </div>
-                                  <div className="start-label-box flex">
-                                    <label className='start-end-label' htmlFor='end-box'>End</label>
-                                    <input value={this.state.endTime} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="end-box" name="endTime"></input>
-                                  </div>
-                                </div>
+                            <div className={this.state.startTimeInput || this.state.startTime ? 'start-label-box' : 'light-opacity start-label-box'}>
+                              <label className='start-end-label' htmlFor="start-box">Start</label>
+                              {this.state.endTime ? startTimeRequired : startTime}
+                              </div>
+                            </div>
+                            <div className={this.state.endTimeInput || this.state.endTime ? 'placeholder' : 'light-opacity placeholder'}>
+                              <div className="label-margin time-margin flex">
+                                <label className="label-title invisible">Test</label>
+                              </div>
+                              <div className="start-label-box flex">
+                                <label className='start-end-label' htmlFor='end-box'>End</label>
+                                <input value={this.state.endTime} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="end-box" name="endTime"></input>
                               </div>
                             </div>
                           </div>
@@ -233,6 +261,7 @@ export default class Create extends React.Component {
                         <div className={this.state.locationInput || this.state.location ? 'location-container' : 'light-opacity location-container'}>
                           <div className="label-margin flex align-items">
                             <label className='label-title' htmlFor="location-box">Location</label>
+                            <p className={this.state.invalidLocation ? 'invalid' : 'hidden'}>Invalid Location</p>
                           </div>
                           <div className="flex">
                             <input value={this.state.location} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="location-box input-box-border" type="textbox" placeholder="Address" name="location" id="location-box"></input>
@@ -243,7 +272,12 @@ export default class Create extends React.Component {
                         <button type="button" onClick={this.close} className="cancel">Cancel</button>
                         <button onClick={() => {
                           if (this.state.endTime && !this.state.startTime) {
-                            alert('Start Time Input is missing');
+                            this.invalidTime();
+                            if (this.state.location) {
+                              this.testCoordinates();
+                            } else {
+                              this.invalidLocation();
+                            }
                           } else if (this.state.location) {
                             this.testCoordinates();
                           } else {
