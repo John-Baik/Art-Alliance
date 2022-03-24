@@ -16,13 +16,17 @@ export default class Edit extends React.Component {
       startDateInput: false,
       locationInput: false,
       startTimeInput: false,
-      endTimeInput: false
+      endTimeInput: false,
+      invalidTime: false,
+      invalidLocation: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.isButtonActive = this.isButtonActive.bind(this);
     this.handleReset = this.handleReset.bind(this);
     this.isInputActive = this.isInputActive.bind(this);
+    this.invalidTime = this.invalidTime.bind(this);
+    this.invalidLocation = this.invalidLocation.bind(this);
   }
 
   isButtonActive() {
@@ -70,20 +74,32 @@ export default class Edit extends React.Component {
     }
   }
 
+  invalidTime() {
+    if ((this.state.startTime && this.state.endTime) || (!this.state.startTime && !this.state.endTime) || (this.state.startTime && !this.state.endTime)) {
+      this.setState({ invalidTime: false });
+    } else {
+      this.setState({ invalidTime: true });
+    }
+  }
+
+  invalidLocation() {
+    this.setState({ invalidLocation: false });
+  }
+
   testCoordinates() {
     const address = this.state.location;
+    this.invalidTime();
     if (navigator.onLine) {
       if (address) {
         Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
         Geocode.fromAddress(address).then(
           response => {
-          // console.log(response);
             this.props.editModal();
             this.handleUpdate();
           },
           error => {
             console.error(error);
-            alert('Invalid Location');
+            this.setState({ invalidLocation: true });
           }
         );
       } else {
@@ -98,6 +114,7 @@ export default class Edit extends React.Component {
   handleUpdate(event) {
     const post = this.props.post;
     const routePath = this.props.routePath;
+    this.invalidTime();
     fetch(`/api/posts/${post.postId}`, {
       method: 'PATCH',
       headers: {
@@ -176,6 +193,9 @@ export default class Edit extends React.Component {
                     <div className="">
                       <div className="label-margin time-margin flex align-items">
                         <label className={this.state.startTimeInput || this.state.endTimeInput || this.state.startTime || this.state.endTime ? 'label-title' : 'light-opacity label-title'} htmlFor={!this.state.startTime ? 'start-box' : 'end-box'}>Time</label>
+                        <div className="flex align-items-center">
+                          <p className={this.state.invalidTime ? 'invalid start-time-missing' : 'hidden'}>Start Time Missing</p>
+                        </div>
                       </div>
                       <div className={this.state.startTimeInput || this.state.startTime ? 'start-label-box' : 'light-opacity start-label-box'}>
                         <label className='start-end-label' htmlFor="start-box">Start</label>
@@ -196,6 +216,7 @@ export default class Edit extends React.Component {
                 <div className={this.state.locationInput || this.state.location ? 'location-container' : 'light-opacity location-container'}>
                   <div className="label-margin flex align-items">
                     <label className='label-title' htmlFor="location-box">Location</label>
+                    <p className={this.state.invalidLocation ? 'invalid' : 'hidden'}>Invalid Location</p>
                   </div>
                   <div className="">
                     <input value={this.state.location} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="location-box input-box-border" type="textbox" placeholder="Address" name="location" id="location-box"></input>
@@ -210,7 +231,12 @@ export default class Edit extends React.Component {
                   type="button" className="cancel">Cancel</button>
                 <button onClick={() => {
                   if (this.state.endTime && !this.state.startTime) {
-                    alert('Start Time Input is missing');
+                    this.invalidTime();
+                    if (this.state.location) {
+                      this.testCoordinates();
+                    } else {
+                      this.invalidLocation();
+                    }
                   } else if (this.state.location) {
                     this.testCoordinates();
                   } else {

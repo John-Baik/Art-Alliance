@@ -15,7 +15,7 @@ insert into "posts"
 
 insert into "comments"
   ("commentText", "postId", "userId")
-  values ('Test comment', '2', '1'),
+  values ('I may be available for this. I will get back to you', '2', '1'),
   ('Hi! I may be available for this. Please email me at danwos@gmail.com', '2', '2'),
   ('This  sounds awesome! Would love to chat with you about this event!', '2', '3'),
   ('Best of luck finding someone! Sounds very fun!', '1', '2');

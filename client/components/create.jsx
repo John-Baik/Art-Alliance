@@ -133,11 +133,7 @@ export default class Create extends React.Component {
   }
 
   invalidLocation() {
-    if (!this.state.location) {
-      this.setState({ invalidLocation: false });
-    } else {
-      this.testCoordinates();
-    }
+    this.setState({ invalidLocation: false });
   }
 
   handleSubmit(event) {
