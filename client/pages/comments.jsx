@@ -1,7 +1,7 @@
 import React from 'react';
 import AOS from 'aos';
 import Post from '../components/post';
-import SingleComment from '../components/singleComment';
+import SingleComment from '../components/single-comment';
 
 export default class Comments extends React.Component {
   constructor(props) {

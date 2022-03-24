@@ -8,7 +8,7 @@ export default class Edit extends React.Component {
     this.state = {
       post: this.props.post.post,
       price: this.props.post.price ? this.props.post.price : '',
-      startDate: this.props.post.startDate ? format(parseISO(this.props.post.startDate), 'yyyy-MM-dd') : '',
+      startDate: this.props.post.startDate,
       startTime: this.props.post.startTime ? this.props.post.startTime : '',
       endTime: this.props.post.endTime ? this.props.post.endTime : '',
       location: this.props.post.location ? this.props.post.location : '',
@@ -16,13 +16,17 @@ export default class Edit extends React.Component {
       startDateInput: false,
       locationInput: false,
       startTimeInput: false,
-      endTimeInput: false
+      endTimeInput: false,
+      invalidTime: false,
+      invalidLocation: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.isButtonActive = this.isButtonActive.bind(this);
     this.handleReset = this.handleReset.bind(this);
     this.isInputActive = this.isInputActive.bind(this);
+    this.invalidTime = this.invalidTime.bind(this);
+    this.invalidLocation = this.invalidLocation.bind(this);
   }
 
   isButtonActive() {
@@ -70,29 +74,47 @@ export default class Edit extends React.Component {
     }
   }
 
+  invalidTime() {
+    if ((this.state.startTime && this.state.endTime) || (!this.state.startTime && !this.state.endTime) || (this.state.startTime && !this.state.endTime)) {
+      this.setState({ invalidTime: false });
+    } else {
+      this.setState({ invalidTime: true });
+    }
+  }
+
+  invalidLocation() {
+    this.setState({ invalidLocation: false });
+  }
+
   testCoordinates() {
     const address = this.state.location;
-    if (address) {
-      Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
-      Geocode.fromAddress(address).then(
-        response => {
-          // console.log(response);
-          this.props.editModal();
-          this.handleUpdate();
-        },
-        error => {
-          console.error(error);
-          alert('Invalid Location');
-        }
-      );
-    } else {
-      this.handleUpdate();
+    if (navigator.onLine) {
+      if (address) {
+        Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
+        Geocode.fromAddress(address).then(
+          response => {
+            if (!this.state.invalidTime) {
+              this.props.editModal();
+              this.handleUpdate();
+            }
+          },
+          error => {
+            console.error(error);
+            this.setState({ invalidLocation: true });
+          }
+        );
+
+      } else {
+        this.props.getPosts();
+      }
     }
   }
 
   handleUpdate(event) {
     const post = this.props.post;
     const routePath = this.props.routePath;
+    this.invalidTime();
+    this.invalidLocation();
     fetch(`/api/posts/${post.postId}`, {
       method: 'PATCH',
       headers: {
@@ -123,8 +145,14 @@ export default class Edit extends React.Component {
     const isActive = this.isButtonActive();
     const startTime = <input value={this.state.startTime} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime"></input>;
     const startTimeRequired = <input value={this.state.startTime} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="start-end-time-box input-box-border" type="time" id="start-box" name="startTime" required></input>;
+    const dt = new Date(this.state.startDate);
+    const monthNumber = dt.getMonth();
+    const date = dt.toUTCString();
+    const dateArray = date.split(' ');
+    const zeroPad = (num, places) => String(monthNumber + 1).padStart(places, '0');
+    const startDateFinal = `${dateArray[3]}-${zeroPad(5, 2)}-${dateArray[1]}`;
     return (
-      <>
+    <>
     <div className='modal-container'>
       <div className="container">
         <div className="create-header">
@@ -157,7 +185,7 @@ export default class Edit extends React.Component {
                         <label className='label-title' htmlFor="date-box">Date</label>
                       </div>
                       <div>
-                        <input value={this.state.startDate} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="date-box input-box-border" type="date" id="date-box" name="startDate"></input>
+                        <input value={this.state.startDate ? startDateFinal : ''} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="date-box input-box-border" type="date" id="date-box" name="startDate"></input>
                       </div>
                     </div>
                   </div>
@@ -165,6 +193,9 @@ export default class Edit extends React.Component {
                     <div className="">
                       <div className="label-margin time-margin flex align-items">
                         <label className={this.state.startTimeInput || this.state.endTimeInput || this.state.startTime || this.state.endTime ? 'label-title' : 'light-opacity label-title'} htmlFor={!this.state.startTime ? 'start-box' : 'end-box'}>Time</label>
+                        <div className="flex align-items-center">
+                          <p className={this.state.invalidTime ? 'invalid start-time-missing' : 'hidden'}>Start Time Missing</p>
+                        </div>
                       </div>
                       <div className={this.state.startTimeInput || this.state.startTime ? 'start-label-box' : 'light-opacity start-label-box'}>
                         <label className='start-end-label' htmlFor="start-box">Start</label>
@@ -185,6 +216,7 @@ export default class Edit extends React.Component {
                 <div className={this.state.locationInput || this.state.location ? 'location-container' : 'light-opacity location-container'}>
                   <div className="label-margin flex align-items">
                     <label className='label-title' htmlFor="location-box">Location</label>
+                    <p className={this.state.invalidLocation ? 'invalid' : 'hidden'}>Invalid Location</p>
                   </div>
                   <div className="">
                     <input value={this.state.location} onFocus={this.isInputActive} onBlur={this.isInputActive} onChange={this.handleChange} className="location-box input-box-border" type="textbox" placeholder="Address" name="location" id="location-box"></input>
@@ -199,11 +231,16 @@ export default class Edit extends React.Component {
                   type="button" className="cancel">Cancel</button>
                 <button onClick={() => {
                   if (this.state.endTime && !this.state.startTime) {
-                    alert('Start Time Input is missing');
+                    this.invalidTime();
+                    if (this.state.location) {
+                      this.testCoordinates();
+                    } else {
+                      this.invalidLocation();
+                    }
                   } else if (this.state.location) {
+                    this.invalidTime();
                     this.testCoordinates();
                   } else {
-
                     this.handleUpdate();
                     this.props.editModal();
                   }

@@ -76,6 +76,11 @@ export default class savedPost extends React.Component {
     const numberOfComments = this.state.numberOfComments;
     const savedPost = this.props.savedPost;
     const createdAtFormatted = format(parseISO(savedPost.createdAt), 'LLL dd, yyyy');
+    const startDate = savedPost.startDate;
+    const dt = new Date(startDate);
+    const date = dt.toUTCString();
+    const dateArray = date.split(' ');
+    const startDateFinal = `${dateArray[2]} ${dateArray[1]}, ${dateArray[3]}`;
     return (
       <>
       { this.state.locationActive ? <Location postLocation={savedPost.location} locationActive={this.locationActive} className={this.state.locationActive ? '' : 'hidden'} /> : <></> }
@@ -111,7 +116,7 @@ export default class savedPost extends React.Component {
                             </tr>
                             <tr className="table-row1">
                               <th scope="column" className={savedPost.startDate ? 'table' : 'hidden'}>DATE</th>
-                              <td scope="column" className={savedPost.startDate ? 'table' : 'hidden'}>{savedPost.startDate ? format(parseISO(savedPost.startDate), 'LLL dd, yyyy') : ''}</td>
+                                <td scope="column" className={savedPost.startDate ? 'table' : 'hidden'}>{savedPost.startDate ? startDateFinal : ''}</td>
                             </tr>
                             <tr className="table-row1">
                               <th scope="column" className={savedPost.startTime ? 'table' : 'hidden'}>TIME</th>

@@ -43,7 +43,7 @@ export default class Home extends React.Component {
                     <p>Saved</p>
                   </a>
                 </div>
-                <div className="symbol-container">
+                <div className="hidden symbol-container">
                   <a href='#messages' className="symbol-container relative roboto-font">
                     <i className={routePath === 'messages' ? 'fas fa-comment-alt navigation-symbol' : 'far fa-comment-alt navigation-symbol'}></i>
                     <p>Messages</p>
@@ -70,7 +70,7 @@ export default class Home extends React.Component {
                   <p>Saved</p>
                 </a>
               </div>
-              <div className="symbol-container navigation-mobile roboto-font">
+              <div className="hidden symbol-container navigation-mobile roboto-font">
                 <a href='#messages' className="symbol-container relative">
                   <i className={routePath === 'messages' ? 'fas fa-comment-alt navigation-symbol' : 'far fa-comment-alt navigation-symbol'}></i>
                   <p>Messages</p>

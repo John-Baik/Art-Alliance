@@ -161,6 +161,11 @@ export default class Post extends React.Component {
     const loggedInUserId = this.props.loggedInUserId;
     const createdAtFormatted = format(parseISO(post.createdAt), 'LLL dd, yyyy');
     if (!this.numberOfComments) {
+      const startDate = post.startDate;
+      const dt = new Date(startDate);
+      const date = dt.toUTCString();
+      const dateArray = date.split(' ');
+      const startDateFinal = `${dateArray[2]} ${dateArray[1]}, ${dateArray[3]}`;
       return (
       <>
       {this.state.locationActive ? <Location postLocation={post.location} locationActive={this.locationActive} className={this.state.locationActive ? '' : 'hidden'}/> : <></>}
@@ -191,9 +196,9 @@ export default class Post extends React.Component {
                           <Dropdown editModal={this.editModal} deleteModalOpen={this.deleteModalOpen} />
                         </div>
                       </div>
-                      <div className={post.userId === loggedInUserId ? 'hidden' : ''}>
+                      <button className={post.userId === loggedInUserId ? 'hidden' : 'save-button'}>
                         <i onClick={this.state.bookmarkActive ? this.removeSaved : this.addSaved} className={this.state.bookmarkActive ? 'fas fa-bookmark navigation-symbol bookmark-active' : 'far fa-bookmark navigation-symbol bookmark-inactive'}></i>
-                      </div>
+                      </button>
                     </OutsideClickHandler>
                     <div className={this.state.editModalOpen ? '' : 'hidden'}>
                       <Edit noInternetPopUpHome={this.props.noInternetPopUpHome} noInternetPopUp={this.props.noInternetPopUp} routePath={this.props.routePath} findPost={this.props.findPost} closeEditModal={this.closeEditModal} editModal={this.editModal} post={post} getPosts={this.props.getPosts} />
@@ -214,7 +219,7 @@ export default class Post extends React.Component {
                               </tr>
                               <tr className="table-row1">
                                 <th scope="column" className={post.startDate ? 'table' : 'hidden'}>DATE</th>
-                                  <td scope="column" className={post.startDate ? 'table' : 'hidden'}>{post.startDate ? format(parseISO(post.startDate), 'LLL dd, yyyy') : ''}</td>
+                                  <td scope="column" className={post.startDate ? 'table' : 'hidden'}>{post.startDate ? startDateFinal : ''}</td>
                               </tr>
                               <tr className="table-row1">
                                 <th scope="column" className={post.startTime ? 'table' : 'hidden'}>TIME</th>
@@ -246,5 +251,4 @@ export default class Post extends React.Component {
       );
     }
   }
-
 }

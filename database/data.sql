@@ -1,6 +1,6 @@
 insert into "users"
   ("username", "password")
-  values ('John Baik', 'temp'), ('Bailey Yu', 'temp2'), ('Nicholas Prodehl', 'temp3'),
+  values ('Demo User', 'temp'), ('Bailey Yu', 'temp2'), ('Nicholas Prodehl', 'temp3'),
   ('Angela Nan', 'temp4'), ('Gustavo Ayala', 'temp5') ;
 
 insert into "posts"
@@ -15,7 +15,7 @@ insert into "posts"
 
 insert into "comments"
   ("commentText", "postId", "userId")
-  values ('Test comment', '2', '1'),
-  ('Test Comment 2', '2', '2'),
-  ('Test Comment 3', '2', '3'),
-  ('Test Comment 4', '1', '2');
+  values ('I may be available for this. I will get back to you', '2', '1'),
+  ('Hi! I may be available for this. Please email me at danwos@gmail.com', '2', '2'),
+  ('This  sounds awesome! Would love to chat with you about this event!', '2', '3'),
+  ('Best of luck finding someone! Sounds very fun!', '1', '2');

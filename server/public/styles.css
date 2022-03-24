@@ -200,7 +200,6 @@ h1 {
   color: gray;
   width: 3.5rem;
   text-align: center;
-  cursor: pointer;
 }
 
 .add-post-button {
@@ -509,8 +508,8 @@ textarea,
 }
 
 .loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
   border-radius: 50%;
   width: 8rem;
   height: 8rem;
@@ -564,11 +563,6 @@ textarea,
   color: black;
   border: black solid 2px;
 }
-
-/* .comment-button-spacing {
-  padding-bottom: 2rem;
-  padding-top: 0.5rem;
-} */
 
 .background {
   background-color: #dae0e6;
@@ -676,6 +670,23 @@ textarea,
 .location-error-padding {
   padding: 0 3rem;
   padding-top: 0;
+}
+
+.save-button {
+  border: none;
+  background-color: transparent;
+}
+
+.invalid {
+  margin: 0;
+  color: red;
+  font-family: Roboto, sans-serif;
+  font-size: 0.8rem;
+  padding-left: 0.5rem;
+}
+
+.start-time-missing {
+  position: fixed;
 }
 
 @keyframes spin {

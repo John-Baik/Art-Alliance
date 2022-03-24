@@ -1,6 +1,5 @@
 import React from 'react';
 import Home from './pages/home';
-
 import Saved from './pages/saved';
 import Comments from './pages/comments';
 import Messages from './pages/messages';
@@ -11,18 +10,12 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedInUserId: 2,
+      loggedInUserId: 1,
       route: parseRoute(window.location.hash)
     };
   }
 
   componentDidMount() {
-    /**
-     * Listen for hash change events on the window object
-     * Each time the window.location.hash changes, parse
-     * it with the parseRoute() function and update state
-     */
-
     window.addEventListener('hashchange', event => {
       this.setState({ route: parseRoute(window.location.hash) });
     });
