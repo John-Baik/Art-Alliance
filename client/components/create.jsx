@@ -138,43 +138,43 @@ export default class Create extends React.Component {
 
   handleSubmit(event) {
     this.invalidTime();
-    if (!this.state.locationError) {
-      fetch(`/api/posts/${this.props.loggedInUserId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(this.state)
-      })
-        .then(response => response.json())
-        .then(() => {
-          this.props.getPosts();
-          this.setState({
-            post: '',
-            price: '',
-            startDate: '',
-            startTime: '',
-            endTime: '',
-            location: '',
-            isOpen: false,
-            invalidLocation: false,
-            invalidTime: false
-          });
-        },
-        error => {
-          this.setState({
-            post: '',
-            price: '',
-            startDate: '',
-            startTime: '',
-            endTime: '',
-            location: '',
-            isOpen: false,
-            errorPage: true
-          });
-          console.error(error);
+
+    fetch(`/api/posts/${this.props.loggedInUserId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    })
+      .then(response => response.json())
+      .then(() => {
+        this.props.getPosts();
+        this.setState({
+          post: '',
+          price: '',
+          startDate: '',
+          startTime: '',
+          endTime: '',
+          location: '',
+          isOpen: false,
+          invalidLocation: false,
+          invalidTime: false
         });
-    }
+      },
+      error => {
+        this.setState({
+          post: '',
+          price: '',
+          startDate: '',
+          startTime: '',
+          endTime: '',
+          location: '',
+          isOpen: false,
+          errorPage: true
+        });
+        console.error(error);
+      });
+
   }
 
   render() {

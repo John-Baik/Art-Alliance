@@ -88,26 +88,25 @@ export default class Edit extends React.Component {
 
   testCoordinates() {
     const address = this.state.location;
-    this.invalidTime();
     if (navigator.onLine) {
       if (address) {
         Geocode.setApiKey('AIzaSyBj9V_RJhLq9WQJOZccmLZKM-pymhhpnfE');
         Geocode.fromAddress(address).then(
           response => {
-            this.props.editModal();
-            this.handleUpdate();
+            if (!this.state.invalidTime) {
+              this.props.editModal();
+              this.handleUpdate();
+            }
           },
           error => {
             console.error(error);
             this.setState({ invalidLocation: true });
           }
         );
-      } else {
-        this.handleUpdate();
-      }
-    } else {
-      this.props.getPosts();
 
+      } else {
+        this.props.getPosts();
+      }
     }
   }
 
@@ -115,6 +114,7 @@ export default class Edit extends React.Component {
     const post = this.props.post;
     const routePath = this.props.routePath;
     this.invalidTime();
+    this.invalidLocation();
     fetch(`/api/posts/${post.postId}`, {
       method: 'PATCH',
       headers: {
@@ -238,6 +238,7 @@ export default class Edit extends React.Component {
                       this.invalidLocation();
                     }
                   } else if (this.state.location) {
+                    this.invalidTime();
                     this.testCoordinates();
                   } else {
                     this.handleUpdate();
