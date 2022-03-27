@@ -4,24 +4,28 @@ A full stack web application for employers who want to find freelancers for hire
 
 A brief paragraph explaining why you wanted to build this project.
 
-https://art-alliance.herokuapp.com/
 
 
-A list of technologies used to build the project, including databases, languages, libraries, and frameworks.
-Technologies Used
-React.js
-Webpack
-Node.js
-Express.js
-PostgreSQL
-JavaScript
-HTML5
-CSS3
-Babel
-Heroku
-AOS Library
-Geocode
-Babel
+Try the application live [here:]
+(https://art-alliance.herokuapp.com/)
+
+
+## Technologies Used
+<dt>
+<dd>⋅⋅* React.js</dd>
+<dd>⋅⋅* Webpack</dd>
+<dd>⋅⋅* Node.js</dd>
+<dd>⋅⋅* Express.js</dd>
+<dd>⋅⋅* PostgreSQL</dd>
+<dd>⋅⋅* JavaScript</dd>
+<dd>⋅⋅* HTML5</dd>
+<dd>⋅⋅* CSS3</dd>
+<dd>⋅⋅* Babel</dd>
+<dd>⋅⋅* Heroku</dd>
+<dd>⋅⋅* AOS Library</dd>
+<dd>⋅⋅* Geocode</dd>
+<dd>⋅⋅* Babel</dd>
+<dt>
 
 
 
