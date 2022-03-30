@@ -138,7 +138,6 @@ export default class Create extends React.Component {
 
   handleSubmit(event) {
     this.invalidTime();
-
     fetch(`/api/posts/${this.props.loggedInUserId}`, {
       method: 'POST',
       headers: {
@@ -201,7 +200,7 @@ export default class Create extends React.Component {
                 </div>
                 <div>
                   <div className="">
-                    <form onReset={this.handleReset} onSubmit={this.handleSubmit}>
+                  <form onReset={this.handleReset} onSubmit={this.handleSubmit} autoComplete="off">
                       <div className="create-row1">
                         <div className="">
                           <div className="label-margin flex">

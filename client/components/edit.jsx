@@ -161,7 +161,7 @@ export default class Edit extends React.Component {
         </div>
         <div>
           <div className="">
-              <form onSubmit={this.handleUpdate}>
+                <form onSubmit={this.handleUpdate} autoComplete="off">
               <div className="create-row1">
                 <div className="">
                   <div className="label-margin">
