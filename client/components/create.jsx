@@ -288,9 +288,11 @@ export default class Create extends React.Component {
           </>
       );
     } else {
-      return <div data-aos="zoom-in" data-aos-once="true">
-        {button}
-      </div>;
+      return (
+        <div data-aos="zoom-in" data-aos-once="true">
+          {button}
+        </div>
+      );
     }
   }
 }

@@ -11,11 +11,9 @@ export default class Messages extends React.Component {
   render() {
     return (
       <div className='home-page-container'>
-        <div>
-          <div className='home-margin'>
-            <div className="loading-container ">
-              <div className="loading-circle loader">
-              </div>
+        <div className='home-margin'>
+          <div className="loading-container ">
+            <div className="loading-circle loader">
             </div>
           </div>
         </div>

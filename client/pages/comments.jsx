@@ -147,11 +147,9 @@ export default class Comments extends React.Component {
     } else if (!this.state.comments || !this.state.post) {
       return (
         <div className='home-page-container'>
-          <div>
-            <div className='home-margin'>
-              <div className="loading-container ">
-                <div className="loading-circle loader">
-                </div>
+          <div className='home-margin'>
+            <div className="loading-container ">
+              <div className="loading-circle loader">
               </div>
             </div>
           </div>
@@ -187,21 +185,21 @@ export default class Comments extends React.Component {
                     </div>
                   </div>
                   <form className="no-margin">
-                  <div className="post-second-container">
-                    <div className='post-header no-border-bottom no-padding-top'>
-                      <button onClick={this.commentBoxOpen} className={this.state.commentBoxOpen ? 'hidden' : 'add-comment-button'}>Add a Public Comment...</button>
-                      <textarea className={this.state.commentBoxOpen ? 'post-textbox input-box-border post-padding-top comment-textbox-width' : 'hidden'} onChange={this.handleChange} value={this.state.commentText} name="commentText" placeholder="Add a Public Comment..." id="post-title"
-                      ref={inputElement => {
-                        if (inputElement) {
-                          inputElement.focus();
-                        }
-                      }}></textarea>
-                    </div>
+                    <div className="post-second-container">
+                      <div className='post-header no-border-bottom no-padding-top'>
+                        <button onClick={this.commentBoxOpen} className={this.state.commentBoxOpen ? 'hidden' : 'add-comment-button'}>Add a Public Comment...</button>
+                        <textarea className={this.state.commentBoxOpen ? 'post-textbox input-box-border post-padding-top comment-textbox-width' : 'hidden'} onChange={this.handleChange} value={this.state.commentText} name="commentText" placeholder="Add a Public Comment..." id="post-title"
+                          ref={inputElement => {
+                            if (inputElement) {
+                              inputElement.focus();
+                            }
+                          }}></textarea>
+                      </div>
                       <div className={this.state.commentBoxOpen ? 'create-comment-buttons comment-button-margin-bottom padding-right-comment-buttons' : 'hidden'}>
-                      <button onClick={this.commentBoxClose} type="button" className='cancel'>Cancel</button>
-                      <button onClick={this.addComment} className={isActive ? 'post post-button-active' : 'no-post'}>Post</button>
+                        <button onClick={this.commentBoxClose} type="button" className='cancel'>Cancel</button>
+                        <button onClick={this.addComment} className={isActive ? 'post post-button-active' : 'no-post'}>Post</button>
+                      </div>
                     </div>
-                  </div>
                   </form>
                   <div className="post-second-container">
                     <ul className='home-posts'>

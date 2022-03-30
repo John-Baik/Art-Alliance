@@ -168,10 +168,10 @@ export default class Post extends React.Component {
       const startDateFinal = `${dateArray[2]} ${dateArray[1]}, ${dateArray[3]}`;
       return (
       <>
-      {this.state.locationActive ? <Location postLocation={post.location} locationActive={this.locationActive} className={this.state.locationActive ? '' : 'hidden'}/> : <></>}
-      <div className={this.state.deleteModalOpen ? '' : 'hidden'}>
-      <Delete noInternetPopUpHome={this.props.noInternetPopUpHome} routePath={this.props.routePath} getPosts={this.props.getPosts} post={post} deleteModalClose={this.deleteModalClose} findPost={this.props.findPost} deletedCommentStatus={this.props.deletedCommentStatus}/>
-      </div>
+        {this.state.locationActive ? <Location postLocation={post.location} locationActive={this.locationActive} className={this.state.locationActive ? '' : 'hidden'}/> : <></>}
+        <div className={this.state.deleteModalOpen ? '' : 'hidden'}>
+          <Delete noInternetPopUpHome={this.props.noInternetPopUpHome} routePath={this.props.routePath} getPosts={this.props.getPosts} post={post} deleteModalClose={this.deleteModalClose} findPost={this.props.findPost} deletedCommentStatus={this.props.deletedCommentStatus}/>
+        </div>
         <div data-aos="fade-up" data-aos-offset="40">
           <li className="post-entry">
             <div className="post-container">
