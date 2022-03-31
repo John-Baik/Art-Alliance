@@ -37,7 +37,6 @@ class Location extends React.Component {
   render() {
     if (this.state.errorPage) {
       return (
-
         <div className="modal-container">
           <div className="exit-location-container">
             <button className="exit-location-button" onClick={this.props.locationActive}>&times;</button>
@@ -46,8 +45,8 @@ class Location extends React.Component {
             <div className="map-wrapper no-min-width home-page flex align-items-center location-error-padding">
               <p className="empty-page">Sorry, there was an error connecting to the network! Please check your internet connection and try again.</p>
             </div>
+          </div>
         </div>
-      </div>
 
       );
     } else if (!this.state.lat || !this.state.lng) {

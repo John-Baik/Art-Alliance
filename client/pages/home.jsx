@@ -53,11 +53,9 @@ export default class Home extends React.Component {
     } else if (!this.state.posts) {
       return (
         <div className='home-page-container'>
-          <div>
-            <div className='home-margin'>
-              <div className="loading-container ">
-                <div className="loading-circle loader">
-                </div>
+          <div className='home-margin'>
+            <div className="loading-container ">
+              <div className="loading-circle loader">
               </div>
             </div>
           </div>
@@ -68,19 +66,19 @@ export default class Home extends React.Component {
       <Post noInternetPopUpHome={this.noInternetPopUpHome} loggedInUserId={this.props.loggedInUserId} key={post.postId} post={post} getPosts={this.getPosts} />
       ));
       return (
-      <div className='home-page-container'>
-        <div>
-          <div className="add-post-container">
-            <Create loggedInUserId={this.state.loggedInUserId} getPosts={this.getPosts} />
-          </div>
-          <div className="flex justify-content-center">
-            <div className="post-width">
-              <p data-aos="fade-right" className={this.state.posts.length === 0 ? 'empty-page roboto-font text-align-center' : 'hidden'}>Home page is empty. Add a post!</p>
-              <ul className='home-posts'>{listItems}</ul>
+        <div className='home-page-container'>
+          <div>
+            <div className="add-post-container">
+              <Create loggedInUserId={this.state.loggedInUserId} getPosts={this.getPosts} />
+            </div>
+            <div className="flex justify-content-center">
+              <div className="post-width">
+                <p data-aos="fade-right" className={this.state.posts.length === 0 ? 'empty-page roboto-font text-align-center' : 'hidden'}>Home page is empty. Add a post!</p>
+                <ul className='home-posts'>{listItems}</ul>
+              </div>
             </div>
           </div>
         </div>
-      </div>
       );
     }
   }
