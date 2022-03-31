@@ -5,8 +5,7 @@ A full stack web application for employers who want to find freelancers for hire
 As someone who dabbled in freelance work, I always thought it would be nice to have an app to easily find work as an employee as well as discover other artists as an employer in an accessible social media style format. I also have a lot of friends who do freelance for a living so I thought something like this would be useful for them.
 ## Live Demo
 
-Try the application live [here:]
-(https://art-alliance.herokuapp.com/)
+Try the application live [here:](https://art-alliance.herokuapp.com/)
 
 ## Technologies Used
 - React.js
@@ -37,12 +36,13 @@ Try the application live [here:]
 - User can view location in Google Maps
 
 ## Stretch Features
+- User can create an account
+- User can send recieve messages
 - User can toggle Dark Mode
 
 ## Preview
 <img src="images/create-post.gif">
 <img src="images/location.gif">
-
 
 ## Development
 ### System Requirements
