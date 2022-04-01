@@ -1,12 +1,10 @@
 # Art-Alliance
 
-A full stack web application for employers who want to find freelancers for hire.
+A full stack web application for employers who want to find creative freelancers for hire.
 
-As someone who dabbled in freelance work, I always thought it would be nice to have an app to easily find work as an employee as well as discover other artists as an employer in an accessible social media style format. I also have a lot of friends who do freelance for a living so I thought something like this would be useful for them.
+I always thought it would be nice to have an app to easily find work as a creative employee as well as discover other artists as an employer in an accessible social media style format. As someone who once did freelance work as a videographer, I feel that something like this would've been extremely useful for me to find work and potentially connect with other people in the field.
 ## Live Demo
-
 Try the application live [here:](https://art-alliance.herokuapp.com/)
-
 ## Technologies Used
 - React.js
 - Webpack
@@ -19,9 +17,8 @@ Try the application live [here:](https://art-alliance.herokuapp.com/)
 - Babel
 - Heroku
 - AOS Library
+- Google Maps API
 - Geocode
-- Babel
-
 ## Features
 - User can create a post
 - Use can view posts
@@ -37,7 +34,7 @@ Try the application live [here:](https://art-alliance.herokuapp.com/)
 
 ## Stretch Features
 - User can create an account
-- User can send recieve messages
+- User can send or recieve messages
 - User can toggle Dark Mode
 
 ## Preview
@@ -48,7 +45,7 @@ Try the application live [here:](https://art-alliance.herokuapp.com/)
 ### System Requirements
 - Node.js 10 or higher
 - NPM 6 or higher
-- Postgres<
+- Postgres
 - VS Code or any similar IDE supporting JavaScript ES6
 
 ### Getting Started
@@ -66,19 +63,24 @@ Try the application live [here:](https://art-alliance.herokuapp.com/)
     ```shell
     sudo service postgresql start
     ```
-4. Create a new database
+4. Create a new database.
     ```shell
     createdb art-alliance
     ```
-5. Import the example database
+5. Replace changeMe to art-alliance in .env.
+    ```shell
+    TOKEN_SECRET=art-alliance
+    DATABASE_URL=postgres://dev:dev@localhost/art-alliance
+    ```
+6. Import the example database.
     ```shell
     npm run db:import
     ```
-6. Start the database (optional - if pgweb is installed).
+7. Start the database (optional - if pgweb is installed).
     ```shell
     pgweb --db=art-alliance
     ```
-7. Start the project. Once started you can view the application by opening http://localhost:3000 in your browser.
-      ```shell
-      npm run dev
-      ```
+8. Start the project. Once started you can view the application by opening http://localhost:3000 in your browser.
+    ```shell
+    npm run dev
+    ```
