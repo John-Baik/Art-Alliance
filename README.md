@@ -47,7 +47,6 @@ Try the application live [here:](https://art-alliance.herokuapp.com/)
 - NPM 6 or higher
 - Postgres
 - VS Code or any similar IDE supporting JavaScript ES6
-
 ### Getting Started
 
 1. Clone the repository.
