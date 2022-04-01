@@ -1,12 +1,10 @@
 # Art-Alliance
 
-A full stack web application for employers who want to find freelancers for hire.
+A full stack web application for employers who want to find creative freelancers for hire.
 
-As someone who dabbled in freelance work, I always thought it would be nice to have an app to easily find work as an employee as well as discover other artists as an employer in an accessible social media style format. I also have a lot of friends who do freelance for a living so I thought something like this would be useful for them.
+I always thought it would be nice to have an app to easily find work as a creative employee as well as discover other artists as an employer in an accessible social media style format. As someone who once did freelance work as a videographer, I feel that something like this would've been extremely useful for me to find work and potentially connect with other people in the field.
 ## Live Demo
-
 Try the application live [here:](https://art-alliance.herokuapp.com/)
-
 ## Technologies Used
 - React.js
 - Webpack
