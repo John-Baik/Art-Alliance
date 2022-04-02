@@ -38,8 +38,8 @@ Try the application live [here:](https://art-alliance.herokuapp.com/)
 - User can toggle Dark Mode
 
 ## Preview
-<img src="images/create-post.gif">
-<img src="images/location.gif">
+<img src="gifs/create-post.gif">
+<img src="gifs/location.gif">
 
 ## Development
 ### System Requirements
