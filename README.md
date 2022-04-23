@@ -20,22 +20,22 @@ Try the application live [here:](https://art-alliance.herokuapp.com/)
 - Google Maps API
 - Geocode
 ## Features
-- User can create a post
-- Use can view posts
-- User can edit post
-- User can delete post
-- User can save posts
-- User can view saved posts
-- User can view comments
-- User can add comment
-- User can edit comment
-- User can delete comment
-- User can view location in Google Maps
+1. User can create a post
+2. Use can view posts
+3. User can edit post
+4. User can delete post
+5. User can save posts
+6. vUser can view saved posts
+7. User can view comments
+8. User can add comment
+9. User can edit comment
+10. User can delete comment
+11. User can view location in Google Maps
 
 ## Stretch Features
-- User can create an account
-- User can send or recieve messages
-- User can toggle Dark Mode
+1. User can create an account
+2. User can send or recieve messages
+3. User can toggle Dark Mode
 
 ## Preview
 <img src="images/create-post.gif">
