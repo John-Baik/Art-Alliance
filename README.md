@@ -41,6 +41,7 @@ Try the application live [here:](https://art-alliance.herokuapp.com/)
 <img src="images/create-post.gif">
 <img src="images/location.gif">
 
+
 ## Development
 ### System Requirements
 - Node.js 10 or higher
