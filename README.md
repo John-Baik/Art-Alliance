@@ -25,7 +25,7 @@ Try the application live [here:](https://art-alliance.herokuapp.com/)
 3. User can edit post
 4. User can delete post
 5. User can save posts
-6. vUser can view saved posts
+6. User can view saved posts
 7. User can view comments
 8. User can add comment
 9. User can edit comment
